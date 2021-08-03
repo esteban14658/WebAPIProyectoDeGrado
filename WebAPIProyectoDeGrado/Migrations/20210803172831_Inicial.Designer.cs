@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace WebAPIProyectoDeGrado.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210803163903_Inicial")]
+    [Migration("20210803172831_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,6 +205,11 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)");
+
+                    b.Property<string>("Rol")
                         .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("character varying(12)");

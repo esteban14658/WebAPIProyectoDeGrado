@@ -207,6 +207,11 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("character varying(12)");
 
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");

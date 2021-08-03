@@ -33,7 +33,8 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Email = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     Password = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
-                    Estado = table.Column<bool>(type: "boolean", nullable: false)
+                    Estado = table.Column<bool>(type: "boolean", nullable: false),
+                    Rol = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false)
                 },
                 constraints: table =>
                 {

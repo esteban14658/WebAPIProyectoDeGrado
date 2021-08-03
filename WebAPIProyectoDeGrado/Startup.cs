@@ -41,6 +41,8 @@ namespace WebAPIProyectoDeGrado
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIProyectoDeGrado", Version = "v1" });
             });
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("defaultConnection")));
         }

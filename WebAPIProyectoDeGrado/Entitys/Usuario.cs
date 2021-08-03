@@ -20,5 +20,8 @@ namespace WebAPIProyectoDeGrado.Entitys
         public string Password { get; set; }
         [Required]
         public Boolean Estado { get; set; }
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [StringLength(maximumLength: 12, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        public string Rol { get; set; }
     }
 }
