@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using WebAPIProyectoDeGrado.Filters;
 
 namespace WebAPIProyectoDeGrado
 {
@@ -31,7 +32,7 @@ namespace WebAPIProyectoDeGrado
 
             services.AddControllers(opciones =>
             {
-                //opciones.Filters.Add(typeof(FiltroDeExcepcion));
+                opciones.Filters.Add(typeof(FiltroDeExcepcion));
             }).AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
