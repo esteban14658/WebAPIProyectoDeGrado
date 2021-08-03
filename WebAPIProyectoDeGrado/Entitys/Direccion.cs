@@ -18,8 +18,8 @@ namespace WebAPIProyectoDeGrado.Entitys
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
         public string Descripcion { get; set; }
         [ForeignKey("Tienda")]
-        public int TiendaId { get; set; }
+        public int? TiendaId { get; set; }
         [ForeignKey("PuntoDeRecoleccion")]
-        public int PuntoDeRecoleccionId { get; set; }
+        public int? PuntoDeRecoleccionId { get; set; }
     }
 }

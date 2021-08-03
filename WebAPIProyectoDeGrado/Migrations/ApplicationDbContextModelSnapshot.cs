@@ -36,13 +36,13 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("character varying(25)");
 
-                    b.Property<int>("PuntoDeRecoleccionId")
+                    b.Property<int?>("PuntoDeRecoleccionId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("ResidenteId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TiendaId")
+                    b.Property<int?>("TiendaId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -221,9 +221,7 @@ namespace WebAPIProyectoDeGrado.Migrations
                 {
                     b.HasOne("WebAPIProyectoDeGrado.Entitys.PuntoDeRecoleccion", null)
                         .WithOne("Direccion")
-                        .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Direccion", "PuntoDeRecoleccionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Direccion", "PuntoDeRecoleccionId");
 
                     b.HasOne("WebAPIProyectoDeGrado.Entitys.Residente", null)
                         .WithMany("ListaDirecciones")
@@ -231,9 +229,7 @@ namespace WebAPIProyectoDeGrado.Migrations
 
                     b.HasOne("WebAPIProyectoDeGrado.Entitys.Tienda", null)
                         .WithOne("Direccion")
-                        .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Direccion", "TiendaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Direccion", "TiendaId");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Reciclador", b =>

@@ -115,8 +115,8 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Barrio = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     Descripcion = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    TiendaId = table.Column<int>(type: "integer", nullable: false),
-                    PuntoDeRecoleccionId = table.Column<int>(type: "integer", nullable: false),
+                    TiendaId = table.Column<int>(type: "integer", nullable: true),
+                    PuntoDeRecoleccionId = table.Column<int>(type: "integer", nullable: true),
                     ResidenteId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -127,7 +127,7 @@ namespace WebAPIProyectoDeGrado.Migrations
                         column: x => x.PuntoDeRecoleccionId,
                         principalTable: "PuntoDeRecolecciones",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Direcciones_Residentes_ResidenteId",
                         column: x => x.ResidenteId,
@@ -139,7 +139,7 @@ namespace WebAPIProyectoDeGrado.Migrations
                         column: x => x.TiendaId,
                         principalTable: "Tiendas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
