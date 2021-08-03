@@ -15,6 +15,7 @@ namespace WebAPIProyectoDeGrado
 
         public DbSet<Tienda> Tiendas { get; set; }
         public DbSet<Reciclador> Recicladores { get; set; }
+        public DbSet<Residente> Residentes { get; set; }
         public DbSet<Direccion> Direcciones { get; set; }
     }
 }
