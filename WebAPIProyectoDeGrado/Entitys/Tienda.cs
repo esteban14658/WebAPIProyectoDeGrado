@@ -16,5 +16,6 @@ namespace WebAPIProyectoDeGrado.Entitys
         [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
         public string Telefono { get; set; }
         public Direccion Direccion { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

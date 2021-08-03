@@ -39,9 +39,19 @@ namespace WebAPIProyectoDeGrado.Migrations
                     b.Property<int?>("ResidenteId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("TiendaId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ResidenteId");
+
+                    b.HasIndex("TiendaId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Direcciones");
                 });
@@ -73,7 +83,12 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Recicladores");
                 });
@@ -100,7 +115,12 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Residentes");
                 });
@@ -112,9 +132,6 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("DireccionId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -125,11 +142,39 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DireccionId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Tiendas");
+                });
+
+            modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Direccion", b =>
@@ -137,18 +182,51 @@ namespace WebAPIProyectoDeGrado.Migrations
                     b.HasOne("WebAPIProyectoDeGrado.Entitys.Residente", null)
                         .WithMany("ListaDirecciones")
                         .HasForeignKey("ResidenteId");
+
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Tienda", null)
+                        .WithMany("ListaDirecciones")
+                        .HasForeignKey("TiendaId");
+
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Reciclador", b =>
+                {
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Residente", b =>
+                {
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Tienda", b =>
                 {
-                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Direccion", "Direccion")
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("DireccionId");
+                        .HasForeignKey("UsuarioId");
 
-                    b.Navigation("Direccion");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Residente", b =>
+                {
+                    b.Navigation("ListaDirecciones");
+                });
+
+            modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Tienda", b =>
                 {
                     b.Navigation("ListaDirecciones");
                 });
