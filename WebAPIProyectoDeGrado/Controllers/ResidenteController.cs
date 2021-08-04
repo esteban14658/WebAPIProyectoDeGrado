@@ -35,7 +35,9 @@ namespace WebAPIProyectoDeGrado.Controllers
                 return NotFound();
             }
 
-            var residente = await context.Residentes.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Usuario.Email == email);
+            var residente = await context.Residentes.Include(x => x.Usuario).Include(x => 
+                x.ListaDirecciones).FirstOrDefaultAsync(x => x.Usuario.Email == email);
+
             return mapper.Map<ResidenteDTO>(residente);
         }
     }
