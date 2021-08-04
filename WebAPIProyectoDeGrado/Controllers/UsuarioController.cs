@@ -17,7 +17,6 @@ namespace WebAPIProyectoDeGrado.Controllers
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        //414564
         public UsuarioController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
@@ -42,8 +41,8 @@ namespace WebAPIProyectoDeGrado.Controllers
                 return NotFound();
             }
 
-            var autor = await context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
-            return mapper.Map<UsuarioDTO>(autor);
+            var usuario = await context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            return mapper.Map<UsuarioDTO>(usuario);
         }
 
     }

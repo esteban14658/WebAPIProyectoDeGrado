@@ -13,6 +13,9 @@ namespace WebAPIProyectoDeGrado.Utilitys
         public AutoMapperProfile()
         {
             CreateMap<Usuario, UsuarioDTO>();
+            CreateMap<Reciclador, RecicladorDTO>();
+
+            CreateMap<RecicladorCreacionDTO, Reciclador>();
         }
     }
 }
