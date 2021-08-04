@@ -14,6 +14,15 @@ namespace WebAPIProyectoDeGrado.Utilitys
         {
             CreateMap<Usuario, UsuarioDTO>();
             CreateMap<Reciclador, RecicladorDTO>();
+            CreateMap<Direccion, DireccionDTO>();
+            CreateMap<Residente, ResidenteDTO>();
+
+            //Falta agregar los atributos de los siguientes
+
+            CreateMap<PuntoDeRecoleccion, PuntoDeRecoleccionDTO>();
+            CreateMap<Tienda, TiendaDTO>();
+
+            // **** *** **************************************************
 
             CreateMap<RecicladorCreacionDTO, Reciclador>();
             CreateMap<UsuarioCreacionDTO, Usuario>();
