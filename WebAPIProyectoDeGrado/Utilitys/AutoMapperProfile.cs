@@ -16,6 +16,7 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<Reciclador, RecicladorDTO>();
 
             CreateMap<RecicladorCreacionDTO, Reciclador>();
+            CreateMap<UsuarioCreacionDTO, Usuario>();
         }
     }
 }

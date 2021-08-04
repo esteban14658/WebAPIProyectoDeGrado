@@ -24,7 +24,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("obtenerPorIdUsuario/{idUsuario:int}")]
-        public async Task<ActionResult<RecicladorDTO>> obtenerPorUsuario(int idUsuario)
+        public async Task<ActionResult<RecicladorDTO>> obtenerPorIdUsuario(int idUsuario)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
                 x.Usuario.Id == idUsuario);
@@ -38,6 +38,21 @@ namespace WebAPIProyectoDeGrado.Controllers
             return mapper.Map<RecicladorDTO>(reciclador);
         }
 
+        [HttpGet("obtenerPorEmailUsuario/{email}")]
+        public async Task<ActionResult<RecicladorDTO>> obtenerPorEmailUsuario(string email)
+        {
+            var existe = await context.Recicladores.AnyAsync(x =>
+                x.Usuario.Email == email);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            var reciclador = await context.Recicladores.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Usuario.Email == email);
+            return mapper.Map<RecicladorDTO>(reciclador);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] RecicladorCreacionDTO recicladorCreacionDTO)
         {
@@ -45,7 +60,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 
             if (existeElUsuario)
             {
-                return BadRequest($"Ya existe un autor con el email: {recicladorCreacionDTO.Usuario.Email}");
+                return BadRequest($"Ya existe un reciclador con el email: {recicladorCreacionDTO.Usuario.Email}");
             }
 
             var reciclador = mapper.Map<Reciclador>(recicladorCreacionDTO);
