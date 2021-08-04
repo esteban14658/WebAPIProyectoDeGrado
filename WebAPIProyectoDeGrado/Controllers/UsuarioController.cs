@@ -17,6 +17,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
+        //414564
         public UsuarioController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
