@@ -115,9 +115,9 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Barrio = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     Descripcion = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    ResidenteId = table.Column<int>(type: "integer", nullable: true),
                     TiendaId = table.Column<int>(type: "integer", nullable: true),
-                    PuntoDeRecoleccionId = table.Column<int>(type: "integer", nullable: true),
-                    ResidenteId = table.Column<int>(type: "integer", nullable: true)
+                    PuntoDeRecoleccionId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {

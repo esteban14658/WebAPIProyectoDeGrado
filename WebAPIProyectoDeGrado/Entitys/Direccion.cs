@@ -17,6 +17,7 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
         public string Descripcion { get; set; }
+        public int? ResidenteId { get; set; }
         [ForeignKey("Tienda")]
         public int? TiendaId { get; set; }
         [ForeignKey("PuntoDeRecoleccion")]
