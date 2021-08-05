@@ -40,5 +40,22 @@ namespace WebAPIProyectoDeGrado.Controllers
 
             return mapper.Map<ResidenteDTO>(residente);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] ResidenteCreacionDTO residenteCreacionDTO)
+        {
+            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == residenteCreacionDTO.Usuario.Email);
+
+            if (existeElUsuario)
+            {
+                return BadRequest($"Ya existe un reciclador con el email: {residenteCreacionDTO.Usuario.Email}");
+            }
+
+            var residente = mapper.Map<Residente>(residenteCreacionDTO);
+
+            context.Add(residente);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

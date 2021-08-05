@@ -18,5 +18,6 @@ namespace WebAPIProyectoDeGrado.DTOs
         [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
         public string Telefono { get; set; }
         public List<DireccionCreacionDTO> ListaDirecciones { get; set; }
+        public UsuarioCreacionDTO Usuario { get; set; }
     }
 }
