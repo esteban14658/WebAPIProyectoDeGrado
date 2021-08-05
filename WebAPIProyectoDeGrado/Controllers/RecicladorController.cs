@@ -30,8 +30,8 @@ namespace WebAPIProyectoDeGrado.Controllers
             return mapper.Map<List<RecicladorDTO>>(recicladores);
         }
 
-        [HttpGet("obtenerPorIdUsuario/{idUsuario:int}")]
-        public async Task<ActionResult<RecicladorDTO>> obtenerPorIdUsuario(int idUsuario)
+        [HttpGet("ObtenerPorIdUsuario/{idUsuario:int}")]
+        public async Task<ActionResult<RecicladorDTO>> ObtenerPorIdUsuario(int idUsuario)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
                 x.Usuario.Id == idUsuario);
@@ -46,7 +46,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("ObtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<RecicladorDTO>> obtenerPorEmailUsuario(string email)
+        public async Task<ActionResult<RecicladorDTO>> ObtenerPorEmailUsuario(string email)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
                 x.Usuario.Email == email);

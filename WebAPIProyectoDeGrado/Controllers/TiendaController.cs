@@ -32,6 +32,23 @@ namespace WebAPIProyectoDeGrado.Controllers
             return mapper.Map<List<TiendaDTO>>(tiendas);
         }
 
+        [HttpGet("ObtenerPorIdUsuario/{id:int}")]
+        public async Task<ActionResult<TiendaDTO>> ObtenerPorIdUsuario(int id)
+        {
+            var existe = await context.Tiendas.AnyAsync(x =>
+                x.Usuario.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            var tienda = await context.Tiendas.Include(x => x.Usuario).Include(x =>
+                x.Direccion).FirstOrDefaultAsync(x => x.Usuario.Id == id);
+
+            return mapper.Map<TiendaDTO>(tienda);
+        }
+
         [HttpGet("ObtenerPorEmailUsuario/{email}")]
         public async Task<ActionResult<TiendaDTO>> ObtenerPorEmailUsuario(string email)
         {

@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace WebAPIProyectoDeGrado.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210803193516_Inicial")]
+    [Migration("20210805165017_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
