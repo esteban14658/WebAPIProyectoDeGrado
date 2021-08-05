@@ -24,8 +24,16 @@ namespace WebAPIProyectoDeGrado.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<ResidenteDTO>>> Get()
+        {
+            var residentes = await context.Residentes.Include(x => x.Usuario).Include(x =>
+                x.ListaDirecciones).ToListAsync();
+            return mapper.Map<List<ResidenteDTO>>(residentes);
+        }
+
         [HttpGet("obtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<ResidenteDTO>> obtenerPorEmailUsuario(string email)
+        public async Task<ActionResult<ResidenteDTO>> ObtenerPorEmailUsuario(string email)
         {
             var existe = await context.Residentes.AnyAsync(x =>
                 x.Usuario.Email == email);

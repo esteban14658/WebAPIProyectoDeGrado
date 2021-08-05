@@ -23,6 +23,13 @@ namespace WebAPIProyectoDeGrado.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<RecicladorDTO>>> Get()
+        {
+            var recicladores = await context.Recicladores.Include(x => x.Usuario).ToListAsync();
+            return mapper.Map<List<RecicladorDTO>>(recicladores);
+        }
+
         [HttpGet("obtenerPorIdUsuario/{idUsuario:int}")]
         public async Task<ActionResult<RecicladorDTO>> obtenerPorIdUsuario(int idUsuario)
         {
