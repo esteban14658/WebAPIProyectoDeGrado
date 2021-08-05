@@ -45,7 +45,7 @@ namespace WebAPIProyectoDeGrado.Controllers
             return mapper.Map<RecicladorDTO>(reciclador);
         }
 
-        [HttpGet("obtenerPorEmailUsuario/{email}")]
+        [HttpGet("ObtenerPorEmailUsuario/{email}")]
         public async Task<ActionResult<RecicladorDTO>> obtenerPorEmailUsuario(string email)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
