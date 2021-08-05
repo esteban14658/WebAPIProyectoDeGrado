@@ -12,20 +12,25 @@ namespace WebAPIProyectoDeGrado.Utilitys
     {
         public AutoMapperProfile()
         {
+            // DTOs para recibir informacion
+
             CreateMap<Usuario, UsuarioDTO>();
             CreateMap<Reciclador, RecicladorDTO>();
             CreateMap<Direccion, DireccionDTO>();
             CreateMap<Residente, ResidenteDTO>();
-
-            //Falta agregar los atributos de los siguientes
-
             CreateMap<PuntoDeRecoleccion, PuntoDeRecoleccionDTO>();
             CreateMap<Tienda, TiendaDTO>();
 
             // **** *** **************************************************
 
+            // DTOs para enviar informacion
+
             CreateMap<RecicladorCreacionDTO, Reciclador>();
             CreateMap<UsuarioCreacionDTO, Usuario>();
+            CreateMap<DireccionCreacionDTO, Direccion>();
+            CreateMap<PuntoDeRecoleccionCreacionDTO, PuntoDeRecoleccion>();
+            CreateMap<ResidenteCreacionDTO, Residente>();
+            CreateMap<TiendaCreacionDTO, Tienda>();
         }
     }
 }
