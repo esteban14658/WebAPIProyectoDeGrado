@@ -77,5 +77,27 @@ namespace WebAPIProyectoDeGrado.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(Reciclador reciclador, int id)
+        {
+            if (reciclador.Id != id)
+            {
+                return BadRequest("El id no coincide");
+            }
+
+            var existe = await context.Recicladores.AnyAsync(x =>
+                x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Update(reciclador);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }
