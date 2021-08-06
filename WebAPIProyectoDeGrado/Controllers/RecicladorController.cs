@@ -98,6 +98,5 @@ namespace WebAPIProyectoDeGrado.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
-
     }
 }
