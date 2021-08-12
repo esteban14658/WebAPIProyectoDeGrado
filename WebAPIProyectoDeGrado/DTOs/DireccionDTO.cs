@@ -7,6 +7,7 @@ namespace WebAPIProyectoDeGrado.DTOs
 {
     public class DireccionDTO
     {
+        public int Id { get; set; }
         public string Barrio { get; set; }
         public string TipoDeCalle { get; set; }
         public string Carrera { get; set; }
