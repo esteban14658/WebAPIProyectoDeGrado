@@ -7,6 +7,7 @@ namespace WebAPIProyectoDeGrado.DTOs
 {
     public class UsuarioDTO
     {
+        public int Id { get; set; }
         public string Email { get; set; }
         public Boolean Estado { get; set; }
         public string Rol { get; set; }
