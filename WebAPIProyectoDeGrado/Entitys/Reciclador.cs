@@ -17,6 +17,9 @@ namespace WebAPIProyectoDeGrado.Entitys
         public string Apellido { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        public string TipoDeDocumento { get; set; }
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
         public string Documento { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]

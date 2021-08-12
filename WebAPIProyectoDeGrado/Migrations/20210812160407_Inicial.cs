@@ -49,6 +49,7 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nombre = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     Apellido = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    TipoDeDocumento = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     Documento = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     Telefono = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     UsuarioId = table.Column<int>(type: "integer", nullable: true)
@@ -93,6 +94,8 @@ namespace WebAPIProyectoDeGrado.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nombre = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    TipoDeDocumento = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    Documento = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     Telefono = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     UsuarioId = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -114,10 +117,14 @@ namespace WebAPIProyectoDeGrado.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Barrio = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    TipoDeCalle = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    Carrera = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
+                    Numero1 = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
+                    Numero2 = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
                     Descripcion = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    ResidenteId = table.Column<int>(type: "integer", nullable: true),
                     TiendaId = table.Column<int>(type: "integer", nullable: true),
-                    PuntoDeRecoleccionId = table.Column<int>(type: "integer", nullable: true)
+                    PuntoDeRecoleccionId = table.Column<int>(type: "integer", nullable: true),
+                    ResidenteId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
