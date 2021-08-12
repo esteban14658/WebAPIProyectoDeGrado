@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,10 +24,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet] 
+        [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<UsuarioDTO>>> Get()
         {
-            var usuarios = await context.Usuarios.ToListAsync();
+            var usuarios = await context.Usuarios.Where(x => x.Rol != "Admin").ToListAsync();
             return mapper.Map<List<UsuarioDTO>>(usuarios);
         }
 

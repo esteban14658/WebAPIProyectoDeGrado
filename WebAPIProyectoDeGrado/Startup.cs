@@ -50,7 +50,7 @@ namespace WebAPIProyectoDeGrado
             {
                 opciones.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("").AllowAnyMethod().AllowAnyHeader();
+                    builder.WithOrigins("http://localhost:8100").AllowAnyMethod().AllowAnyHeader();
                 });
             });
         }
