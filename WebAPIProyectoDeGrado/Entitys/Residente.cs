@@ -8,8 +8,6 @@ namespace WebAPIProyectoDeGrado.Entitys
 {
     public class Residente
     {
-        internal object id;
-
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]

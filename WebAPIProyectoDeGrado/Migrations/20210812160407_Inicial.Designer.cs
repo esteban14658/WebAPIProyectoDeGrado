@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace WebAPIProyectoDeGrado.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210805171256_Inicial")]
+    [Migration("20210812160407_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,25 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("character varying(25)");
 
+                    b.Property<string>("Carrera")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("character varying(25)");
+
+                    b.Property<string>("Numero1")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)");
+
+                    b.Property<string>("Numero2")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)");
 
                     b.Property<int?>("PuntoDeRecoleccionId")
                         .HasColumnType("integer");
@@ -46,6 +61,11 @@ namespace WebAPIProyectoDeGrado.Migrations
 
                     b.Property<int?>("TiendaId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("TipoDeCalle")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
 
                     b.HasKey("Id");
 
@@ -120,6 +140,11 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
+                    b.Property<string>("TipoDeDocumento")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
                     b.Property<int?>("UsuarioId")
                         .HasColumnType("integer");
 
@@ -169,6 +194,11 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Documento")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -178,6 +208,11 @@ namespace WebAPIProyectoDeGrado.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
+
+                    b.Property<string>("TipoDeDocumento")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
 
                     b.Property<int?>("UsuarioId")
                         .HasColumnType("integer");
