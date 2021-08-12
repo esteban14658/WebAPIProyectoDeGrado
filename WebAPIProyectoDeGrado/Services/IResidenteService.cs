@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IRecicladorService: IGenericService<Reciclador>
+    public interface IResidenteService: IGenericService<Residente>
     {
     }
 }

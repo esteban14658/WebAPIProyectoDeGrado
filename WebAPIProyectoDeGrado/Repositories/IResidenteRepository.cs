@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Entitys;
 
-namespace WebAPIProyectoDeGrado.Services
+namespace WebAPIProyectoDeGrado.Repositories
 {
-    public interface IRecicladorService: IGenericService<Reciclador>
+    public interface IResidenteRepository : IGenericRepository<Residente>
     {
+
     }
 }
