@@ -13,12 +13,12 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/usuarios")]
-    public class UsuarioController: ControllerBase
+    public class UserController: ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public UsuarioController(ApplicationDbContext context, IMapper mapper)
+        public UserController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;

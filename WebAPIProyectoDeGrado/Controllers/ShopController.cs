@@ -12,13 +12,13 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/tiendas")]
-    public class TiendaController: ControllerBase
+    public class ShopController: ControllerBase
     {
 
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public TiendaController(ApplicationDbContext context, IMapper mapper)
+        public ShopController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;

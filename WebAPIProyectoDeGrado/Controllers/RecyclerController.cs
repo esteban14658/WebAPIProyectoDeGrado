@@ -12,12 +12,12 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/recicladores")]
-    public class RecicladorController: ControllerBase
+    public class RecyclerController: ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public RecicladorController(ApplicationDbContext context, IMapper mapper)
+        public RecyclerController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -26,7 +26,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
-            var recicladores = await context.Recicladores.Include(x => x.Usuario).ToListAsync();
+            var recicladores = await context.Recicladores.Include(x => x.User).ToListAsync();
             return mapper.Map<List<RecyclerDTO>>(recicladores);
         }
 
@@ -34,14 +34,14 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<RecyclerDTO>> ObtenerPorIdUsuario(int idUsuario)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
-                x.Usuario.Id == idUsuario);
+                x.User.Id == idUsuario);
 
             if (!existe)
             {
                 return NotFound();
             }
             
-            var reciclador = await context.Recicladores.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Usuario.Id == idUsuario);
+            var reciclador = await context.Recicladores.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Id == idUsuario);
             return mapper.Map<RecyclerDTO>(reciclador);
         }
 
@@ -49,26 +49,26 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<RecyclerDTO>> ObtenerPorEmailUsuario(string email)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
-                x.Usuario.Email == email);
+                x.User.Email == email);
 
             if (!existe)
             {
                 return NotFound();
             }
 
-            var reciclador = await context.Recicladores.Include(x => x.Usuario).FirstOrDefaultAsync(x => 
-                x.Usuario.Email == email);
+            var reciclador = await context.Recicladores.Include(x => x.User).FirstOrDefaultAsync(x => 
+                x.User.Email == email);
             return mapper.Map<RecyclerDTO>(reciclador);
         }
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recicladorCreacionDTO)
         {
-            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == recicladorCreacionDTO.Usuario.Email);
+            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == recicladorCreacionDTO.User.Email);
 
             if (existeElUsuario)
             {
-                return BadRequest($"Ya existe un reciclador con el email: {recicladorCreacionDTO.Usuario.Email}");
+                return BadRequest($"Ya existe un reciclador con el email: {recicladorCreacionDTO.User.Email}");
             }
 
             var reciclador = mapper.Map<Recycler>(recicladorCreacionDTO);

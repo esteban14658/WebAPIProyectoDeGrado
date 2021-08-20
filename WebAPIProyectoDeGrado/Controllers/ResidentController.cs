@@ -13,12 +13,12 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/residentes")]
-    public class ResidenteController: ControllerBase
+    public class ResidentController: ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public ResidenteController(ApplicationDbContext context, IMapper mapper)
+        public ResidentController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
