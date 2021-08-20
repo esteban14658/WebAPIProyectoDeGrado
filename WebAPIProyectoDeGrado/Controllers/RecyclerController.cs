@@ -26,75 +26,75 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
-            var recicladores = await context.Recicladores.Include(x => x.User).ToListAsync();
-            return mapper.Map<List<RecyclerDTO>>(recicladores);
+            var recyclers = await context.Recyclers.Include(x => x.User).ToListAsync();
+            return mapper.Map<List<RecyclerDTO>>(recyclers);
         }
 
-        [HttpGet("ObtenerPorIdUsuario/{idUsuario:int}")]
-        public async Task<ActionResult<RecyclerDTO>> ObtenerPorIdUsuario(int idUsuario)
+        [HttpGet("GetUserById/{userId:int}")]
+        public async Task<ActionResult<RecyclerDTO>> GetUserById(int userId)
         {
-            var existe = await context.Recicladores.AnyAsync(x =>
-                x.User.Id == idUsuario);
+            var exists = await context.Recyclers.AnyAsync(x =>
+                x.User.Id == userId);
 
-            if (!existe)
+            if (!exists)
             {
                 return NotFound();
             }
             
-            var reciclador = await context.Recicladores.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Id == idUsuario);
-            return mapper.Map<RecyclerDTO>(reciclador);
+            var recycler = await context.Recyclers.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Id == userId);
+            return mapper.Map<RecyclerDTO>(recycler);
         }
 
-        [HttpGet("ObtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<RecyclerDTO>> ObtenerPorEmailUsuario(string email)
+        [HttpGet("GetUserByEmail/{email}")]
+        public async Task<ActionResult<RecyclerDTO>> GetUserByEmail(string email)
         {
-            var existe = await context.Recicladores.AnyAsync(x =>
+            var exists = await context.Recyclers.AnyAsync(x =>
                 x.User.Email == email);
 
-            if (!existe)
+            if (!exists)
             {
                 return NotFound();
             }
 
-            var reciclador = await context.Recicladores.Include(x => x.User).FirstOrDefaultAsync(x => 
+            var recycler = await context.Recyclers.Include(x => x.User).FirstOrDefaultAsync(x => 
                 x.User.Email == email);
-            return mapper.Map<RecyclerDTO>(reciclador);
+            return mapper.Map<RecyclerDTO>(recycler);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recicladorCreacionDTO)
+        public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO createRecyclerDTO)
         {
-            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == recicladorCreacionDTO.User.Email);
+            var userExists = await context.Users.AnyAsync(x => x.Email == createRecyclerDTO.User.Email);
 
-            if (existeElUsuario)
+            if (userExists)
             {
-                return BadRequest($"Ya existe un reciclador con el email: {recicladorCreacionDTO.User.Email}");
+                return BadRequest($"There is already a recycler with the email: {createRecyclerDTO.User.Email}");
             }
 
-            var reciclador = mapper.Map<Recycler>(recicladorCreacionDTO);
+            var recycler = mapper.Map<Recycler>(createRecyclerDTO);
 
-            context.Add(reciclador);
+            context.Add(recycler);
             await context.SaveChangesAsync();
             return Ok();
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(Recycler reciclador, int id)
+        public async Task<ActionResult> Put(Recycler recycler, int id)
         {
-            if (reciclador.Id != id)
+            if (recycler.Id != id)
             {
-                return BadRequest("El id no coincide");
+                return BadRequest("The id doesn't match");
             }
 
-            var existe = await context.Recicladores.AnyAsync(x =>
+            var exist = await context.Recyclers.AnyAsync(x =>
                 x.Id == id);
 
-            if (!existe)
+            if (!exist)
             {
                 return NotFound();
             }
 
-            context.Update(reciclador);
+            context.Update(recycler);
             await context.SaveChangesAsync();
             return Ok();
         }

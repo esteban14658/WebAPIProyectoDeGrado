@@ -13,11 +13,11 @@ namespace WebAPIProyectoDeGrado
         {
         }
 
-        public DbSet<Shop> Tiendas { get; set; }
-        public DbSet<Recycler> Recicladores { get; set; }
-        public DbSet<Resident> Residentes { get; set; }
-        public DbSet<Address> Direcciones { get; set; }
-        public DbSet<User> Usuarios { get; set; }
-        public DbSet<CollectionPoint> PuntoDeRecolecciones { get; set; }
+        public DbSet<Shop> Shops { get; set; }
+        public DbSet<Recycler> Recyclers { get; set; }
+        public DbSet<Resident> Residents { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<CollectionPoint> collectionPoints { get; set; }
     }
 }
