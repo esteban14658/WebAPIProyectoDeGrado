@@ -18,6 +18,6 @@ namespace WebAPIProyectoDeGrado
         public DbSet<Resident> Residents { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<CollectionPoint> collectionPoints { get; set; }
+        public DbSet<CollectionPoint> CollectionPoints { get; set; }
     }
 }
