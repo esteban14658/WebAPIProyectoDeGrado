@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class CollectionPointService: GenericService<PuntoDeRecoleccion>, ICollectionPointService
+    public class CollectionPointService: GenericService<CollectionPoint>, ICollectionPointService
     {
         private readonly IPuntoDeRecoleccionRepository puntoDeRecoleccionRepository;
 

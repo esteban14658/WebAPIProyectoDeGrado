@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ShopService: GenericService<Tienda>, IShopService
+    public class ShopService: GenericService<Shop>, IShopService
     {
         private readonly ITiendaRepository tiendaRepository;
 

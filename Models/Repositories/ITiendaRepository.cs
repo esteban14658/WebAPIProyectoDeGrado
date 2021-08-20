@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories
 {
-    public interface ITiendaRepository: IGenericRepository<Tienda>
+    public interface ITiendaRepository: IGenericRepository<Shop>
     {
     }
 }

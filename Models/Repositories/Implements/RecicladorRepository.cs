@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class RecicladorRepository: GenericRepository<Reciclador>, IRecicladorRepository
+    public class RecicladorRepository: GenericRepository<Recycler>, IRecicladorRepository
     {
         public RecicladorRepository(ApplicationDbContext context): base(context) 
         {

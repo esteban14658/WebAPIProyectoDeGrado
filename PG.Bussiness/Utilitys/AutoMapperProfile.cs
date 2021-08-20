@@ -14,23 +14,23 @@ namespace WebAPIProyectoDeGrado.Utilitys
         {
             // DTOs para recibir informacion
 
-            CreateMap<Usuario, UserDTO>();
-            CreateMap<Reciclador, RecyclerDTO>();
-            CreateMap<Direccion, AddressDTO>();
-            CreateMap<Residente, ResidentDTO>();
-            CreateMap<PuntoDeRecoleccion, CollectionPointDTO>();
-            CreateMap<Tienda, ShopDTO>();
+            CreateMap<User, UserDTO>();
+            CreateMap<Recycler, RecyclerDTO>();
+            CreateMap<Address, AddressDTO>();
+            CreateMap<Resident, ResidentDTO>();
+            CreateMap<CollectionPoint, CollectionPointDTO>();
+            CreateMap<Shop, ShopDTO>();
 
             // **** *** **************************************************
 
             // DTOs para enviar informacion
 
-            CreateMap<CreateRecyclerDTO, Reciclador>();
-            CreateMap<CreateUserDTO, Usuario>();
-            CreateMap<CreateAddressDTO, Direccion>();
-            CreateMap<CreateCollectionPoint, PuntoDeRecoleccion>();
-            CreateMap<CreateResidentDTO, Residente>();
-            CreateMap<CreateShopDTO, Tienda>();
+            CreateMap<CreateRecyclerDTO, Recycler>();
+            CreateMap<CreateUserDTO, User>();
+            CreateMap<CreateAddressDTO, Address>();
+            CreateMap<CreateCollectionPoint, CollectionPoint>();
+            CreateMap<CreateResidentDTO, Resident>();
+            CreateMap<CreateShopDTO, Shop>();
         }
     }
 }

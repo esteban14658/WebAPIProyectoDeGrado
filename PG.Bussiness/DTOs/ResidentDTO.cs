@@ -7,10 +7,10 @@ namespace WebAPIProyectoDeGrado.DTOs
 {
     public class ResidentDTO
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Telefono { get; set; }
-        public List<AddressDTO> ListaDirecciones { get; set; }
-        public UserDTO Usuario { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public List<AddressDTO> AddressList { get; set; }
+        public UserDTO User { get; set; }
     }
 }

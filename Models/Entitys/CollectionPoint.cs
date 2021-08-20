@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
-    public class PuntoDeRecoleccion
+    public class CollectionPoint
     {
         public int Id { get; set; }
         [Required]
@@ -23,6 +23,6 @@ namespace WebAPIProyectoDeGrado.Entitys
         public string Descripcion { get; set; }
         public Boolean Estado { get; set; }
         [Required]
-        public Direccion Direccion { get; set; }
+        public Address Direccion { get; set; }
     }
 }

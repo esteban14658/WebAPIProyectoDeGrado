@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
-    public class Usuario
+    public class User
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]

@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ResidentService: GenericService<Residente>, IResidentService
+    public class ResidentService: GenericService<Resident>, IResidentService
     {
         private readonly IResidenteRepository residenteRepository;
 

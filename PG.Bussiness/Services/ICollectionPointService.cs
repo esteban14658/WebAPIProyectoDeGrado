@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface ICollectionPointService: IGenericService<PuntoDeRecoleccion>
+    public interface ICollectionPointService: IGenericService<CollectionPoint>
     {
     }
 }

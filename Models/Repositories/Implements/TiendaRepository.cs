@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class TiendaRepository: GenericRepository<Tienda>, ITiendaRepository
+    public class TiendaRepository: GenericRepository<Shop>, ITiendaRepository
     {
         public TiendaRepository(ApplicationDbContext context) : base(context)
         {

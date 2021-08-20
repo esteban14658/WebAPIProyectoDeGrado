@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class RecyclerService: GenericService<Reciclador>, IRecyclerService
+    public class RecyclerService: GenericService<Recycler>, IRecyclerService
     {
         private readonly IRecicladorRepository recicladorRepository;
         public RecyclerService(IRecicladorRepository recicladorRepository): base(recicladorRepository)

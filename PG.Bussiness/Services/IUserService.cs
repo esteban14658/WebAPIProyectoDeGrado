@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IUserService: IGenericService<Usuario>
+    public interface IUserService: IGenericService<User>
     {
     }
 }

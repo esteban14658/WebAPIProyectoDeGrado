@@ -76,7 +76,7 @@ namespace WebAPIProyectoDeGrado.Controllers
                 return BadRequest($"Ya existe una tienda con el email: {tiendaCreacionDTO.Usuario.Email}");
             }
 
-            var tienda = mapper.Map<Tienda>(tiendaCreacionDTO);
+            var tienda = mapper.Map<Shop>(tiendaCreacionDTO);
 
             context.Add(tienda);
             await context.SaveChangesAsync();

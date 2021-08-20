@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class DireccionRepository: GenericRepository<Direccion>, IDireccionRepository
+    public class DireccionRepository: GenericRepository<Address>, IDireccionRepository
     {
         public DireccionRepository(ApplicationDbContext context) : base(context)
         {

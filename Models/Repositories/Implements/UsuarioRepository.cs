@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class UsuarioRepository: GenericRepository<Usuario>, IUsuarioRepository
+    public class UsuarioRepository: GenericRepository<User>, IUsuarioRepository
     {
         public UsuarioRepository(ApplicationDbContext context) : base(context)
         {

@@ -10,21 +10,21 @@ namespace WebAPIProyectoDeGrado.DTOs
     {
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Barrio { get; set; }
+        public string Neighborhood { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string TipoDeCalle { get; set; }
+        public string StreetType { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Carrera { get; set; }
+        public string Career { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Numero1 { get; set; }
+        public string NumberOne { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Numero2 { get; set; }
+        public string NumberTwo { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Descripcion { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -8,30 +8,30 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
-    public class Direccion
+    public class Address
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Barrio { get; set; }
+        public string Neighborhood { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string TipoDeCalle { get; set; }
+        public string StreetType { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Carrera { get; set; }
+        public string Career { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Numero1 { get; set; }
+        public string NumberOne { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Numero2 { get; set; }
+        public string NumberTwo { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Descripcion { get; set; }
-        [ForeignKey("Tienda")]
-        public int? TiendaId { get; set; }
-        [ForeignKey("PuntoDeRecoleccion")]
-        public int? PuntoDeRecoleccionId { get; set; }
+        public string Description { get; set; }
+        [ForeignKey("Shop")]
+        public int? ShopId { get; set; }
+        [ForeignKey("CollectionPoint")]
+        public int? CollectionPointId { get; set; }
     }
 }

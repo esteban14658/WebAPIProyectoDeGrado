@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class UserService: GenericService<Usuario>, IUserService
+    public class UserService: GenericService<User>, IUserService
     {
         private readonly IUsuarioRepository usuarioRepository;
 

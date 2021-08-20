@@ -76,7 +76,7 @@ namespace WebAPIProyectoDeGrado.Controllers
                 return BadRequest($"Ya existe un reciclador con el email: {residenteCreacionDTO.Usuario.Email}");
             }
 
-            var residente = mapper.Map<Residente>(residenteCreacionDTO);
+            var residente = mapper.Map<Resident>(residenteCreacionDTO);
 
             context.Add(residente);
             await context.SaveChangesAsync();
