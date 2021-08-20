@@ -11,17 +11,17 @@ namespace WebAPIProyectoDeGrado.Entitys
     {
         public int Id { get; set; }
         [Required]
-        public DateTime FechaCreacion { get; set; }
+        public DateTime CreateDate { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 20, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string TipoDeMaterial { get; set; }
+        public string TypeOfMaterial { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 50, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Imagen { get; set; }
+        public string Image { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 50, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Descripcion { get; set; }
-        public Boolean Estado { get; set; }
+        public string Description { get; set; }
+        public Boolean State { get; set; }
         [Required]
         public Address Direccion { get; set; }
     }

@@ -71,7 +71,7 @@ namespace WebAPIProyectoDeGrado.Controllers
                 return BadRequest($"Ya existe un reciclador con el email: {recicladorCreacionDTO.Usuario.Email}");
             }
 
-            var reciclador = mapper.Map<Reciclador>(recicladorCreacionDTO);
+            var reciclador = mapper.Map<Recycler>(recicladorCreacionDTO);
 
             context.Add(reciclador);
             await context.SaveChangesAsync();
@@ -79,7 +79,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(Reciclador reciclador, int id)
+        public async Task<ActionResult> Put(Recycler reciclador, int id)
         {
             if (reciclador.Id != id)
             {
