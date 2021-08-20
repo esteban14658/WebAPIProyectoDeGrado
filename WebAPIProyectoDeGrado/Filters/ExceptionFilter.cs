@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Filters
 {
-    public class FiltroDeExcepcion : ExceptionFilterAttribute
+    public class ExceptionFilter : ExceptionFilterAttribute
     {
-        private readonly ILogger<FiltroDeExcepcion> logger;
+        private readonly ILogger<ExceptionFilter> logger;
 
-        public FiltroDeExcepcion(ILogger<FiltroDeExcepcion> logger)
+        public ExceptionFilter(ILogger<ExceptionFilter> logger)
         {
             this.logger = logger;
         }

@@ -9,9 +9,9 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 {
     public class CollectionPointService: GenericService<CollectionPoint>, ICollectionPointService
     {
-        private readonly IPuntoDeRecoleccionRepository puntoDeRecoleccionRepository;
+        private readonly ICollectionPointRepository puntoDeRecoleccionRepository;
 
-        public CollectionPointService(IPuntoDeRecoleccionRepository puntoDeRecoleccionRepository): base(puntoDeRecoleccionRepository)
+        public CollectionPointService(ICollectionPointRepository puntoDeRecoleccionRepository): base(puntoDeRecoleccionRepository)
         {
             this.puntoDeRecoleccionRepository = puntoDeRecoleccionRepository;
         }

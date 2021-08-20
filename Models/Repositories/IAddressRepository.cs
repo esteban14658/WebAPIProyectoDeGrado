@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories
 {
-    public interface IPuntoDeRecoleccionRepository: IGenericRepository<CollectionPoint>
+    public interface IAddressRepository: IGenericRepository<Address>
     {
     }
 }

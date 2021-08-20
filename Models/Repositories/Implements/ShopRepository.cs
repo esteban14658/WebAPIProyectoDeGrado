@@ -6,11 +6,10 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class DireccionRepository: GenericRepository<Address>, IDireccionRepository
+    public class ShopRepository: GenericRepository<Shop>, IShopRepository
     {
-        public DireccionRepository(ApplicationDbContext context) : base(context)
+        public ShopRepository(ApplicationDbContext context) : base(context)
         {
-
         }
     }
 }

@@ -9,9 +9,9 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 {
     public class ResidentService: GenericService<Resident>, IResidentService
     {
-        private readonly IResidenteRepository residenteRepository;
+        private readonly IResidentRepository residenteRepository;
 
-        public ResidentService(IResidenteRepository residenteRepository): base(residenteRepository)
+        public ResidentService(IResidentRepository residenteRepository): base(residenteRepository)
         {
             this.residenteRepository = residenteRepository;
         }

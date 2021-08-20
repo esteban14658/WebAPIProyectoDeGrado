@@ -6,10 +6,11 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class PuntoDeRecoleccionRepository: GenericRepository<CollectionPoint>, IPuntoDeRecoleccionRepository
+    public class AddressRepository: GenericRepository<Address>, IAddressRepository
     {
-        public PuntoDeRecoleccionRepository(ApplicationDbContext context) : base(context)
+        public AddressRepository(ApplicationDbContext context) : base(context)
         {
+
         }
     }
 }

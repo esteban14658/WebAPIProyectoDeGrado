@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories
 {
-    public interface IRecicladorRepository: IGenericRepository<Recycler>
+    public interface IRecyclerRepository: IGenericRepository<Recycler>
     {
 
     }

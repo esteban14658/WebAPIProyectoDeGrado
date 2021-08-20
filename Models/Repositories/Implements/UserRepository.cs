@@ -6,9 +6,9 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class ResidenteRepository: GenericRepository<Resident>, IResidenteRepository
+    public class UserRepository: GenericRepository<User>, IUserRepository
     {
-        public ResidenteRepository(ApplicationDbContext context): base(context)
+        public UserRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

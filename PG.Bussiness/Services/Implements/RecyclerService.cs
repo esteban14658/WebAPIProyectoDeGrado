@@ -9,8 +9,8 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 {
     public class RecyclerService: GenericService<Recycler>, IRecyclerService
     {
-        private readonly IRecicladorRepository recicladorRepository;
-        public RecyclerService(IRecicladorRepository recicladorRepository): base(recicladorRepository)
+        private readonly IRecyclerRepository recicladorRepository;
+        public RecyclerService(IRecyclerRepository recicladorRepository): base(recicladorRepository)
         {
             this.recicladorRepository = recicladorRepository;
         }

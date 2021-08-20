@@ -9,9 +9,9 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 {
     public class AddressService: GenericService<Address>, IAddressService
     {
-        private readonly IDireccionRepository direccionRepository;
+        private readonly IAddressRepository direccionRepository;
 
-        public AddressService(IDireccionRepository direccionRepository): base(direccionRepository)
+        public AddressService(IAddressRepository direccionRepository): base(direccionRepository)
         {
             this.direccionRepository = direccionRepository;
         }

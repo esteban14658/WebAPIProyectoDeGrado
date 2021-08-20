@@ -9,9 +9,9 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 {
     public class UserService: GenericService<User>, IUserService
     {
-        private readonly IUsuarioRepository usuarioRepository;
+        private readonly IUserRepository usuarioRepository;
 
-        public UserService(IUsuarioRepository usuarioRepository): base(usuarioRepository)
+        public UserService(IUserRepository usuarioRepository): base(usuarioRepository)
         {
             this.usuarioRepository = usuarioRepository;
         }

@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories
 {
-    public interface IDireccionRepository: IGenericRepository<Address>
+    public interface IUserRepository: IGenericRepository<User>
     {
     }
 }
