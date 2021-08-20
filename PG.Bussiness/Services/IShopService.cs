@@ -6,7 +6,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IDireccionService: IGenericService<Direccion>
+    public interface IShopService: IGenericService<Tienda>
     {
     }
 }

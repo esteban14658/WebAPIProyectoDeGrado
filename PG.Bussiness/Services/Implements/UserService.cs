@@ -7,11 +7,11 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class UsuarioService: GenericService<Usuario>, IUsuarioService
+    public class UserService: GenericService<Usuario>, IUserService
     {
         private readonly IUsuarioRepository usuarioRepository;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository): base(usuarioRepository)
+        public UserService(IUsuarioRepository usuarioRepository): base(usuarioRepository)
         {
             this.usuarioRepository = usuarioRepository;
         }

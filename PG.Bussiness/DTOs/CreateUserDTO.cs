@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class UsuarioCreacionDTO
+    public class CreateUserDTO
     {
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]

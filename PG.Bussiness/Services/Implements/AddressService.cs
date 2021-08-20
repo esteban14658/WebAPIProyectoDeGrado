@@ -7,11 +7,11 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class DireccionService: GenericService<Direccion>, IDireccionService
+    public class AddressService: GenericService<Direccion>, IAddressService
     {
         private readonly IDireccionRepository direccionRepository;
 
-        public DireccionService(IDireccionRepository direccionRepository): base(direccionRepository)
+        public AddressService(IDireccionRepository direccionRepository): base(direccionRepository)
         {
             this.direccionRepository = direccionRepository;
         }

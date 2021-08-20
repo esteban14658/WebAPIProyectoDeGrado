@@ -25,15 +25,15 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TiendaDTO>>> Get()
+        public async Task<ActionResult<List<ShopDTO>>> Get()
         {
             var tiendas = await context.Tiendas.Include(x => 
                 x.Usuario).Include(x => x.Direccion).ToListAsync();
-            return mapper.Map<List<TiendaDTO>>(tiendas);
+            return mapper.Map<List<ShopDTO>>(tiendas);
         }
 
         [HttpGet("ObtenerPorIdUsuario/{id:int}")]
-        public async Task<ActionResult<TiendaDTO>> ObtenerPorIdUsuario(int id)
+        public async Task<ActionResult<ShopDTO>> ObtenerPorIdUsuario(int id)
         {
             var existe = await context.Tiendas.AnyAsync(x =>
                 x.Usuario.Id == id);
@@ -46,11 +46,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             var tienda = await context.Tiendas.Include(x => x.Usuario).Include(x =>
                 x.Direccion).FirstOrDefaultAsync(x => x.Usuario.Id == id);
 
-            return mapper.Map<TiendaDTO>(tienda);
+            return mapper.Map<ShopDTO>(tienda);
         }
 
         [HttpGet("ObtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<TiendaDTO>> ObtenerPorEmailUsuario(string email)
+        public async Task<ActionResult<ShopDTO>> ObtenerPorEmailUsuario(string email)
         {
             var existe = await context.Tiendas.AnyAsync(x =>
                 x.Usuario.Email == email);
@@ -63,11 +63,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             var tienda = await context.Tiendas.Include(x => x.Usuario).Include(x =>
                 x.Direccion).FirstOrDefaultAsync(x => x.Usuario.Email == email);
 
-            return mapper.Map<TiendaDTO>(tienda);
+            return mapper.Map<ShopDTO>(tienda);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] TiendaCreacionDTO tiendaCreacionDTO)
+        public async Task<ActionResult> Post([FromBody] CreateShopDTO tiendaCreacionDTO)
         {
             var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == tiendaCreacionDTO.Usuario.Email);
 

@@ -7,11 +7,11 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class PuntoDeRecoleccionService: GenericService<PuntoDeRecoleccion>, IPuntoDeRecoleccionService
+    public class CollectionPointService: GenericService<PuntoDeRecoleccion>, ICollectionPointService
     {
         private readonly IPuntoDeRecoleccionRepository puntoDeRecoleccionRepository;
 
-        public PuntoDeRecoleccionService(IPuntoDeRecoleccionRepository puntoDeRecoleccionRepository): base(puntoDeRecoleccionRepository)
+        public CollectionPointService(IPuntoDeRecoleccionRepository puntoDeRecoleccionRepository): base(puntoDeRecoleccionRepository)
         {
             this.puntoDeRecoleccionRepository = puntoDeRecoleccionRepository;
         }

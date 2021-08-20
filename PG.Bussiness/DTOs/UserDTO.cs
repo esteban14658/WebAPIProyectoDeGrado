@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class UsuarioDTO
+    public class UserDTO
     {
         public int Id { get; set; }
         public string Email { get; set; }

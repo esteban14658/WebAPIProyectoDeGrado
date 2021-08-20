@@ -7,11 +7,11 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class TiendaService: GenericService<Tienda>, ITiendaService
+    public class ShopService: GenericService<Tienda>, IShopService
     {
         private readonly ITiendaRepository tiendaRepository;
 
-        public TiendaService(ITiendaRepository tiendaRepository): base(tiendaRepository)
+        public ShopService(ITiendaRepository tiendaRepository): base(tiendaRepository)
         {
             this.tiendaRepository = tiendaRepository;
         }

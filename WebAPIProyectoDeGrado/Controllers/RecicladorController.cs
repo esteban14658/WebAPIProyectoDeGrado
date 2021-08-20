@@ -24,14 +24,14 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<RecicladorDTO>>> Get()
+        public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
             var recicladores = await context.Recicladores.Include(x => x.Usuario).ToListAsync();
-            return mapper.Map<List<RecicladorDTO>>(recicladores);
+            return mapper.Map<List<RecyclerDTO>>(recicladores);
         }
 
         [HttpGet("ObtenerPorIdUsuario/{idUsuario:int}")]
-        public async Task<ActionResult<RecicladorDTO>> ObtenerPorIdUsuario(int idUsuario)
+        public async Task<ActionResult<RecyclerDTO>> ObtenerPorIdUsuario(int idUsuario)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
                 x.Usuario.Id == idUsuario);
@@ -42,11 +42,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
             
             var reciclador = await context.Recicladores.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Usuario.Id == idUsuario);
-            return mapper.Map<RecicladorDTO>(reciclador);
+            return mapper.Map<RecyclerDTO>(reciclador);
         }
 
         [HttpGet("ObtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<RecicladorDTO>> ObtenerPorEmailUsuario(string email)
+        public async Task<ActionResult<RecyclerDTO>> ObtenerPorEmailUsuario(string email)
         {
             var existe = await context.Recicladores.AnyAsync(x =>
                 x.Usuario.Email == email);
@@ -58,11 +58,11 @@ namespace WebAPIProyectoDeGrado.Controllers
 
             var reciclador = await context.Recicladores.Include(x => x.Usuario).FirstOrDefaultAsync(x => 
                 x.Usuario.Email == email);
-            return mapper.Map<RecicladorDTO>(reciclador);
+            return mapper.Map<RecyclerDTO>(reciclador);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] RecicladorCreacionDTO recicladorCreacionDTO)
+        public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recicladorCreacionDTO)
         {
             var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == recicladorCreacionDTO.Usuario.Email);
 

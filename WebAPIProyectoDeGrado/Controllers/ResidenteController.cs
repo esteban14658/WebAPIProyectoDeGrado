@@ -25,15 +25,15 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ResidenteDTO>>> Get()
+        public async Task<ActionResult<List<ResidentDTO>>> Get()
         {
             var residentes = await context.Residentes.Include(x => x.Usuario).Include(x =>
                 x.ListaDirecciones).ToListAsync();
-            return mapper.Map<List<ResidenteDTO>>(residentes);
+            return mapper.Map<List<ResidentDTO>>(residentes);
         }
 
         [HttpGet("ObtenerPorIdlUsuario/{id:int}")]
-        public async Task<ActionResult<ResidenteDTO>> ObtenerPorIdlUsuario(int id)
+        public async Task<ActionResult<ResidentDTO>> ObtenerPorIdlUsuario(int id)
         {
             var existe = await context.Residentes.AnyAsync(x =>
                 x.Usuario.Id == id);
@@ -46,11 +46,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             var residente = await context.Residentes.Include(x => x.Usuario).Include(x =>
                 x.ListaDirecciones).FirstOrDefaultAsync(x => x.Usuario.Id == id);
 
-            return mapper.Map<ResidenteDTO>(residente);
+            return mapper.Map<ResidentDTO>(residente);
         }
 
         [HttpGet("ObtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<ResidenteDTO>> ObtenerPorEmailUsuario(string email)
+        public async Task<ActionResult<ResidentDTO>> ObtenerPorEmailUsuario(string email)
         {
             var existe = await context.Residentes.AnyAsync(x =>
                 x.Usuario.Email == email);
@@ -63,11 +63,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             var residente = await context.Residentes.Include(x => x.Usuario).Include(x => 
                 x.ListaDirecciones).FirstOrDefaultAsync(x => x.Usuario.Email == email);
 
-            return mapper.Map<ResidenteDTO>(residente);
+            return mapper.Map<ResidentDTO>(residente);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] ResidenteCreacionDTO residenteCreacionDTO)
+        public async Task<ActionResult> Post([FromBody] CreateResidentDTO residenteCreacionDTO)
         {
             var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == residenteCreacionDTO.Usuario.Email);
 

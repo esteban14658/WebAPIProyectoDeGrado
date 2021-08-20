@@ -26,14 +26,14 @@ namespace WebAPIProyectoDeGrado.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<List<UsuarioDTO>>> Get()
+        public async Task<ActionResult<List<UserDTO>>> Get()
         {
             var usuarios = await context.Usuarios.Where(x => x.Rol != "Admin").ToListAsync();
-            return mapper.Map<List<UsuarioDTO>>(usuarios);
+            return mapper.Map<List<UserDTO>>(usuarios);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<UsuarioDTO>> Get(int id)
+        public async Task<ActionResult<UserDTO>> Get(int id)
         {
             var existe = await context.Usuarios.AnyAsync(x =>
                 x.Id == id);
@@ -44,7 +44,7 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
 
             var usuario = await context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
-            return mapper.Map<UsuarioDTO>(usuario);
+            return mapper.Map<UserDTO>(usuario);
         }
 
     }
