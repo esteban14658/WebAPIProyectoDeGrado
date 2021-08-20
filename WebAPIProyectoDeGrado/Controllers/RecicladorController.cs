@@ -40,7 +40,7 @@ namespace WebAPIProyectoDeGrado.Controllers
             {
                 return NotFound();
             }
-
+            
             var reciclador = await context.Recicladores.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Usuario.Id == idUsuario);
             return mapper.Map<RecicladorDTO>(reciclador);
         }
