@@ -9,14 +9,14 @@ namespace WebAPIProyectoDeGrado.Entitys
     public class Resident
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Phone { get; set; }
         public List<Address> AddressList { get; set; }
         public User User { get; set; }

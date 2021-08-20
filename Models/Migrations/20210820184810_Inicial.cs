@@ -15,9 +15,9 @@ namespace PG.Models.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CreateDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    TypeOfMaterial = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Image = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    TypeOfMaterial = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    Image = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false),
+                    Description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -32,9 +32,9 @@ namespace PG.Models.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Email = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    Password = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
+                    Password = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false),
-                    Role = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false)
+                    Role = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,7 +49,7 @@ namespace PG.Models.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     LastName = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    DocumentType = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    DocumentType = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     Document = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     Phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
@@ -94,8 +94,8 @@ namespace PG.Models.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    DocumentType = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    Document = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    DocumentType = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                    Document = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     Phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -118,7 +118,7 @@ namespace PG.Models.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Neighborhood = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     StreetType = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    Career = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
+                    Career = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     NumberOne = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
                     NumberTwo = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
                     Description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),

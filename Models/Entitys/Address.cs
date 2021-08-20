@@ -11,23 +11,23 @@ namespace WebAPIProyectoDeGrado.Entitys
     public class Address
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Neighborhood { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string StreetType { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Career { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 5, ErrorMessage = "field {0} must be less than {1} characters")]
         public string NumberOne { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 5, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 5, ErrorMessage = "field {0} must be less than {1} characters")]
         public string NumberTwo { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
         [ForeignKey("Shop")]
         public int? ShopId { get; set; }

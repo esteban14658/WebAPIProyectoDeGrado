@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210820180536_Inicial")]
+    [Migration("20210820184810_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,8 +30,8 @@ namespace PG.Models.Migrations
 
                     b.Property<string>("Career")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
 
                     b.Property<int?>("CollectionPointId")
                         .HasColumnType("integer");
@@ -92,21 +92,21 @@ namespace PG.Models.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
 
                     b.Property<string>("Image")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasMaxLength(35)
+                        .HasColumnType("character varying(35)");
 
                     b.Property<bool>("State")
                         .HasColumnType("boolean");
 
                     b.Property<string>("TypeOfMaterial")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
 
                     b.HasKey("Id");
 
@@ -127,8 +127,8 @@ namespace PG.Models.Migrations
 
                     b.Property<string>("DocumentType")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -196,13 +196,13 @@ namespace PG.Models.Migrations
 
                     b.Property<string>("Document")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<string>("DocumentType")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -238,13 +238,13 @@ namespace PG.Models.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
 
                     b.Property<bool>("State")
                         .HasColumnType("boolean");

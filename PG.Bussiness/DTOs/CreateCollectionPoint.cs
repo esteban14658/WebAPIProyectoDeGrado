@@ -10,14 +10,14 @@ namespace WebAPIProyectoDeGrado.DTOs
     {
         [Required]
         public DateTime CreateDate { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 20, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string TypeOfMaterial { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 50, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 35, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Image { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(maximumLength: 50, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
         public Boolean State { get; set; }
         [Required]
