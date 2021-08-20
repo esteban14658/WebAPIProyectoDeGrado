@@ -10,18 +10,18 @@ namespace WebAPIProyectoDeGrado.DTOs
     {
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Nombre { get; set; }
+        public string Name { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string TipoDeDocumento { get; set; }
+        public string DocumentType { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Documento { get; set; }
+        public string Document { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
 
-        public string Telefono { get; set; }
-        public CreateUserDTO Usuario { get; set; }
-        public CreateAddressDTO Direccion { get; set; }
+        public string Phone { get; set; }
+        public CreateUserDTO User { get; set; }
+        public CreateAddressDTO Address { get; set; }
     }
 }
