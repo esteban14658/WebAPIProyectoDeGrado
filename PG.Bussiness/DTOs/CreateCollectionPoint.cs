@@ -21,6 +21,6 @@ namespace WebAPIProyectoDeGrado.DTOs
         public string Description { get; set; }
         public Boolean State { get; set; }
         [Required]
-        public CreateAddressDTO Direccion { get; set; }
+        public CreateAddressDTO Address { get; set; }
     }
 }

@@ -23,6 +23,6 @@ namespace WebAPIProyectoDeGrado.Entitys
         public string Description { get; set; }
         public Boolean State { get; set; }
         [Required]
-        public Address Direccion { get; set; }
+        public Address Address { get; set; }
     }
 }
