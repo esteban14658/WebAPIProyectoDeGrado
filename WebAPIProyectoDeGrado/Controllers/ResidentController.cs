@@ -27,8 +27,8 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ResidentDTO>>> Get()
         {
-            var residentes = await context.Residentes.Include(x => x.Usuario).Include(x =>
-                x.ListaDirecciones).ToListAsync();
+            var residentes = await context.Residentes.Include(x => x.User).Include(x =>
+                x.AddressList).ToListAsync();
             return mapper.Map<List<ResidentDTO>>(residentes);
         }
 
@@ -36,15 +36,15 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<ResidentDTO>> ObtenerPorIdlUsuario(int id)
         {
             var existe = await context.Residentes.AnyAsync(x =>
-                x.Usuario.Id == id);
+                x.User.Id == id);
 
             if (!existe)
             {
                 return NotFound();
             }
 
-            var residente = await context.Residentes.Include(x => x.Usuario).Include(x =>
-                x.ListaDirecciones).FirstOrDefaultAsync(x => x.Usuario.Id == id);
+            var residente = await context.Residentes.Include(x => x.User).Include(x =>
+                x.AddressList).FirstOrDefaultAsync(x => x.User.Id == id);
 
             return mapper.Map<ResidentDTO>(residente);
         }
@@ -53,15 +53,15 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<ResidentDTO>> ObtenerPorEmailUsuario(string email)
         {
             var existe = await context.Residentes.AnyAsync(x =>
-                x.Usuario.Email == email);
+                x.User.Email == email);
 
             if (!existe)
             {
                 return NotFound();
             }
 
-            var residente = await context.Residentes.Include(x => x.Usuario).Include(x => 
-                x.ListaDirecciones).FirstOrDefaultAsync(x => x.Usuario.Email == email);
+            var residente = await context.Residentes.Include(x => x.User).Include(x =>
+                x.AddressList).FirstOrDefaultAsync(x => x.User.Email == email);
 
             return mapper.Map<ResidentDTO>(residente);
         }
@@ -69,11 +69,11 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CreateResidentDTO residenteCreacionDTO)
         {
-            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == residenteCreacionDTO.Usuario.Email);
+            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == residenteCreacionDTO.User.Email);
 
             if (existeElUsuario)
             {
-                return BadRequest($"Ya existe un reciclador con el email: {residenteCreacionDTO.Usuario.Email}");
+                return BadRequest($"Ya existe un reciclador con el email: {residenteCreacionDTO.User.Email}");
             }
 
             var residente = mapper.Map<Resident>(residenteCreacionDTO);

@@ -11,14 +11,14 @@ namespace WebAPIProyectoDeGrado.Entitys
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Nombre { get; set; }
+        public string Name { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 25, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Apellido { get; set; }
+        public string LastName { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 10, ErrorMessage = "El campo {0} debe ser menor a {1} caracteres")]
-        public string Telefono { get; set; }
-        public List<Address> ListaDirecciones { get; set; }
-        public User Usuario { get; set; }
+        public string Phone { get; set; }
+        public List<Address> AddressList { get; set; }
+        public User User { get; set; }
     }
 }
