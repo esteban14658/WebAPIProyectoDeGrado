@@ -7,11 +7,11 @@ namespace WebAPIProyectoDeGrado.DTOs
 {
     public class RecyclerDTO
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string TipoDeDocumento { get; set; }
-        public string Documento { get; set; }
-        public string Telefono { get; set; }
-        public UserDTO Usuario { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string DocumentType { get; set; }
+        public string Document { get; set; }
+        public string Phone { get; set; }
+        public UserDTO User { get; set; }
     }
 }
