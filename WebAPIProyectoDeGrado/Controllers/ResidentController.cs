@@ -73,7 +73,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 
             if (userExists)
             {
-                return BadRequest($"There is already a recycler with the email: {createResidentDTO.User.Email}");
+                return BadRequest($"There is already a resident with the email: {createResidentDTO.User.Email}");
             }
 
             var resident = mapper.Map<Resident>(createResidentDTO);

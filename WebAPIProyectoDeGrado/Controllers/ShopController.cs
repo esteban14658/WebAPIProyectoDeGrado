@@ -27,32 +27,32 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ShopDTO>>> Get()
         {
-            var tiendas = await context.Tiendas.Include(x => 
+            var shops = await context.Shops.Include(x => 
                 x.User).Include(x => x.Address).ToListAsync();
-            return mapper.Map<List<ShopDTO>>(tiendas);
+            return mapper.Map<List<ShopDTO>>(shops);
         }
 
-        [HttpGet("ObtenerPorIdUsuario/{id:int}")]
-        public async Task<ActionResult<ShopDTO>> ObtenerPorIdUsuario(int id)
+        [HttpGet("GetUserById/{id:int}")]
+        public async Task<ActionResult<ShopDTO>> GetUserById(int id)
         {
-            var existe = await context.Tiendas.AnyAsync(x =>
+            var exists = await context.Shops.AnyAsync(x =>
                 x.User.Id == id);
 
-            if (!existe)
+            if (!exists)
             {
                 return NotFound();
             }
 
-            var tienda = await context.Tiendas.Include(x => x.User).Include(x =>
+            var shop = await context.Shops.Include(x => x.User).Include(x =>
                 x.Address).FirstOrDefaultAsync(x => x.User.Id == id);
 
-            return mapper.Map<ShopDTO>(tienda);
+            return mapper.Map<ShopDTO>(shop);
         }
 
-        [HttpGet("ObtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<ShopDTO>> ObtenerPorEmailUsuario(string email)
+        [HttpGet("GetUserByEmail/{email}")]
+        public async Task<ActionResult<ShopDTO>> GetUserByEmail(string email)
         {
-            var existe = await context.Tiendas.AnyAsync(x =>
+            var existe = await context.Shops.AnyAsync(x =>
                 x.User.Email == email);
 
             if (!existe)
@@ -60,25 +60,25 @@ namespace WebAPIProyectoDeGrado.Controllers
                 return NotFound();
             }
 
-            var tienda = await context.Tiendas.Include(x => x.User).Include(x =>
+            var shop = await context.Shops.Include(x => x.User).Include(x =>
                 x.Address).FirstOrDefaultAsync(x => x.User.Email == email);
 
-            return mapper.Map<ShopDTO>(tienda);
+            return mapper.Map<ShopDTO>(shop);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateShopDTO tiendaCreacionDTO)
+        public async Task<ActionResult> Post([FromBody] CreateShopDTO createShopDTO)
         {
-            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == tiendaCreacionDTO.User.Email);
+            var userExists = await context.Users.AnyAsync(x => x.Email == createShopDTO.User.Email);
 
-            if (existeElUsuario)
+            if (userExists)
             {
-                return BadRequest($"Ya existe una tienda con el email: {tiendaCreacionDTO.User.Email}");
+                return BadRequest($"There is already a shop with the email: {createShopDTO.User.Email}");
             }
 
-            var tienda = mapper.Map<Shop>(tiendaCreacionDTO);
+            var shop = mapper.Map<Shop>(createShopDTO);
 
-            context.Add(tienda);
+            context.Add(shop);
             await context.SaveChangesAsync();
             return Ok();
         }

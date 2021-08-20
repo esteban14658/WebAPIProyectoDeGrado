@@ -28,23 +28,23 @@ namespace WebAPIProyectoDeGrado.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<List<UserDTO>>> Get()
         {
-            var usuarios = await context.Usuarios.Where(x => x.Role != "Admin").ToListAsync();
-            return mapper.Map<List<UserDTO>>(usuarios);
+            var users = await context.Users.Where(x => x.Role != "Admin").ToListAsync();
+            return mapper.Map<List<UserDTO>>(users);
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<UserDTO>> Get(int id)
         {
-            var existe = await context.Usuarios.AnyAsync(x =>
+            var exists = await context.Users.AnyAsync(x =>
                 x.Id == id);
 
-            if (!existe)
+            if (!exists)
             {
                 return NotFound();
             }
 
-            var usuario = await context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
-            return mapper.Map<UserDTO>(usuario);
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return mapper.Map<UserDTO>(user);
         }
 
     }
