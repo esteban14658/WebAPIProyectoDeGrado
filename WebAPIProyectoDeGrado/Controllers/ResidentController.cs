@@ -27,58 +27,58 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ResidentDTO>>> Get()
         {
-            var residentes = await context.Residentes.Include(x => x.User).Include(x =>
+            var residents = await context.Residents.Include(x => x.User).Include(x =>
                 x.AddressList).ToListAsync();
-            return mapper.Map<List<ResidentDTO>>(residentes);
+            return mapper.Map<List<ResidentDTO>>(residents);
         }
 
-        [HttpGet("ObtenerPorIdlUsuario/{id:int}")]
-        public async Task<ActionResult<ResidentDTO>> ObtenerPorIdlUsuario(int id)
+        [HttpGet("GetUserById/{id:int}")]
+        public async Task<ActionResult<ResidentDTO>> GetUserById(int id)
         {
-            var existe = await context.Residentes.AnyAsync(x =>
+            var exists = await context.Residents.AnyAsync(x =>
                 x.User.Id == id);
 
-            if (!existe)
+            if (!exists)
             {
                 return NotFound();
             }
 
-            var residente = await context.Residentes.Include(x => x.User).Include(x =>
+            var resident = await context.Residents.Include(x => x.User).Include(x =>
                 x.AddressList).FirstOrDefaultAsync(x => x.User.Id == id);
 
-            return mapper.Map<ResidentDTO>(residente);
+            return mapper.Map<ResidentDTO>(resident);
         }
 
-        [HttpGet("ObtenerPorEmailUsuario/{email}")]
-        public async Task<ActionResult<ResidentDTO>> ObtenerPorEmailUsuario(string email)
+        [HttpGet("GetUserByEmail/{email}")]
+        public async Task<ActionResult<ResidentDTO>> GetUserByEmail(string email)
         {
-            var existe = await context.Residentes.AnyAsync(x =>
+            var exists = await context.Residents.AnyAsync(x =>
                 x.User.Email == email);
 
-            if (!existe)
+            if (!exists)
             {
                 return NotFound();
             }
 
-            var residente = await context.Residentes.Include(x => x.User).Include(x =>
+            var resident = await context.Residents.Include(x => x.User).Include(x =>
                 x.AddressList).FirstOrDefaultAsync(x => x.User.Email == email);
 
-            return mapper.Map<ResidentDTO>(residente);
+            return mapper.Map<ResidentDTO>(resident);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateResidentDTO residenteCreacionDTO)
+        public async Task<ActionResult> Post([FromBody] CreateResidentDTO createResidentDTO)
         {
-            var existeElUsuario = await context.Usuarios.AnyAsync(x => x.Email == residenteCreacionDTO.User.Email);
+            var userExists = await context.Users.AnyAsync(x => x.Email == createResidentDTO.User.Email);
 
-            if (existeElUsuario)
+            if (userExists)
             {
-                return BadRequest($"Ya existe un reciclador con el email: {residenteCreacionDTO.User.Email}");
+                return BadRequest($"There is already a recycler with the email: {createResidentDTO.User.Email}");
             }
 
-            var residente = mapper.Map<Resident>(residenteCreacionDTO);
+            var resident = mapper.Map<Resident>(createResidentDTO);
 
-            context.Add(residente);
+            context.Add(resident);
             await context.SaveChangesAsync();
             return Ok();
         }
