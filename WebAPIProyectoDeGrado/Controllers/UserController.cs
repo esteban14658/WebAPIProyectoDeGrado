@@ -12,7 +12,7 @@ using WebAPIProyectoDeGrado.Entitys;
 namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
-    [Route("api/usuarios")]
+    [Route("api/users")]
     public class UserController: ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -28,7 +28,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<List<UserDTO>>> Get()
         {
-            var usuarios = await context.Usuarios.Where(x => x.Rol != "Admin").ToListAsync();
+            var usuarios = await context.Usuarios.Where(x => x.Role != "Admin").ToListAsync();
             return mapper.Map<List<UserDTO>>(usuarios);
         }
 

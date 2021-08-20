@@ -12,7 +12,7 @@ using WebAPIProyectoDeGrado.Entitys;
 namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
-    [Route("api/residentes")]
+    [Route("api/residents")]
     public class ResidentController: ControllerBase
     {
         private readonly ApplicationDbContext context;

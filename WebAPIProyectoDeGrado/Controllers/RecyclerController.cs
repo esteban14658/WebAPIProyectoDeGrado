@@ -11,7 +11,7 @@ using WebAPIProyectoDeGrado.Entitys;
 namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
-    [Route("api/recicladores")]
+    [Route("api/recyclers")]
     public class RecyclerController: ControllerBase
     {
         private readonly ApplicationDbContext context;
