@@ -32,7 +32,7 @@ namespace WebAPIProyectoDeGrado
 
             services.AddControllers(opciones =>
             {
-                opciones.Filters.Add(typeof(FiltroDeExcepcion));
+                opciones.Filters.Add(typeof(ExceptionFilter));
             }).AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
