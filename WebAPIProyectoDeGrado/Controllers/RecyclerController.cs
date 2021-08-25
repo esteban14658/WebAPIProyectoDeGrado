@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
+using WebAPIProyectoDeGrado.Services.Implements;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
@@ -16,6 +17,7 @@ namespace WebAPIProyectoDeGrado.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private RecyclerService recyclerService;
 
         public RecyclerController(ApplicationDbContext context, IMapper mapper)
         {
