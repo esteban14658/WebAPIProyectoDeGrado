@@ -47,5 +47,38 @@ namespace WebAPIProyectoDeGrado.Controllers
             return mapper.Map<UserDTO>(user);
         }
 
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(CreateUserDTO createUserDTO, int id)
+        {
+            var exist = await context.Users.AnyAsync(x => x.Id == id);
+
+            if (!exist)
+            {
+                return NotFound();
+            }
+
+            var user = mapper.Map<User>(createUserDTO);
+            user.Id = id;
+
+            context.Update(user);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await context.Users.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new User() { Id = id });
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }

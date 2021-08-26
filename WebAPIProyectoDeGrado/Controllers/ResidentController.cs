@@ -82,5 +82,38 @@ namespace WebAPIProyectoDeGrado.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(CreateResidentDTO createResidentDTO, int id)
+        {
+            var exist = await context.Recyclers.AnyAsync(x => x.Id == id);
+
+            if (!exist)
+            {
+                return NotFound();
+            }
+
+            var resident = mapper.Map<Resident>(createResidentDTO);
+            resident.Id = id;
+
+            context.Update(resident);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await context.Residents.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Resident() { Id = id });
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

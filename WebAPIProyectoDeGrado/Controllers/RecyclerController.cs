@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
-using WebAPIProyectoDeGrado.Services.Implements;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
@@ -17,7 +16,6 @@ namespace WebAPIProyectoDeGrado.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
-        private RecyclerService recyclerService;
 
         public RecyclerController(ApplicationDbContext context, IMapper mapper)
         {
@@ -81,24 +79,37 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(Recycler recycler, int id)
+        public async Task<ActionResult> Put(CreateRecyclerDTO createRecyclerDTO, int id)
         {
-            if (recycler.Id != id)
-            {
-                return BadRequest("The id doesn't match");
-            }
-
-            var exist = await context.Recyclers.AnyAsync(x =>
-                x.Id == id);
+            var exist = await context.Recyclers.AnyAsync(x => x.Id == id);
 
             if (!exist)
             {
                 return NotFound();
             }
 
+            var recycler = mapper.Map<Recycler>(createRecyclerDTO);
+            recycler.Id = id;
+
             context.Update(recycler);
             await context.SaveChangesAsync();
-            return Ok();
+            return NoContent();
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await context.Recyclers.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Recycler() { Id = id });
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }
