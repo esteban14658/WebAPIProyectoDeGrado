@@ -82,5 +82,38 @@ namespace WebAPIProyectoDeGrado.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(CreateShopDTO createShopDTO, int id)
+        {
+            var exist = await context.Shops.AnyAsync(x => x.Id == id);
+
+            if (!exist)
+            {
+                return NotFound();
+            }
+
+            var shop = mapper.Map<Shop>(createShopDTO);
+            shop.Id = id;
+
+            context.Update(shop);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await context.Shops.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Shop() { Id = id });
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
