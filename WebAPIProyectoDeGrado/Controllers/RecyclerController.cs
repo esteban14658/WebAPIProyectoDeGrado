@@ -77,7 +77,12 @@ namespace WebAPIProyectoDeGrado.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
-
+        /// <summary>
+        /// Updates a recycler
+        /// </summary>
+        /// <param name="createRecyclerDTO"></param>
+        /// <param name="id"></param>
+        /// <returns>A response HTTP</returns>
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(CreateRecyclerDTO createRecyclerDTO, int id)
         {
