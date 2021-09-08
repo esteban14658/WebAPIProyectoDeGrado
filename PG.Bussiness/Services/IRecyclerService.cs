@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IRecyclerService: IGenericService<Recycler>
+    public interface IRecyclerService: IGenericService<RecyclerDTO>
     {
+        Task<List<RecyclerDTO>> GetAllRecyclers();
     }
 }

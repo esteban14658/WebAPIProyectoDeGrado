@@ -1,21 +1,68 @@
-﻿using System;
+﻿using AutoMapper;
+using PG.Bussiness.DTOs;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPIProyectoDeGrado.DTOs;
+using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : class
+    public class GenericService<TDto, TEntity> : IGenericService<TDto> where TDto : class where TEntity : class 
     {
-        private IGenericRepository<TEntity> genericRepository;
+        private readonly IGenericRepository<TEntity> genericRepository;
+        private readonly IMapper mapper;
 
-        public GenericService(IGenericRepository<TEntity> genericRepository)
+
+        public GenericService()
         {
-            this.genericRepository = genericRepository;
+
         }
 
-        public async Task Delete(int id)
+        public GenericService(IGenericRepository<TEntity> genericRepository, IMapper mapper)
+        {
+            this.genericRepository = genericRepository;
+            this.mapper = mapper;
+        }
+
+        public Task Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<TDto>> GetAll()
+        {
+            var genericResult = await genericRepository.GetAll();
+
+            List<TDto> residents = new List<TDto>();
+
+            foreach (var item in genericResult)
+            {
+                var result = mapper.Map<TDto>(item);
+                residents.Add(result);
+            }
+            return residents;
+        }
+
+        public Task<TDto> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TDto> Insert(TDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TDto> Update(TDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*public async Task Delete(int id)
         {
             await genericRepository.Delete(id);
         }
@@ -33,11 +80,8 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         public async Task<TEntity> Insert(TEntity entity)
         {
             return await genericRepository.Insert(entity);
-        }
+        }*/
 
-        public async Task<TEntity> Update(TEntity entity)
-        {
-            return await genericRepository.Update(entity);
-        }
+
     }
 }

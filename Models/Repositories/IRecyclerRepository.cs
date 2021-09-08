@@ -8,6 +8,7 @@ namespace WebAPIProyectoDeGrado.Repositories
 {
     public interface IRecyclerRepository: IGenericRepository<Recycler>
     {
-
+        Task<List<Recycler>> GetAllRecyclers();
+        Task<Recycler> GetUserByEmail(string email);
     }
 }

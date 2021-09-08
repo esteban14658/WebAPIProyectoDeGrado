@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
+using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
@@ -16,18 +18,30 @@ namespace WebAPIProyectoDeGrado.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly IRecyclerService recyclerService;
 
-        public RecyclerController(ApplicationDbContext context, IMapper mapper)
+        public RecyclerController(ApplicationDbContext context, IMapper mapper, IRecyclerService recyclerService)
         {
             this.context = context;
             this.mapper = mapper;
+            this.recyclerService = recyclerService;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
-            var recyclers = await context.Recyclers.Include(x => x.User).ToListAsync();
-            return mapper.Map<List<RecyclerDTO>>(recyclers);
+            /*var recyclers = await context.Recyclers.Include(x => x.User).ToListAsync();
+            return mapper.Map<List<RecyclerDTO>>(recyclers);*/
+            var recyclers = await recyclerService.GetAllRecyclers();
+            try
+            {
+                //return mapper.Map<List<RecyclerDTO>>(recyclers);
+                return Ok(recyclers);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("GetUserById/{userId:int}")]

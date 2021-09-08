@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         private readonly ApplicationDbContext context;
+        private readonly DbSet<TEntity> _entities;
         public GenericRepository(ApplicationDbContext context)
         {
             this.context = context;
+            _entities = context.Set<TEntity>();
         }
         public async Task Delete(int id)
         {
@@ -20,30 +24,32 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             {
                 throw new Exception("La entidad es nula");
             }
-            context.Set<TEntity>().Remove(entity);
+            _entities.Remove(entity);
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public virtual async Task<List<TEntity>> GetAll()
         {
-            return await context.Set<TEntity>().ToListAsync();
+            List<TEntity> entities = new List<TEntity>();
+            var result = await _entities.ToListAsync();
+            return result;
         }
 
         public async Task<TEntity> GetById(int id)
         {
-            return await context.Set<TEntity>().FindAsync(id);
+            return await _entities.FindAsync(id);
         }
 
         public async Task<TEntity> Insert(TEntity entity)
         {
-            context.Set<TEntity>().Add(entity);
+            _entities.Add(entity);
             await context.SaveChangesAsync();
             return entity;
         }
 
         public async Task<TEntity> Update(TEntity entity)
         {
-            context.Entry(entity).State = EntityState.Modified;
+            _entities.Update(entity);
             await context.SaveChangesAsync();
             return entity;
         }

@@ -1,19 +1,23 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class AddressService: GenericService<Address>, IAddressService
+    public class AddressService: GenericService<AddressDTO, Address>, IAddressService
     {
-        private readonly IAddressRepository direccionRepository;
+        private readonly IAddressRepository _addressRepository;
+        private readonly IMapper _mapper;
 
-        public AddressService(IAddressRepository direccionRepository): base(direccionRepository)
+        public AddressService(IAddressRepository addressRepository, IMapper mapper): base(addressRepository, mapper)
         {
-            this.direccionRepository = direccionRepository;
+            _addressRepository = addressRepository;
+            _mapper = mapper;
         }
     }
 }
