@@ -7,7 +7,6 @@ namespace WebAPIProyectoDeGrado.DTOs
 {
     public class ShopDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Telefono { get; set; }
         public string DocumentType { get; set; }
