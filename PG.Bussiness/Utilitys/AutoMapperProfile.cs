@@ -31,6 +31,8 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<CreateCollectionPoint, CollectionPoint>();
             CreateMap<CreateResidentDTO, Resident>();
             CreateMap<CreateShopDTO, Shop>();
+
+            
         }
     }
 }

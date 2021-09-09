@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +12,11 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Filters;
+using WebAPIProyectoDeGrado.Repositories;
+using WebAPIProyectoDeGrado.Repositories.Implements;
+using WebAPIProyectoDeGrado.Services;
+using WebAPIProyectoDeGrado.Services.Implements;
+using WebAPIProyectoDeGrado.Utilitys;
 
 namespace WebAPIProyectoDeGrado
 {
@@ -41,10 +44,29 @@ namespace WebAPIProyectoDeGrado
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIProyectoDeGrado", Version = "v1" });
             });
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("defaultConnection")));
+
+            //services.AddScoped(typeof(AutoMapperProfile));
+            
+            //services.AddScoped(typeof(IGenericService<>), typeof(GenericService<,>));
+            services.AddScoped(typeof(IRecyclerService), typeof(RecyclerService));
+            services.AddScoped(typeof(IAddressService), typeof(AddressService));
+            services.AddScoped(typeof(ICollectionPointService), typeof(CollectionPointService));
+            services.AddScoped(typeof(IResidentService), typeof(ResidentService));
+            services.AddScoped(typeof(IShopService), typeof(ShopService));
+            services.AddScoped(typeof(IUserService), typeof(UserService));
+
+            //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IRecyclerRepository), typeof(RecyclerRepository));
+            services.AddScoped(typeof(IAddressRepository), typeof(AddressRepository));
+            services.AddScoped(typeof(ICollectionPointRepository), typeof(CollectionPointRepository));
+            services.AddScoped(typeof(IResidentRepository), typeof(ResidentRepository));
+            services.AddScoped(typeof(IShopRepository), typeof(ShopRepository));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+
 
             services.AddCors(opciones =>
             {

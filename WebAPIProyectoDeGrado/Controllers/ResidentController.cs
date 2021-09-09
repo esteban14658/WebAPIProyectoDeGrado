@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
+using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
@@ -17,19 +18,20 @@ namespace WebAPIProyectoDeGrado.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly IResidentService residentService;
 
-        public ResidentController(ApplicationDbContext context, IMapper mapper)
+        public ResidentController(ApplicationDbContext context, IMapper mapper, IResidentService residentService)
         {
             this.context = context;
             this.mapper = mapper;
+            this.residentService = residentService;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<ResidentDTO>>> Get()
         {
-            var residents = await context.Residents.Include(x => x.User).Include(x =>
-                x.AddressList).ToListAsync();
-            return mapper.Map<List<ResidentDTO>>(residents);
+            var recyclers = await residentService.GetAll();
+            return Ok(recyclers);
         }
 
         [HttpGet("GetUserById/{id:int}")]

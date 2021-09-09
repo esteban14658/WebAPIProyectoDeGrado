@@ -1,19 +1,23 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class UserService: GenericService<User>, IUserService
+    public class UserService: GenericService<UserDTO, User>, IUserService
     {
-        private readonly IUserRepository usuarioRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository usuarioRepository): base(usuarioRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper): base(userRepository, mapper)
         {
-            this.usuarioRepository = usuarioRepository;
+            _userRepository = userRepository;
+            _mapper = mapper;
         }
     }
 }

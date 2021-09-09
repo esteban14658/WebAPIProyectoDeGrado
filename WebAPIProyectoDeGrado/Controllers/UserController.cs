@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
+using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
@@ -17,17 +18,21 @@ namespace WebAPIProyectoDeGrado.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly IUserService userService;
+        
 
-        public UserController(ApplicationDbContext context, IMapper mapper)
+        public UserController(ApplicationDbContext context, IMapper mapper, IUserService userService)
         {
             this.context = context;
             this.mapper = mapper;
+            this.userService = userService;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<List<UserDTO>>> Get()
         {
+            //var us = await userService.GetAll();
             var users = await context.Users.Where(x => x.Role != "Admin").ToListAsync();
             return mapper.Map<List<UserDTO>>(users);
         }
