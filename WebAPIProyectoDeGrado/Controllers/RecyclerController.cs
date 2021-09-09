@@ -30,12 +30,9 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
-            /*var recyclers = await context.Recyclers.Include(x => x.User).ToListAsync();
-            return mapper.Map<List<RecyclerDTO>>(recyclers);*/
-            var recyclers = await recyclerService.GetAllRecyclers();
+            var recyclers = await recyclerService.GetAll();
             try
             {
-                //return mapper.Map<List<RecyclerDTO>>(recyclers);
                 return Ok(recyclers);
             }
             catch (Exception e)

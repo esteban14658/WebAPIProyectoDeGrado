@@ -12,27 +12,18 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 {
     public class RecyclerService: GenericService<RecyclerDTO, Recycler>, IRecyclerService
     {
-        private readonly IRecyclerRepository _recicladorRepository;
+        private readonly IRecyclerRepository _recyclerRepository;
         private readonly IMapper _mapper;
 
-        public RecyclerService(IRecyclerRepository recicladorRepository, IMapper mapper) : base(recicladorRepository, mapper)
+        public RecyclerService(IRecyclerRepository recyclerRepository, IMapper mapper) : base(recyclerRepository, mapper)
         {
-            _recicladorRepository = recicladorRepository;
+            _recyclerRepository = recyclerRepository;
             _mapper = mapper;
         }
 
-
-        public async Task<List<RecyclerDTO>> GetAllRecyclers()
+        public Task<RecyclerDTO> GetUserByEmail(string email)
         {
-            var genericResult = await _recicladorRepository.GetAllRecyclers();
-            List<RecyclerDTO> recyclerDTOs = new List<RecyclerDTO>();
-
-            foreach (var item in genericResult)
-            {
-                var result = _mapper.Map<RecyclerDTO>(item);
-                recyclerDTOs.Add(result);
-            }
-            return recyclerDTOs;
+            throw new NotImplementedException();
         }
     }
 }

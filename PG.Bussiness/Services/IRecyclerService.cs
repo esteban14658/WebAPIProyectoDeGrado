@@ -9,6 +9,6 @@ namespace WebAPIProyectoDeGrado.Services
 {
     public interface IRecyclerService: IGenericService<RecyclerDTO>
     {
-        Task<List<RecyclerDTO>> GetAllRecyclers();
+        Task<RecyclerDTO> GetUserByEmail(string email);
     }
 }

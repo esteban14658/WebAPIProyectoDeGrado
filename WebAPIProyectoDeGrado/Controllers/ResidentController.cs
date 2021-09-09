@@ -31,7 +31,15 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<List<ResidentDTO>>> Get()
         {
             var recyclers = await residentService.GetAll();
-            return Ok(recyclers);
+            try
+            {
+                return Ok(recyclers);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [HttpGet("GetUserById/{id:int}")]
