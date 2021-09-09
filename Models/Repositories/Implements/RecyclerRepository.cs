@@ -20,6 +20,12 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return await _recycler.Include(x => x.User).ToListAsync();
         }
 
+        public override Task<Recycler> GetById(int id)
+        {
+            return _recycler.Include(x => x.User).FirstOrDefaultAsync(x => 
+                x.Id == id);
+        }
+
         public Task<Recycler> GetUserByEmail(string email)
         {
             throw new NotImplementedException();

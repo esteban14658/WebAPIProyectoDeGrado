@@ -41,6 +41,20 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
         }
 
+        [HttpGet("GetById/{id:int}")]
+        public async Task<ActionResult<RecyclerDTO>> GetById(int id)
+        {
+            var recycler = await recyclerService.GetById(id);
+            try
+            {
+                return Ok(recycler);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet("GetUserById/{userId:int}")]
         public async Task<ActionResult<RecyclerDTO>> GetUserById(int userId)
         {

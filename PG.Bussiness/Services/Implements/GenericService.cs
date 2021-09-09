@@ -47,9 +47,12 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return genericList;
         }
 
-        public Task<TDto> GetById(int id)
+        public async Task<TDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            var genericResult = await genericRepository.GetById(id);
+
+            TDto dto = mapper.Map<TDto>(genericResult);
+            return dto;
         }
 
         public Task<TDto> Insert(TDto dto)

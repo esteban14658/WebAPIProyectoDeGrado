@@ -28,6 +28,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             await context.SaveChangesAsync();
         }
 
+
         public virtual async Task<List<TEntity>> GetAll()
         {
             List<TEntity> entities = new List<TEntity>();
@@ -35,7 +36,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return result;
         }
 
-        public async Task<TEntity> GetById(int id)
+        public virtual async Task<TEntity> GetById(int id)
         {
             return await _entities.FindAsync(id);
         }
