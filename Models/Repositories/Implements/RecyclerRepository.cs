@@ -15,7 +15,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             _recycler = context.Set<Recycler>();
         }
 
-        public async Task<List<Recycler>> GetAllRecyclers()
+        public override async Task<List<Recycler>> GetAll()
         {
             return await _recycler.Include(x => x.User).ToListAsync();
         }

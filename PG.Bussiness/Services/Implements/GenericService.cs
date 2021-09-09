@@ -37,14 +37,14 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         {
             var genericResult = await genericRepository.GetAll();
 
-            List<TDto> residents = new List<TDto>();
+            List<TDto> genericList = new();
 
             foreach (var item in genericResult)
             {
                 var result = mapper.Map<TDto>(item);
-                residents.Add(result);
+                genericList.Add(result);
             }
-            return residents;
+            return genericList;
         }
 
         public Task<TDto> GetById(int id)
