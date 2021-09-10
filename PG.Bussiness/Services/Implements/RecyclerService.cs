@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using PG.Bussiness.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -24,6 +26,18 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         public Task<RecyclerDTO> GetUserByEmail(string email)
         {
             throw new NotImplementedException();
+        }
+
+        public override async Task<RecyclerDTO> GetById(int id)
+        {
+            var exists = _recyclerRepository.Exists(id);
+            if (!exists)
+            {
+                throw new KeyNotFoundException("User not found");
+            }
+            var genericResult = await _recyclerRepository.GetById(id);
+            RecyclerDTO recyclerDTO = _mapper.Map<RecyclerDTO>(genericResult);
+            return recyclerDTO;
         }
     }
 }

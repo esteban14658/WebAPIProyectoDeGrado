@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using PG.Bussiness.DTOs;
+using PG.Bussiness.Exceptions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,7 +40,6 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var genericResult = await genericRepository.GetAll();
 
             List<TDto> genericList = new();
-
             foreach (var item in genericResult)
             {
                 var result = mapper.Map<TDto>(item);
@@ -47,10 +48,9 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return genericList;
         }
 
-        public async Task<TDto> GetById(int id)
+        public virtual async Task<TDto> GetById(int id)
         {
             var genericResult = await genericRepository.GetById(id);
-
             TDto dto = mapper.Map<TDto>(genericResult);
             return dto;
         }
