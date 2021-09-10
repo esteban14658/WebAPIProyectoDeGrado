@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PG.Presentation.Middlewares;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,6 +93,9 @@ namespace WebAPIProyectoDeGrado
             app.UseRouting();
 
             app.UseCors();
+
+            //app.UseMiddleware<handler>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseAuthorization();
 

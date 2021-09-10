@@ -15,9 +15,20 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             _recycler = context.Set<Recycler>();
         }
 
+        public bool Exists(int id)
+        {
+            return _recycler.Any(x => x.Id == id);
+        }
+
         public override async Task<List<Recycler>> GetAll()
         {
             return await _recycler.Include(x => x.User).ToListAsync();
+        }
+
+        public override Task<Recycler> GetById(int id)
+        {
+            return _recycler.Include(x => x.User).FirstOrDefaultAsync(x => 
+                x.Id == id);
         }
 
         public Task<Recycler> GetUserByEmail(string email)

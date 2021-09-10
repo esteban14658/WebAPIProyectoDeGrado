@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -31,14 +33,18 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
             var recyclers = await recyclerService.GetAll();
-            try
+            if (recyclers.Count == 0)
             {
-                return Ok(recyclers);
+                return NoContent();
             }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
+            return Ok(recyclers);
+        }
+
+        [HttpGet("GetById/{id:int}")]
+        public async Task<ActionResult<RecyclerDTO>> GetById(int id)
+        {
+            var recycler = await recyclerService.GetById(id);
+            return recycler;
         }
 
         [HttpGet("GetUserById/{userId:int}")]
