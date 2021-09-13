@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IShopService: IGenericService<ShopDTO>
+    public interface IShopService: IGenericService<ShopDTO, CreateShopDTO>
     {
     }
 }

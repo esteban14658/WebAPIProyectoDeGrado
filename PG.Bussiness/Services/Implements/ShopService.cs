@@ -9,7 +9,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ShopService: GenericService<ShopDTO,Shop>, IShopService
+    public class ShopService: GenericService<ShopDTO, CreateShopDTO, Shop>, IShopService
     {
         private readonly IShopRepository _shopRepository;
         private readonly IMapper _mapper;

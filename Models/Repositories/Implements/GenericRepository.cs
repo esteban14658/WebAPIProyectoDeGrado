@@ -16,13 +16,13 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             this.context = context;
             _entities = context.Set<TEntity>();
         }
-        public async Task Delete(int id)
+        public virtual async Task Delete(int id)
         {
             var entity = await GetById(id);
 
             if (entity == null)
             {
-                throw new Exception("La entidad es nula");
+                throw new Exception("The entity is null");
             }
             _entities.Remove(entity);
             await context.SaveChangesAsync();
@@ -48,7 +48,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return entity;
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public virtual async Task<TEntity> Update(TEntity entity)
         {
             _entities.Update(entity);
             await context.SaveChangesAsync();

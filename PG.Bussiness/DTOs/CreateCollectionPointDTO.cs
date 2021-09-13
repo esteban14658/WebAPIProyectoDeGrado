@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class CreateCollectionPoint
+    public class CreateCollectionPointDTO
     {
         [Required]
         public DateTime CreateDate { get; set; }

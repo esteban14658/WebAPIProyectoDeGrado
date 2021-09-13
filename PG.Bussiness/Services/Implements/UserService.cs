@@ -9,7 +9,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class UserService: GenericService<UserDTO, User>, IUserService
+    public class UserService: GenericService<UserDTO, CreateUserDTO, User>, IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;

@@ -35,6 +35,9 @@ namespace PG.Presentation.Middlewares
                     case NoContentException e:
                         response.StatusCode = (int)HttpStatusCode.NoContent;
                         break;
+                    case CustomConflictException e:
+                        response.StatusCode = (int)HttpStatusCode.Conflict;
+                        break;
                     case AppException e:
                         // custom application error
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
