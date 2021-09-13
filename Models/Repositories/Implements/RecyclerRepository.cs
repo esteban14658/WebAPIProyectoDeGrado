@@ -20,6 +20,11 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return _recycler.Any(x => x.Id == id);
         }
 
+        public bool ExistUserByEmail(string email)
+        {
+            return _recycler.Any(x => x.User.Email.Equals(email));
+        }
+
         public override async Task<List<Recycler>> GetAll()
         {
             return await _recycler.Include(x => x.User).ToListAsync();

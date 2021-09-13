@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IRecyclerService: IGenericService<RecyclerDTO>
+    public interface IRecyclerService: IGenericService<RecyclerDTO, CreateRecyclerDTO>
     {
         Task<RecyclerDTO> GetUserByEmail(string email);
     }

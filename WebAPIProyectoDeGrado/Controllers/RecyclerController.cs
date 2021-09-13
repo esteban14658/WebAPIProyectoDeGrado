@@ -79,9 +79,9 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO createRecyclerDTO)
+        public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recyclerDTO)
         {
-            var userExists = await context.Users.AnyAsync(x => x.Email == createRecyclerDTO.User.Email);
+            /*var userExists = await context.Users.AnyAsync(x => x.Email == createRecyclerDTO.User.Email);
 
             if (userExists)
             {
@@ -92,7 +92,9 @@ namespace WebAPIProyectoDeGrado.Controllers
 
             context.Add(recycler);
             await context.SaveChangesAsync();
-            return Ok();
+            return Ok();*/
+            var recycler = await recyclerService.Insert(recyclerDTO);
+            return Ok(recycler);
         }
         /// <summary>
         /// Updates a recycler

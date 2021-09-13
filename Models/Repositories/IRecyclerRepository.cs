@@ -10,5 +10,6 @@ namespace WebAPIProyectoDeGrado.Repositories
     { 
         Task<Recycler> GetUserByEmail(string email);
         bool Exists(int id);
+        bool ExistUserByEmail(string email);
     }
 }

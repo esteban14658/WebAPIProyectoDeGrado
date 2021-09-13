@@ -9,7 +9,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class CollectionPointService: GenericService<CollectionPointDTO,CollectionPoint>, ICollectionPointService
+    public class CollectionPointService: GenericService<CollectionPointDTO, CreateCollectionPointDTO, CollectionPoint>, ICollectionPointService
     {
         private readonly ICollectionPointRepository _collectionPointRepository;
         private readonly IMapper _mapper;

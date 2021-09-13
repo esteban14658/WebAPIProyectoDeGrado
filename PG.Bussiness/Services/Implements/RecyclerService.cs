@@ -12,7 +12,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class RecyclerService: GenericService<RecyclerDTO, Recycler>, IRecyclerService
+    public class RecyclerService: GenericService<RecyclerDTO, CreateRecyclerDTO, Recycler>, IRecyclerService
     {
         private readonly IRecyclerRepository _recyclerRepository;
         private readonly IMapper _mapper;
@@ -38,6 +38,19 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var genericResult = await _recyclerRepository.GetById(id);
             RecyclerDTO recyclerDTO = _mapper.Map<RecyclerDTO>(genericResult);
             return recyclerDTO;
+        }
+
+        public override async Task<CreateRecyclerDTO> Insert(CreateRecyclerDTO dto)
+        {
+            var user = _recyclerRepository.ExistUserByEmail(dto.User.Email);
+            if (user)
+            {
+                throw new CustomConflictException("User already exist");
+            }
+            var recycler = _mapper.Map<Recycler>(dto);
+
+            await _recyclerRepository.Insert(recycler);
+            return dto;
         }
     }
 }

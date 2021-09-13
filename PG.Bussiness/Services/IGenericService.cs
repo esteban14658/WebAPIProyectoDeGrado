@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IGenericService<TDto> where TDto: class
+    public interface IGenericService<TDto, TCreateDTO> where TDto: class where TCreateDTO: class
     {
         Task<List<TDto>> GetAll();
         Task<TDto> GetById(int id);
-        Task<TDto> Insert(TDto dto);
+        Task<TCreateDTO> Insert(TCreateDTO dto);
         Task<TDto> Update(TDto dto);
         Task Delete(int id);
     }

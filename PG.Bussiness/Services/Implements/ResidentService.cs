@@ -9,7 +9,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ResidentService: GenericService<ResidentDTO,Resident>, IResidentService
+    public class ResidentService: GenericService<ResidentDTO, CreateResidentDTO, Resident>, IResidentService
     {
         private readonly IResidentRepository _residenteRepository;
         private readonly IMapper _mapper;

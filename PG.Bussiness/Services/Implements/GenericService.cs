@@ -13,7 +13,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class GenericService<TDto, TEntity> : IGenericService<TDto> where TDto : class where TEntity : class 
+    public class GenericService<TDto, TCreateDTO, TEntity> : IGenericService<TDto, TCreateDTO> where TDto : class where TCreateDTO: class where TEntity : class 
     {
         private readonly IGenericRepository<TEntity> genericRepository;
         private readonly IMapper mapper;
@@ -55,9 +55,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public Task<TDto> Insert(TDto dto)
+        public virtual async Task<TCreateDTO> Insert(TCreateDTO dto)
         {
-            throw new NotImplementedException();
+            TEntity entity = mapper.Map<TEntity>(dto);
+            await genericRepository.Insert(entity);
+            return dto;
         }
 
         public Task<TDto> Update(TDto dto)

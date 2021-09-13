@@ -9,7 +9,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class AddressService: GenericService<AddressDTO, Address>, IAddressService
+    public class AddressService: GenericService<AddressDTO, CreateAddressDTO, Address>, IAddressService
     {
         private readonly IAddressRepository _addressRepository;
         private readonly IMapper _mapper;

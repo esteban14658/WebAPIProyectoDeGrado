@@ -7,7 +7,7 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface ICollectionPointService: IGenericService<CollectionPointDTO>
+    public interface ICollectionPointService: IGenericService<CollectionPointDTO, CreateCollectionPointDTO>
     {
     }
 }
