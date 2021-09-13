@@ -24,9 +24,16 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _mapper = mapper;
         }
 
-        public Task<RecyclerDTO> GetUserByEmail(string email)
+        public async Task<RecyclerDTO> GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            var exist = _recyclerRepository.ExistUserByEmail(email);
+            if (!exist)
+            {
+                throw new KeyNotFoundException("recycler not found");
+            }
+            var genericResult = await _recyclerRepository.GetUserByEmail(email);
+            var recyclerDTO = _mapper.Map<RecyclerDTO>(genericResult);
+            return recyclerDTO;
         }
 
         public override async Task<RecyclerDTO> GetById(int id)
@@ -68,5 +75,16 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
+        public async Task<RecyclerDTO> GetUserById(int id)
+        {
+            var exist = _recyclerRepository.ExistUserById(id);
+            if (!exist)
+            {
+                throw new KeyNotFoundException("recycler not found");
+            }
+            var genericResult = await _recyclerRepository.GetUserById(id);
+            var recyclerDTO = _mapper.Map<RecyclerDTO>(genericResult);
+            return recyclerDTO;
+        }
     }
 }

@@ -47,9 +47,19 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 x.Id == id);
         }
 
-        public Task<Recycler> GetUserByEmail(string email)
+        public async Task<Recycler> GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            return await _recycler.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Email == email);
+        }
+
+        public async Task<Recycler> GetUserById(int id)
+        {
+            return await _recycler.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Id == id);
+        }
+
+        public bool ExistUserById(int id)
+        {
+            return _recycler.Any(x => x.User.Id == id);
         }
     }
 }
