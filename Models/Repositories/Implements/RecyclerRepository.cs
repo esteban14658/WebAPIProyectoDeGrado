@@ -10,9 +10,12 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
     public class RecyclerRepository: GenericRepository<Recycler>, IRecyclerRepository
     {
         private readonly DbSet<Recycler> _recycler;
+        private readonly ApplicationDbContext _context;
+
         public RecyclerRepository(ApplicationDbContext context): base(context) 
         {
             _recycler = context.Set<Recycler>();
+            _context = context;
         }
 
         public bool Exists(int id)
@@ -29,6 +32,14 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         {
             return await _recycler.Include(x => x.User).ToListAsync();
         }
+
+        public override async Task<Recycler> Update(Recycler entity)
+        {
+            _recycler.Update(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
 
         public override Task<Recycler> GetById(int id)
         {

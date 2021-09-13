@@ -30,9 +30,9 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             this.mapper = mapper;
         }
 
-        public Task Delete(int id)
+        public virtual async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await genericRepository.Delete(id);
         }
 
         public async Task<List<TDto>> GetAll()
@@ -62,9 +62,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public Task<TDto> Update(TDto dto)
+        public virtual async Task<TCreateDTO> Update(TCreateDTO dto, int id)
         {
-            throw new NotImplementedException();
+            var mapping = mapper.Map<TEntity>(dto);
+            await genericRepository.Update(mapping);
+            return dto;
         }
 
         /*public async Task Delete(int id)

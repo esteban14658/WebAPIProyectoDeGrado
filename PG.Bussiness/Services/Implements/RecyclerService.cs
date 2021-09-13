@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -52,5 +53,20 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await _recyclerRepository.Insert(recycler);
             return dto;
         }
+
+        public override async Task<CreateRecyclerDTO> Update(CreateRecyclerDTO dto, int id)
+        {
+            var exist = _recyclerRepository.Exists(id);
+            if (!exist)
+            {
+                throw new KeyNotFoundException("recycler not found");
+            }
+            var recycler = _mapper.Map<Recycler>(dto);
+            recycler.Id = id;
+
+            await _recyclerRepository.Update(recycler);
+            return dto;
+        }
+
     }
 }

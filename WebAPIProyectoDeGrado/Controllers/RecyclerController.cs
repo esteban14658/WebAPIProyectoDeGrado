@@ -81,20 +81,8 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recyclerDTO)
         {
-            /*var userExists = await context.Users.AnyAsync(x => x.Email == createRecyclerDTO.User.Email);
-
-            if (userExists)
-            {
-                return BadRequest($"There is already a recycler with the email: {createRecyclerDTO.User.Email}");
-            }
-
-            var recycler = mapper.Map<Recycler>(createRecyclerDTO);
-
-            context.Add(recycler);
-            await context.SaveChangesAsync();
-            return Ok();*/
             var recycler = await recyclerService.Insert(recyclerDTO);
-            return Ok(recycler);
+            return Accepted(recycler);
         }
         /// <summary>
         /// Updates a recycler
@@ -105,7 +93,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(CreateRecyclerDTO createRecyclerDTO, int id)
         {
-            var exist = await context.Recyclers.AnyAsync(x => x.Id == id);
+            /*var exist = await context.Recyclers.AnyAsync(x => x.Id == id);
 
             if (!exist)
             {
@@ -116,14 +104,15 @@ namespace WebAPIProyectoDeGrado.Controllers
             recycler.Id = id;
 
             context.Update(recycler);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync();*/
+            var recycler = await recyclerService.Update(createRecyclerDTO, id);
             return NoContent();
         }
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await context.Recyclers.AnyAsync(x => x.Id == id);
+            /*var existe = await context.Recyclers.AnyAsync(x => x.Id == id);
 
             if (!existe)
             {
@@ -131,7 +120,8 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
 
             context.Remove(new Recycler() { Id = id });
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync();*/
+            await recyclerService.Delete(id);
             return NoContent();
         }
 
