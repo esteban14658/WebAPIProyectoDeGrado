@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
@@ -22,11 +23,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
             var recyclers = await recyclerService.GetAll();
-            if (recyclers.Count == 0)
-            {
-                return NoContent();
-            }
-            return Ok(recyclers);
+            return recyclers;
         }
 
         [HttpGet("GetById/{id:int}")]

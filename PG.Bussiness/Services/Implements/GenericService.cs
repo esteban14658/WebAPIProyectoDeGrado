@@ -39,6 +39,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         {
             var genericResult = await genericRepository.GetAll();
 
+            /*if (genericResult.Count == 0)
+            {
+                throw new NoContentException("nnn");
+            }*/
+
             List<TDto> genericList = new();
             foreach (var item in genericResult)
             {
