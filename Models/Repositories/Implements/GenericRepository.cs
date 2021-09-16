@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -29,10 +30,12 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         }
 
 
-        public virtual async Task<List<TEntity>> GetAll()
+        public virtual async Task<List<TEntity>> GetAll(int page, int amount)
         {
             List<TEntity> entities = new List<TEntity>();
             var result = await _entities.ToListAsync();
+ 
+            result.Capacity = amount;
             return result;
         }
 
@@ -47,6 +50,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             await context.SaveChangesAsync();
             return entity;
         }
+
 
         public virtual async Task<TEntity> Update(TEntity entity)
         {
