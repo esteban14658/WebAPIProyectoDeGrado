@@ -46,9 +46,9 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(CreateResidentDTO createResidentDTO, int id)
+        public async Task<ActionResult> Put(ResidentDTO residentDTO, int id)
         {
-            await residentService.Update(createResidentDTO, id);
+            await residentService.Update(residentDTO, id);
             return NoContent();
         }
 

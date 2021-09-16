@@ -10,7 +10,7 @@ namespace WebAPIProyectoDeGrado.Services
         Task<List<TDto>> GetAll();
         Task<TDto> GetById(int id);
         Task<TCreateDTO> Insert(TCreateDTO dto);
-        Task<TCreateDTO> Update(TCreateDTO dto, int id);
+        Task<TDto> Update(TDto dto, int id);
         Task Delete(int id);
     }
 }

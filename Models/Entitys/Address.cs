@@ -29,6 +29,7 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
+        public Resident Resident { get; set; }
         [ForeignKey("Shop")]
         public int? ShopId { get; set; }
         [ForeignKey("CollectionPoint")]

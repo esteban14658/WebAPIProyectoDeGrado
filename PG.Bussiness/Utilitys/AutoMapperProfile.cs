@@ -14,12 +14,12 @@ namespace WebAPIProyectoDeGrado.Utilitys
         {
             // DTOs para recibir informacion
 
-            CreateMap<User, UserDTO>();
-            CreateMap<Recycler, RecyclerDTO>();
-            CreateMap<Address, AddressDTO>();
-            CreateMap<Resident, ResidentDTO>();
-            CreateMap<CollectionPoint, CollectionPointDTO>();
-            CreateMap<Shop, ShopDTO>();
+            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<Recycler, RecyclerDTO>().ReverseMap();
+            CreateMap<Address, AddressDTO>().ReverseMap();
+            CreateMap<Resident, ResidentDTO>().ReverseMap();
+            CreateMap<CollectionPoint, CollectionPointDTO>().ReverseMap();
+            CreateMap<Shop, ShopDTO>().ReverseMap();
 
             // **** *** **************************************************
 

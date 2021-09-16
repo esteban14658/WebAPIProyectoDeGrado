@@ -45,6 +45,18 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return residentDTO;
         }
 
+        public override async Task<ResidentDTO> GetById(int id)
+        {
+            var exists = _residentRepository.Exists(id);
+            if (!exists)
+            {
+                throw new KeyNotFoundException("User not found");
+            }
+            var genericResult = await _residentRepository.GetById(id);
+            ResidentDTO residentDTO = _mapper.Map<ResidentDTO>(genericResult);
+            return residentDTO;
+        }
+
         public override async Task<CreateResidentDTO> Insert(CreateResidentDTO dto)
         {
             var user = _residentRepository.ExistUserByEmail(dto.User.Email);
@@ -53,11 +65,15 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new CustomConflictException("User already exist");
             }
             var resident = _mapper.Map<Resident>(dto);
+            foreach (var item in resident.AddressList)
+            {
+                item.Resident = resident;
+            }
             await _residentRepository.Insert(resident);
             return dto;
         }
-
-        public override async Task<CreateResidentDTO> Update(CreateResidentDTO dto, int id)
+        // Corregir update
+        public override async Task<ResidentDTO> Update(ResidentDTO dto, int id)
         {
             var exist = _residentRepository.Exists(id);
             
@@ -65,13 +81,13 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new KeyNotFoundException("Resident not found");
             }
-            
+            dto.AddressList = null;
+            dto.User = null;
             var resident = _mapper.Map<Resident>(dto);
             resident.Id = id;
-            
-
             await _residentRepository.Update(resident);
             return dto;
         }
+
     }
 }

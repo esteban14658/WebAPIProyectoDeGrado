@@ -39,10 +39,10 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         {
             var genericResult = await genericRepository.GetAll();
 
-            /*if (genericResult.Count == 0)
+            if (genericResult.Count == 0)
             {
                 throw new NoContentException("nnn");
-            }*/
+            }
 
             List<TDto> genericList = new();
             foreach (var item in genericResult)
@@ -67,33 +67,12 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public virtual async Task<TCreateDTO> Update(TCreateDTO dto, int id)
+        public virtual async Task<TDto> Update(TDto dto, int id)
         {
             var mapping = mapper.Map<TEntity>(dto);
             await genericRepository.Update(mapping);
             return dto;
         }
-
-        /*public async Task Delete(int id)
-        {
-            await genericRepository.Delete(id);
-        }
-
-        public async Task<IEnumerable<TEntity>> GetAll()
-        {
-            return await genericRepository.GetAll();
-        }
-
-        public async Task<TEntity> GetById(int id)
-        {
-            return await genericRepository.GetById(id);
-        }
-
-        public async Task<TEntity> Insert(TEntity entity)
-        {
-            return await genericRepository.Insert(entity);
-        }*/
-
 
     }
 }

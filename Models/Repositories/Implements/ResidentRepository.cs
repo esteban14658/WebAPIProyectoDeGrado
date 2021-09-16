@@ -44,6 +44,18 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 x.AddressList).ToListAsync();
         }
 
+        public override async Task Delete(int id)
+        {
+            var entity = await GetById(id);
+
+            if (entity == null)
+            {
+                throw new Exception("The entity is null");
+            }
+            _resident.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Resident> GetUserByEmail(string email)
         {
             return await _resident.Include(x => x.User).Include(x => x.AddressList)
