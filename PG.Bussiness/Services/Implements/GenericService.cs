@@ -37,12 +37,13 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 
         public async Task<List<TDto>> GetAll()
         {
-            var genericResult = await genericRepository.GetAll();
+            var genericResult = await genericRepository.GetAll(1,2);
 
-            if (genericResult.Count == 0)
+            /*if (genericResult.Count == 0)
             {
                 throw new NoContentException("nnn");
-            }
+            }*/
+            long totalRecords = genericResult.Count;
 
             List<TDto> genericList = new();
             foreach (var item in genericResult)

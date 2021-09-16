@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Entitys;
 
@@ -38,10 +39,13 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public override async Task<List<Resident>> GetAll()
+        public override async Task<List<Resident>> GetAll(int page, int amount)
         {
-            return await _resident.Include(x => x.User).Include(x =>
+            Resident resident = new();
+            var result = await _resident.Include(x => x.User).Include(x =>
                 x.AddressList).ToListAsync();
+            
+            return result;
         }
 
         public override async Task Delete(int id)

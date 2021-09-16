@@ -8,7 +8,8 @@ namespace PG.Bussiness.DTOs
 {
     class PaginateDTO<T> where T: class
     {
-        public List<T> Registers { get; set; }
+        public int NumberOfRecords { get; set; }
+        public List<T> Records { get; set; }
 
     }
 }
