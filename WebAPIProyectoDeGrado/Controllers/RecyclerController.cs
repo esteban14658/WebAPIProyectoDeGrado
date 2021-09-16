@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using PG.Bussiness.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
@@ -21,12 +24,10 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<RecyclerDTO>>> Get()
         {
+
             var recyclers = await recyclerService.GetAll();
-            if (recyclers.Count == 0)
-            {
-                return NoContent();
-            }
-            return Ok(recyclers);
+            return recyclers;
+
         }
 
         [HttpGet("GetById/{id:int}")]
@@ -58,9 +59,9 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(CreateRecyclerDTO createRecyclerDTO, int id)
+        public async Task<ActionResult> Put(RecyclerDTO recyclerDTO, int id)
         {
-            await recyclerService.Update(createRecyclerDTO, id);
+            await recyclerService.Update(recyclerDTO, id);
             return NoContent();
         }
 

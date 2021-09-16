@@ -41,9 +41,9 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         }
 
 
-        public override Task<Recycler> GetById(int id)
+        public override async Task<Recycler> GetById(int id)
         {
-            return _recycler.Include(x => x.User).FirstOrDefaultAsync(x => 
+            return await _recycler.Include(x => x.User).FirstOrDefaultAsync(x => 
                 x.Id == id);
         }
 

@@ -32,9 +32,9 @@ namespace PG.Presentation.Middlewares
 
                 switch (error)
                 {
-                    case NoContentException e:
+                    /*case NoContentException e:
                         response.StatusCode = (int)HttpStatusCode.NoContent;
-                        break;
+                        break;*/
                     case CustomConflictException e:
                         response.StatusCode = (int)HttpStatusCode.Conflict;
                         break;

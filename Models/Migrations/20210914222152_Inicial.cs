@@ -122,9 +122,9 @@ namespace PG.Models.Migrations
                     NumberOne = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
                     NumberTwo = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
                     Description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    ResidentId = table.Column<int>(type: "integer", nullable: true),
                     ShopId = table.Column<int>(type: "integer", nullable: true),
-                    CollectionPointId = table.Column<int>(type: "integer", nullable: true),
-                    ResidentId = table.Column<int>(type: "integer", nullable: true)
+                    CollectionPointId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {

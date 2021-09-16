@@ -61,16 +61,16 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public override async Task<CreateRecyclerDTO> Update(CreateRecyclerDTO dto, int id)
+        public override async Task<RecyclerDTO> Update(RecyclerDTO dto, int id)
         {
             var exist = _recyclerRepository.Exists(id);
             if (!exist)
             {
                 throw new KeyNotFoundException("recycler not found");
             }
+            dto.User = null;
             var recycler = _mapper.Map<Recycler>(dto);
             recycler.Id = id;
-
             await _recyclerRepository.Update(recycler);
             return dto;
         }

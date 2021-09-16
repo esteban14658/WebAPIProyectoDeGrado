@@ -258,13 +258,15 @@ namespace PG.Models.Migrations
                         .WithOne("Address")
                         .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Address", "CollectionPointId");
 
-                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Resident", null)
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Resident", "Resident")
                         .WithMany("AddressList")
                         .HasForeignKey("ResidentId");
 
                     b.HasOne("WebAPIProyectoDeGrado.Entitys.Shop", null)
                         .WithOne("Address")
                         .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Address", "ShopId");
+
+                    b.Navigation("Resident");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Recycler", b =>

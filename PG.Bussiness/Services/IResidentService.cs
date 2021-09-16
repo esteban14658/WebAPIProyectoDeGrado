@@ -9,5 +9,7 @@ namespace WebAPIProyectoDeGrado.Services
 {
     public interface IResidentService: IGenericService<ResidentDTO, CreateResidentDTO>
     {
+        Task<ResidentDTO> GetUserById(int id);
+        Task<ResidentDTO> GetUserByEmail(string email);
     }
 }

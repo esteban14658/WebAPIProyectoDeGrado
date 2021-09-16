@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210910164841_Inicial")]
+    [Migration("20210914222152_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -260,13 +260,15 @@ namespace PG.Models.Migrations
                         .WithOne("Address")
                         .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Address", "CollectionPointId");
 
-                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Resident", null)
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Resident", "Resident")
                         .WithMany("AddressList")
                         .HasForeignKey("ResidentId");
 
                     b.HasOne("WebAPIProyectoDeGrado.Entitys.Shop", null)
                         .WithOne("Address")
                         .HasForeignKey("WebAPIProyectoDeGrado.Entitys.Address", "ShopId");
+
+                    b.Navigation("Resident");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Recycler", b =>
