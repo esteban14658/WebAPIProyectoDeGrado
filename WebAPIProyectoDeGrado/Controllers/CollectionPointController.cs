@@ -26,6 +26,7 @@ namespace PG.Presentation.Controllers
         {
             DateTime date = DateTime.Now;
             createCollectionPointDTO.CreateDate = date;
+            createCollectionPointDTO.State = false;
             var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
 
             context.Add(collectionPoint);

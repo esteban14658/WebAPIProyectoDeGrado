@@ -28,7 +28,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return _recycler.Any(x => x.User.Email.Equals(email));
         }
 
-        public override async Task<List<Recycler>> GetAll(int page, int amount)
+        public override async Task<List<Recycler>> GetAll()
         {
             return await _recycler.Include(x => x.User).ToListAsync();
         }
