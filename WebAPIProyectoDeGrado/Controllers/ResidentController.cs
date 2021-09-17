@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PG.Bussiness.DTOs;
+using PG.Bussiness.DTOs.GetDTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
@@ -8,7 +10,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/residents")]
-    public class ResidentController: ControllerBase
+    public class ResidentController : ControllerBase
     {
         private readonly IResidentService residentService;
 
@@ -17,10 +19,10 @@ namespace WebAPIProyectoDeGrado.Controllers
             this.residentService = residentService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<ResidentDTO>>> Get()
+        [HttpGet("{page:int}/{amount:int}")]
+        public async Task<ActionResult<PaginateDTO<ResidentDTO>>> Get(int page, int amount)
         {
-            var residents = await residentService.GetAll();
+            var residents = await residentService.GetAll(page, amount);
             return Ok(residents);
         }
 

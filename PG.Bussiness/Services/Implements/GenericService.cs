@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PG.Bussiness.DTOs;
+using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.Exceptions;
 using System;
 using System.Collections;
@@ -35,23 +36,24 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await genericRepository.Delete(id);
         }
 
-        public async Task<List<TDto>> GetAll()
+        public async Task<PaginateDTO<TDto>> GetAll(int page, int amount)
         {
-            var genericResult = await genericRepository.GetAll(1,2);
-
-            /*if (genericResult.Count == 0)
-            {
-                throw new NoContentException("nnn");
-            }*/
-            long totalRecords = genericResult.Count;
-
+            var genericResult = await genericRepository.GetAll();
             List<TDto> genericList = new();
             foreach (var item in genericResult)
             {
                 var result = mapper.Map<TDto>(item);
                 genericList.Add(result);
             }
-            return genericList;
+            var paged = PagedList<TDto>.Create(genericList, page, amount);
+            PaginateDTO<TDto> paginate = new PaginateDTO<TDto>
+            {
+                Page = page,
+                Size = paged.Count,
+                NumberOfRecords = genericResult.Count,
+                Records = paged
+            };
+            return paginate;
         }
 
         public virtual async Task<TDto> GetById(int id)

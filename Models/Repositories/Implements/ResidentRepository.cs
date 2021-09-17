@@ -39,12 +39,10 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public override async Task<List<Resident>> GetAll(int page, int amount)
+        public override async Task<List<Resident>> GetAll()
         {
-            Resident resident = new();
             var result = await _resident.Include(x => x.User).Include(x =>
                 x.AddressList).ToListAsync();
-            
             return result;
         }
 

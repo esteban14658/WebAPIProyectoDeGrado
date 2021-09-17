@@ -30,12 +30,10 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         }
 
 
-        public virtual async Task<List<TEntity>> GetAll(int page, int amount)
+        public virtual async Task<List<TEntity>> GetAll()
         {
             List<TEntity> entities = new List<TEntity>();
             var result = await _entities.ToListAsync();
- 
-            result.Capacity = amount;
             return result;
         }
 

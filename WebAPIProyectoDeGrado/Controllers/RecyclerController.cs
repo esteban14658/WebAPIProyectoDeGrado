@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using PG.Bussiness.DTOs;
 using PG.Bussiness.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             this.recyclerService = recyclerService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<RecyclerDTO>>> Get()
+        [HttpGet("{page:int}/{amount:int}")]
+        public async Task<ActionResult<PaginateDTO<RecyclerDTO>>> Get(int page, int amount)
         {
 
-            var recyclers = await recyclerService.GetAll();
+            var recyclers = await recyclerService.GetAll(page, amount);
             return recyclers;
 
         }
