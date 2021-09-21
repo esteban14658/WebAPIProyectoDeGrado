@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PG.Bussiness.Services;
+using PG.Bussiness.Services.Implements;
+using PG.Models.Repositories;
+using PG.Models.Repositories.Implements;
 using PG.Presentation.Middlewares;
 using System;
 using System.Collections.Generic;
@@ -60,6 +64,8 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(IResidentService), typeof(ResidentService));
             services.AddScoped(typeof(IShopService), typeof(ShopService));
             services.AddScoped(typeof(IUserService), typeof(UserService));
+            services.AddScoped(typeof(ICommentService), typeof(CommentService));
+            services.AddScoped(typeof(IRouteService), typeof(RouteService));
 
             //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IRecyclerRepository), typeof(RecyclerRepository));
@@ -68,7 +74,8 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(IResidentRepository), typeof(ResidentRepository));
             services.AddScoped(typeof(IShopRepository), typeof(ShopRepository));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
-
+            services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
+            services.AddScoped(typeof(IRouteRepository), typeof(RouteRepository));
 
             services.AddCors(opciones =>
             {

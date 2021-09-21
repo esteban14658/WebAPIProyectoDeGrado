@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PG.Models.Entitys
+namespace PG.Bussiness.DTOs.CreateDTOs
 {
-    [Table(name:"comment")]
-    public class Comment
+    public class CreateCommentDTO
     {
-        [Column(name: "id")]
-        public int Id { get; set; }
-        [Column(name: "description")]
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 50, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }

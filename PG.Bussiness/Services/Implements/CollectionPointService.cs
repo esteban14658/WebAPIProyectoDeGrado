@@ -20,5 +20,16 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _collectionPointRepository = collectionPointRepository;
             _mapper = mapper;
         }
+
+        public async override Task<CreateCollectionPointDTO> Insert(CreateCollectionPointDTO dto)
+        {
+            DateTime date = DateTime.Now;
+            dto.CreateDate = date;
+            dto.State = false;
+            var collectionPoint = _mapper.Map<CollectionPoint>(dto);
+
+            await _collectionPointRepository.Insert(collectionPoint);
+            return dto;
+        }
     }
 }

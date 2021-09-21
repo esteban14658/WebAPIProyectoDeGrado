@@ -1,28 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
+    [Table(name:"collection_point")]
     public class CollectionPoint
     {
+        [Column(name: "id")]
         public int Id { get; set; }
         [Required]
+        [Column(name:"create_date")]
         public DateTime CreateDate { get; set; }
+        [Column(name: "type_of_material")]
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string TypeOfMaterial { get; set; }
+        [Column(name: "image")]
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 35, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Image { get; set; }
+        [Column(name: "description")]
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
+        [Column(name: "state")]
         public Boolean State { get; set; }
         [Required]
+        [Column(name: "adress_id")]
         public Address Address { get; set; }
     }
 }
