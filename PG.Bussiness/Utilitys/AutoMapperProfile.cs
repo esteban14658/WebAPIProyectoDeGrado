@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using PG.Bussiness.DTOs.CreateDTOs;
+using PG.Bussiness.DTOs.GetDTOs;
+using PG.Models.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +23,8 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<Resident, ResidentDTO>().ReverseMap();
             CreateMap<CollectionPoint, CollectionPointDTO>().ReverseMap();
             CreateMap<Shop, ShopDTO>().ReverseMap();
+            CreateMap<Comment, CommentDTO>().ReverseMap();
+            CreateMap<Route, RouteDTO>().ReverseMap();
 
             // **** *** **************************************************
 
@@ -31,6 +36,9 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<CreateCollectionPointDTO, CollectionPoint>().ReverseMap();
             CreateMap<CreateResidentDTO, Resident>().ReverseMap();
             CreateMap<CreateShopDTO, Shop>().ReverseMap();
+            CreateMap<CreateRouteDTO, Route>().ReverseMap();
+            CreateMap<CreateCommentDTO, Comment>().ReverseMap();
+
 
             CreateMap<CreateRecyclerDTO, RecyclerDTO>().ReverseMap();
             CreateMap<CreateUserDTO, UserDTO>().ReverseMap();

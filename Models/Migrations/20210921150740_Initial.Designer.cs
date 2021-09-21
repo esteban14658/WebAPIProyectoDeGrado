@@ -10,8 +10,8 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210914222152_Inicial")]
-    partial class Inicial
+    [Migration("20210921150740_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,51 +21,110 @@ namespace PG.Models.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("PG.Models.Entitys.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("comment");
+                });
+
+            modelBuilder.Entity("PG.Models.Entitys.Route", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("CommentId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("end_date");
+
+                    b.Property<int?>("RecyclerId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("start_date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("RecyclerId");
+
+                    b.ToTable("route");
+                });
+
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Career")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("career");
 
                     b.Property<int?>("CollectionPointId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("collection_point_id");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("description");
 
                     b.Property<string>("Neighborhood")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("neighborhood");
 
                     b.Property<string>("NumberOne")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("number_one");
 
                     b.Property<string>("NumberTwo")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("number_two");
 
                     b.Property<int?>("ResidentId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("ShopId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("shop_id");
 
                     b.Property<string>("StreetType")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("street_type");
 
                     b.HasKey("Id");
 
@@ -77,7 +136,7 @@ namespace PG.Models.Migrations
                     b.HasIndex("ShopId")
                         .IsUnique();
 
-                    b.ToTable("Addresses");
+                    b.ToTable("adress");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.CollectionPoint", b =>
@@ -85,32 +144,43 @@ namespace PG.Models.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("create_date");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("description");
 
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasMaxLength(35)
-                        .HasColumnType("character varying(35)");
+                        .HasColumnType("character varying(35)")
+                        .HasColumnName("image");
+
+                    b.Property<int?>("RouteId")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("State")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("state");
 
                     b.Property<string>("TypeOfMaterial")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("type_of_material");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CollectionPoints");
+                    b.HasIndex("RouteId");
+
+                    b.ToTable("collection_point");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Recycler", b =>
@@ -118,32 +188,38 @@ namespace PG.Models.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Document")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("document");
 
                     b.Property<string>("DocumentType")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("character varying(15)");
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("document_type");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("last_name");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("phone");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
@@ -152,7 +228,7 @@ namespace PG.Models.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Recyclers");
+                    b.ToTable("recycler");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Resident", b =>
@@ -160,22 +236,26 @@ namespace PG.Models.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("last_name");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("phone");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
@@ -184,7 +264,7 @@ namespace PG.Models.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Residents");
+                    b.ToTable("resident");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Shop", b =>
@@ -192,27 +272,32 @@ namespace PG.Models.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Document")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("document");
 
                     b.Property<string>("DocumentType")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("character varying(15)");
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("document_type");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("phone");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
@@ -221,7 +306,7 @@ namespace PG.Models.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Shops");
+                    b.ToTable("shop");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.User", b =>
@@ -229,29 +314,49 @@ namespace PG.Models.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("character varying(25)");
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("email");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("character varying(15)");
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("password");
 
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("character varying(15)");
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("role");
 
                     b.Property<bool>("State")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("state");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("user");
+                });
+
+            modelBuilder.Entity("PG.Models.Entitys.Route", b =>
+                {
+                    b.HasOne("PG.Models.Entitys.Comment", "Comment")
+                        .WithMany()
+                        .HasForeignKey("CommentId");
+
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Recycler", "Recycler")
+                        .WithMany()
+                        .HasForeignKey("RecyclerId");
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("Recycler");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Address", b =>
@@ -271,6 +376,13 @@ namespace PG.Models.Migrations
                     b.Navigation("Resident");
                 });
 
+            modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.CollectionPoint", b =>
+                {
+                    b.HasOne("PG.Models.Entitys.Route", null)
+                        .WithMany("CollectionPoints")
+                        .HasForeignKey("RouteId");
+                });
+
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Recycler", b =>
                 {
                     b.HasOne("WebAPIProyectoDeGrado.Entitys.User", "User")
@@ -296,6 +408,11 @@ namespace PG.Models.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PG.Models.Entitys.Route", b =>
+                {
+                    b.Navigation("CollectionPoints");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.CollectionPoint", b =>

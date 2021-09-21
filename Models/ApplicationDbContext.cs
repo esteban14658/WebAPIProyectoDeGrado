@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PG.Models.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace WebAPIProyectoDeGrado
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<CollectionPoint> CollectionPoints { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Route> Routes { get; set; }
     }
 }
