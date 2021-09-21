@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WebAPIProyectoDeGrado;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
+using WebAPIProyectoDeGrado.Services;
 
 namespace PG.Presentation.Controllers
 {
@@ -12,26 +13,18 @@ namespace PG.Presentation.Controllers
     [Route("api/CollectionPoints")]
     public class CollectionPointController: ControllerBase
     {
-        private readonly ApplicationDbContext context;
-        private readonly IMapper mapper;
+        private readonly ICollectionPointService _collectionPoint;
 
-        public CollectionPointController(ApplicationDbContext context, IMapper mapper)
+        public CollectionPointController(ICollectionPointService collectionPoint)
         {
-            this.context = context;
-            this.mapper = mapper;
+            _collectionPoint = collectionPoint;
         }
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CreateCollectionPointDTO createCollectionPointDTO)
         {
-            DateTime date = DateTime.Now;
-            createCollectionPointDTO.CreateDate = date;
-            createCollectionPointDTO.State = false;
-            var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
-
-            context.Add(collectionPoint);
-            await context.SaveChangesAsync();
-            return Ok();
+            var collectionPoint = await _collectionPoint.Insert(createCollectionPointDTO);
+            return Created("",collectionPoint);
         }
     }
 }
