@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using PG.Bussiness.DTOs;
@@ -23,12 +25,11 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("{page:int}/{amount:int}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<PaginateDTO<RecyclerDTO>>> Get(int page, int amount)
         {
-
             var recyclers = await recyclerService.GetAll(page, amount);
             return recyclers;
-
         }
 
         [HttpGet("GetById/{id:int}")]
