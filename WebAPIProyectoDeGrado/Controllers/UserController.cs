@@ -33,14 +33,14 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<List<UserDTO>>> Get()
         {
             //var us = await userService.GetAll();
-            var users = await context.Users.Where(x => x.Role != "Admin").ToListAsync();
+            var users = await context.UsersApp.Where(x => x.Role != "Admin").ToListAsync();
             return mapper.Map<List<UserDTO>>(users);
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<UserDTO>> Get(int id)
         {
-            var exists = await context.Users.AnyAsync(x =>
+            var exists = await context.UsersApp.AnyAsync(x =>
                 x.Id == id);
 
             if (!exists)
@@ -48,14 +48,14 @@ namespace WebAPIProyectoDeGrado.Controllers
                 return NotFound();
             }
 
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await context.UsersApp.FirstOrDefaultAsync(x => x.Id == id);
             return mapper.Map<UserDTO>(user);
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(CreateUserDTO createUserDTO, int id)
         {
-            var exist = await context.Users.AnyAsync(x => x.Id == id);
+            var exist = await context.UsersApp.AnyAsync(x => x.Id == id);
 
             if (!exist)
             {
@@ -73,7 +73,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await context.Users.AnyAsync(x => x.Id == id);
+            var existe = await context.UsersApp.AnyAsync(x => x.Id == id);
 
             if (!existe)
             {
