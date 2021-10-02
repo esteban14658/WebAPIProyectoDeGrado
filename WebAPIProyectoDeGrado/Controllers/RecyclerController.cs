@@ -1,12 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using PG.Bussiness.DTOs;
-using PG.Bussiness.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Services;
@@ -15,7 +10,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/recyclers")]
-    public class RecyclerController: ControllerBase
+    public class RecyclerController : ControllerBase
     {
         private readonly IRecyclerService recyclerService;
 
@@ -57,7 +52,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recyclerDTO)
         {
             var recycler = await recyclerService.Insert(recyclerDTO);
-            return Created("",recycler);
+            return Created("", recycler);
         }
 
         [HttpPut("{id:int}")]

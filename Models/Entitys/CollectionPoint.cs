@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
-    [Table(name:"collection_point")]
+    [Table(name: "collection_point")]
     public class CollectionPoint
     {
         [Column(name: "id")]
         public int Id { get; set; }
         [Required]
-        [Column(name:"create_date")]
+        [Column(name: "create_date")]
         public DateTime CreateDate { get; set; }
         [Column(name: "type_of_material")]
         [Required(ErrorMessage = "Field {0} is required")]

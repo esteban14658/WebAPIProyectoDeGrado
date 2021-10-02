@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Repositories
 {
-    public interface IGenericRepository<TEntity> where TEntity: class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
         Task<List<TEntity>> GetAll();
         Task<TEntity> GetById(int id);

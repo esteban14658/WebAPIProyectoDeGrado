@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Services;
@@ -10,7 +7,7 @@ namespace PG.Presentation.Controllers
 {
     [ApiController]
     [Route("api/address")]
-    public class AddressController: ControllerBase
+    public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
 

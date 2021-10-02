@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,12 +6,12 @@ using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class RecyclerRepository: GenericRepository<Recycler>, IRecyclerRepository
+    public class RecyclerRepository : GenericRepository<Recycler>, IRecyclerRepository
     {
         private readonly DbSet<Recycler> _recycler;
         private readonly ApplicationDbContext _context;
 
-        public RecyclerRepository(ApplicationDbContext context): base(context) 
+        public RecyclerRepository(ApplicationDbContext context) : base(context)
         {
             _recycler = context.Set<Recycler>();
             _context = context;
@@ -43,7 +42,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public override async Task<Recycler> GetById(int id)
         {
-            return await _recycler.Include(x => x.User).FirstOrDefaultAsync(x => 
+            return await _recycler.Include(x => x.User).FirstOrDefaultAsync(x =>
                 x.Id == id);
         }
 

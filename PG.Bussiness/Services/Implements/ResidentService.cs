@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using PG.Bussiness.Exceptions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -10,12 +8,12 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ResidentService: GenericService<ResidentDTO, CreateResidentDTO, Resident>, IResidentService
+    public class ResidentService : GenericService<ResidentDTO, CreateResidentDTO, Resident>, IResidentService
     {
         private readonly IResidentRepository _residentRepository;
         private readonly IMapper _mapper;
 
-        public ResidentService(IResidentRepository residentRepository, IMapper mapper): base(residentRepository, mapper)
+        public ResidentService(IResidentRepository residentRepository, IMapper mapper) : base(residentRepository, mapper)
         {
             _residentRepository = residentRepository;
             _mapper = mapper;
@@ -76,7 +74,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         public override async Task<ResidentDTO> Update(ResidentDTO dto, int id)
         {
             var exist = _residentRepository.Exists(id);
-            
+
             if (!exist)
             {
                 throw new KeyNotFoundException("Resident not found");

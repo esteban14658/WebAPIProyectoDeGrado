@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
-    [Table(name:"recycler")]
+    [Table(name: "recycler")]
     public class Recycler
     {
         [Column(name: "id")]

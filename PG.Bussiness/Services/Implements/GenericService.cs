@@ -1,20 +1,13 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.GetDTOs;
-using PG.Bussiness.Exceptions;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using WebAPIProyectoDeGrado.DTOs;
-using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class GenericService<TDto, TCreateDTO, TEntity> : IGenericService<TDto, TCreateDTO> where TDto : class where TCreateDTO: class where TEntity : class 
+    public class GenericService<TDto, TCreateDTO, TEntity> : IGenericService<TDto, TCreateDTO> where TDto : class where TCreateDTO : class where TEntity : class
     {
         private readonly IGenericRepository<TEntity> genericRepository;
         private readonly IMapper mapper;

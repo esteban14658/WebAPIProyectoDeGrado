@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -12,7 +10,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/shops")]
-    public class ShopController: ControllerBase
+    public class ShopController : ControllerBase
     {
 
         private readonly ApplicationDbContext context;
@@ -27,7 +25,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ShopDTO>>> Get()
         {
-            var shops = await context.Shops.Include(x => 
+            var shops = await context.Shops.Include(x =>
                 x.User).Include(x => x.Address).ToListAsync();
             return mapper.Map<List<ShopDTO>>(shops);
         }

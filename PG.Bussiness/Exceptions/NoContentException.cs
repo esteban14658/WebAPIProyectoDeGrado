@@ -1,17 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PG.Bussiness.Exceptions
 {
-    public class NoContentException: Exception
+    public class NoContentException : Exception
     {
-        public NoContentException(string message): base(message)
+        public NoContentException(string message) : base(message)
         {
         }
 

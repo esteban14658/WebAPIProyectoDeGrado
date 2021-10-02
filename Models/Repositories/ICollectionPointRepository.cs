@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebAPIProyectoDeGrado.Entitys;
+﻿using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories
 {
-    public interface ICollectionPointRepository: IGenericRepository<CollectionPoint>
+    public interface ICollectionPointRepository : IGenericRepository<CollectionPoint>
     {
     }
 }

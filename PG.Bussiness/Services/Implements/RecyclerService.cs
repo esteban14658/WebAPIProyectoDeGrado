@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using PG.Bussiness.Exceptions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.WebSockets;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -13,7 +8,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class RecyclerService: GenericService<RecyclerDTO, CreateRecyclerDTO, Recycler>, IRecyclerService
+    public class RecyclerService : GenericService<RecyclerDTO, CreateRecyclerDTO, Recycler>, IRecyclerService
     {
         private readonly IRecyclerRepository _recyclerRepository;
         private readonly IMapper _mapper;

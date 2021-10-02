@@ -6,7 +6,6 @@ using PG.Bussiness.DTOs.GetDTOs;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace PG.Presentation.Controllers
 {
     [ApiController]
     [Route("api/accounts")]
-    public class AccountsController: ControllerBase
+    public class AccountsController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly IConfiguration configuration;
@@ -33,8 +32,11 @@ namespace PG.Presentation.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<AuthenticationResponse>> Register(UserCredentials userCredentials)
         {
-            var user = new IdentityUser { UserName = userCredentials.Email,
-                Email = userCredentials.Email };
+            var user = new IdentityUser
+            {
+                UserName = userCredentials.Email,
+                Email = userCredentials.Email
+            };
             var result = await userManager.CreateAsync(user, userCredentials.Password);
 
             if (result.Succeeded)

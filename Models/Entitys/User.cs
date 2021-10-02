@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
-    [Table(name:"user")]
+    [Table(name: "user")]
     public class User
     {
         [Column(name: "id")]

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,12 +13,12 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    public class UserController: ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly IUserService userService;
-        
+
 
         public UserController(ApplicationDbContext context, IMapper mapper, IUserService userService)
         {
