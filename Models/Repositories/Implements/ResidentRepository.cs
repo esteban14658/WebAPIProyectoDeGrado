@@ -2,17 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Entitys;
 
 namespace WebAPIProyectoDeGrado.Repositories.Implements
 {
-    public class ResidentRepository: GenericRepository<Resident>, IResidentRepository
+    public class ResidentRepository : GenericRepository<Resident>, IResidentRepository
     {
         private readonly DbSet<Resident> _resident;
         private readonly ApplicationDbContext _context;
-        public ResidentRepository(ApplicationDbContext context): base(context)
+        public ResidentRepository(ApplicationDbContext context) : base(context)
         {
             _resident = context.Set<Resident>();
             _context = context;

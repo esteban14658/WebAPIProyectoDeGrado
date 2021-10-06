@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebAPIProyectoDeGrado.DTOs;
-using WebAPIProyectoDeGrado.Entitys;
+﻿using WebAPIProyectoDeGrado.DTOs;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IShopService: IGenericService<ShopDTO, CreateShopDTO>
+    public interface IShopService : IGenericService<ShopDTO, CreateShopDTO>
     {
     }
 }

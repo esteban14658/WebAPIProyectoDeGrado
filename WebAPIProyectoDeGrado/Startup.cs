@@ -2,12 +2,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PG.Bussiness.Services;
@@ -16,11 +14,8 @@ using PG.Models.Repositories;
 using PG.Models.Repositories.Implements;
 using PG.Presentation.Middlewares;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Filters;
 using WebAPIProyectoDeGrado.Repositories;
 using WebAPIProyectoDeGrado.Repositories.Implements;
@@ -51,7 +46,32 @@ namespace WebAPIProyectoDeGrado
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIProyectoDeGrado", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PG", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
+
             });
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
@@ -71,8 +91,12 @@ namespace WebAPIProyectoDeGrado
                     ClockSkew = TimeSpan.Zero
                 });
 
+            services.AddAuthorization(opciones =>
+            {
+                opciones.AddPolicy("string", politica => politica.RequireClaim("string"));
+            });
             //services.AddScoped(typeof(AutoMapperProfile));
-            
+
             //services.AddScoped(typeof(IGenericService<>), typeof(GenericService<,>));
             services.AddScoped(typeof(IRecyclerService), typeof(RecyclerService));
             services.AddScoped(typeof(IAddressService), typeof(AddressService));
@@ -82,6 +106,7 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(ICommentService), typeof(CommentService));
             services.AddScoped(typeof(IRouteService), typeof(RouteService));
+            services.AddScoped(typeof(IAccountsService), typeof(AccountsService));
 
             //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IRecyclerRepository), typeof(RecyclerRepository));
@@ -122,7 +147,6 @@ namespace WebAPIProyectoDeGrado
 
             app.UseCors();
 
-            //app.UseMiddleware<handler>();
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseAuthorization();

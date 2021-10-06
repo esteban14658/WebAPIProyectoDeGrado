@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using PG.Bussiness.Exceptions;
-using System;
+using PG.Bussiness.Services;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.WebSockets;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -13,15 +9,17 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class RecyclerService: GenericService<RecyclerDTO, CreateRecyclerDTO, Recycler>, IRecyclerService
+    public class RecyclerService : GenericService<RecyclerDTO, CreateRecyclerDTO, Recycler>, IRecyclerService
     {
         private readonly IRecyclerRepository _recyclerRepository;
         private readonly IMapper _mapper;
+        private readonly IAccountsService _accountService;
 
-        public RecyclerService(IRecyclerRepository recyclerRepository, IMapper mapper) : base(recyclerRepository, mapper)
+        public RecyclerService(IRecyclerRepository recyclerRepository, IMapper mapper, IAccountsService accountService) : base(recyclerRepository, mapper)
         {
             _recyclerRepository = recyclerRepository;
             _mapper = mapper;
+            _accountService = accountService;
         }
 
         public async Task<RecyclerDTO> GetUserByEmail(string email)
@@ -55,6 +53,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("User already exist");
             }
+            await _accountService.Register(dto.User);
             var recycler = _mapper.Map<Recycler>(dto);
 
             await _recyclerRepository.Insert(recycler);

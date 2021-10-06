@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.Exceptions;
-using System;
+using PG.Bussiness.Services;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -10,15 +10,17 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ResidentService: GenericService<ResidentDTO, CreateResidentDTO, Resident>, IResidentService
+    public class ResidentService : GenericService<ResidentDTO, CreateResidentDTO, Resident>, IResidentService
     {
         private readonly IResidentRepository _residentRepository;
         private readonly IMapper _mapper;
+        private readonly IAccountsService _accountService;
 
-        public ResidentService(IResidentRepository residentRepository, IMapper mapper): base(residentRepository, mapper)
+        public ResidentService(IResidentRepository residentRepository, IMapper mapper, IAccountsService accountService) : base(residentRepository, mapper)
         {
             _residentRepository = residentRepository;
             _mapper = mapper;
+            _accountService = accountService;
         }
 
         public async Task<ResidentDTO> GetUserByEmail(string email)
@@ -64,6 +66,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("User already exist");
             }
+            await _accountService.Register(dto.User);
             var resident = _mapper.Map<Resident>(dto);
             foreach (var item in resident.AddressList)
             {
@@ -72,11 +75,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await _residentRepository.Insert(resident);
             return dto;
         }
-        // Corregir update
+
         public override async Task<ResidentDTO> Update(ResidentDTO dto, int id)
         {
             var exist = _residentRepository.Exists(id);
-            
+
             if (!exist)
             {
                 throw new KeyNotFoundException("Resident not found");

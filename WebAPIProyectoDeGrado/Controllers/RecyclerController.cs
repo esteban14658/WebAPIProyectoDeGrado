@@ -1,21 +1,17 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using PG.Bussiness.DTOs;
-using PG.Bussiness.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "string")]
     [ApiController]
     [Route("api/recyclers")]
-    public class RecyclerController: ControllerBase
+    public class RecyclerController : ControllerBase
     {
         private readonly IRecyclerService recyclerService;
 
@@ -25,7 +21,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("{page:int}/{amount:int}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "string")]
         public async Task<ActionResult<PaginateDTO<RecyclerDTO>>> Get(int page, int amount)
         {
             var recyclers = await recyclerService.GetAll(page, amount);
@@ -57,7 +53,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recyclerDTO)
         {
             var recycler = await recyclerService.Insert(recyclerDTO);
-            return Created("",recycler);
+            return Created("", recycler);
         }
 
         [HttpPut("{id:int}")]

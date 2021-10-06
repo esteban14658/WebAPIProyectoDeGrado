@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PG.Bussiness.DTOs
 {
-    public class PaginateDTO<T> where T: class
+    public class PaginateDTO<T> where T : class
     {
         public int Page { get; set; }
         public int Size { get; set; }

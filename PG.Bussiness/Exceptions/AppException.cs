@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PG.Bussiness.Exceptions
 {
-    public class AppException: Exception
+    public class AppException : Exception
     {
         public AppException() : base() { }
 
