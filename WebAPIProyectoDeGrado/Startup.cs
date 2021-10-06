@@ -46,7 +46,32 @@ namespace WebAPIProyectoDeGrado
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIProyectoDeGrado", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PG", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
+
             });
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
@@ -66,6 +91,10 @@ namespace WebAPIProyectoDeGrado
                     ClockSkew = TimeSpan.Zero
                 });
 
+            services.AddAuthorization(opciones =>
+            {
+                opciones.AddPolicy("string", politica => politica.RequireClaim("string"));
+            });
             //services.AddScoped(typeof(AutoMapperProfile));
 
             //services.AddScoped(typeof(IGenericService<>), typeof(GenericService<,>));
@@ -77,6 +106,7 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(ICommentService), typeof(CommentService));
             services.AddScoped(typeof(IRouteService), typeof(RouteService));
+            services.AddScoped(typeof(IAccountsService), typeof(AccountsService));
 
             //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IRecyclerRepository), typeof(RecyclerRepository));
@@ -117,7 +147,6 @@ namespace WebAPIProyectoDeGrado
 
             app.UseCors();
 
-            //app.UseMiddleware<handler>();
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseAuthorization();

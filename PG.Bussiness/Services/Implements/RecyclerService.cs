@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PG.Bussiness.Exceptions;
+using PG.Bussiness.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
@@ -12,11 +13,13 @@ namespace WebAPIProyectoDeGrado.Services.Implements
     {
         private readonly IRecyclerRepository _recyclerRepository;
         private readonly IMapper _mapper;
+        private readonly IAccountsService _accountService;
 
-        public RecyclerService(IRecyclerRepository recyclerRepository, IMapper mapper) : base(recyclerRepository, mapper)
+        public RecyclerService(IRecyclerRepository recyclerRepository, IMapper mapper, IAccountsService accountService) : base(recyclerRepository, mapper)
         {
             _recyclerRepository = recyclerRepository;
             _mapper = mapper;
+            _accountService = accountService;
         }
 
         public async Task<RecyclerDTO> GetUserByEmail(string email)
@@ -50,6 +53,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("User already exist");
             }
+            await _accountService.Register(dto.User);
             var recycler = _mapper.Map<Recycler>(dto);
 
             await _recyclerRepository.Insert(recycler);

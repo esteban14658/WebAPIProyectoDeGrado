@@ -8,6 +8,7 @@ using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "string")]
     [ApiController]
     [Route("api/recyclers")]
     public class RecyclerController : ControllerBase
@@ -20,7 +21,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("{page:int}/{amount:int}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "string")]
         public async Task<ActionResult<PaginateDTO<RecyclerDTO>>> Get(int page, int amount)
         {
             var recyclers = await recyclerService.GetAll(page, amount);
