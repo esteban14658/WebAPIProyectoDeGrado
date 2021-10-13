@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -19,6 +20,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _mapper = mapper;
         }
 
+        public Task<List<CollectionPointDTO>> GetByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         public async override Task<CreateCollectionPointDTO> Insert(CreateCollectionPointDTO dto)
         {
             DateTime date = DateTime.Now;
@@ -29,5 +35,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await _collectionPointRepository.Insert(collectionPoint);
             return dto;
         }
+
+
     }
 }

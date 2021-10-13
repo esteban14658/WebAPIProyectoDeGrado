@@ -34,7 +34,7 @@ namespace PG.Bussiness.Services.Implements
             _userRepository = userRepository;
         }
 
-        public async Task<AuthenticationResponse> Register(CreateUserDTO createUser)
+        public async Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux)
         {
             var user = new IdentityUser
             {
@@ -42,6 +42,8 @@ namespace PG.Bussiness.Services.Implements
                 Email = createUser.Email
             };
             var result = await userManager.CreateAsync(user, createUser.Password);
+            var userAux = await userManager.FindByEmailAsync(createUser.Email);
+            await userManager.AddClaimAsync(userAux, new Claim(entry,aux));
             return null;
         }
 
@@ -55,7 +57,7 @@ namespace PG.Bussiness.Services.Implements
             if (result.Succeeded)
             {
                 var send = _mapper.Map<CreateUserDTO>(consult);
-                return BuildToken(send);
+                return await BuildToken(send);
             }
             else
             {
@@ -63,23 +65,30 @@ namespace PG.Bussiness.Services.Implements
             }
         }
 
-        private AuthenticationResponse BuildToken(CreateUserDTO createUser)
+        private async Task<AuthenticationResponse> BuildToken(CreateUserDTO createUser)
         {
             var claims = new List<Claim>()
             {
                 new Claim("email", createUser.Email),
                 new Claim("role", createUser.Role)
             };
+            var user = await userManager.FindByEmailAsync(createUser.Email);
+            var claimsDB = await userManager.GetClaimsAsync(user);
+
+            claims.AddRange(claimsDB);
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["keyJwt"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            var expiration = DateTime.Now.AddYears(1);
+
             var securityToken = new JwtSecurityToken(issuer: null, audience: null, claims: claims,
-                expires: null, signingCredentials: creds);
+                expires: expiration, signingCredentials: creds);
 
             return new AuthenticationResponse()
             {
-                Token = new JwtSecurityTokenHandler().WriteToken(securityToken)
+                Token = new JwtSecurityTokenHandler().WriteToken(securityToken),
+                Expiration = expiration
             };
         }
     }

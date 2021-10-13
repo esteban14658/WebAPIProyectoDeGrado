@@ -8,7 +8,7 @@ using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "string")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsString")]
     [ApiController]
     [Route("api/recyclers")]
     public class RecyclerController : ControllerBase

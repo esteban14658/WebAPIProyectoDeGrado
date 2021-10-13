@@ -29,5 +29,8 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Required]
         [Column(name: "adress_id")]
         public Address Address { get; set; }
+        [Required]
+        [Column(name: "user_id")]
+        public User User { get; set; }
     }
 }

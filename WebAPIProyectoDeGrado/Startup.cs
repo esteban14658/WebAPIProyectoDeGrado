@@ -14,6 +14,7 @@ using PG.Models.Repositories;
 using PG.Models.Repositories.Implements;
 using PG.Presentation.Middlewares;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Text.Json.Serialization;
 using WebAPIProyectoDeGrado.Filters;
@@ -29,6 +30,7 @@ namespace WebAPIProyectoDeGrado
     {
         public Startup(IConfiguration configuration)
         {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             Configuration = configuration;
         }
 
@@ -93,7 +95,8 @@ namespace WebAPIProyectoDeGrado
 
             services.AddAuthorization(opciones =>
             {
-                opciones.AddPolicy("string", politica => politica.RequireClaim("string"));
+                opciones.AddPolicy("IsString", politica => politica.RequireClaim("isString"));
+                opciones.AddPolicy("IsResident", politica => politica.RequireClaim("isResident"));
             });
             //services.AddScoped(typeof(AutoMapperProfile));
 

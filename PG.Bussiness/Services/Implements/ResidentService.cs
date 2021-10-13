@@ -66,7 +66,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("User already exist");
             }
-            await _accountService.Register(dto.User);
+            await _accountService.Register(dto.User, "isResident", "1");
             var resident = _mapper.Map<Resident>(dto);
             foreach (var item in resident.AddressList)
             {
@@ -92,5 +92,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
+        public async Task DeleteAll(int id)
+        {
+            await _residentRepository.DeleteAddressList(id);
+            await _residentRepository.DeleteUser(id);
+            await _residentRepository.Delete(id);
+        }
     }
 }
