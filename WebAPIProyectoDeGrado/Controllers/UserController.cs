@@ -28,7 +28,6 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<List<UserDTO>>> Get()
         {
             //var us = await userService.GetAll();

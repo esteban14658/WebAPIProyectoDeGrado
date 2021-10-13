@@ -68,5 +68,25 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return await _resident.Include(x => x.User).Include(x => x.AddressList)
                 .FirstOrDefaultAsync(x => x.User.Id == id);
         }
+
+        public async Task DeleteAddressList(int idResident)
+        {
+            var addressList = await _context.Addresses.
+                Where(x => x.Resident.Id == idResident).ToListAsync();
+            foreach (var item in addressList)
+            {
+                _context.Addresses.Remove(item);
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteUser(int idResident)
+        {
+            var resident = await _resident.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == idResident);
+            var user = await _context.UsersApp.FirstOrDefaultAsync(x => x.Id == resident.User.Id);
+            if (resident == null)
+            _context.UsersApp.Remove(user);
+            await _context.SaveChangesAsync();
+        }
     }
 }

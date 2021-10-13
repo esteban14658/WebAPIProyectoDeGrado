@@ -10,7 +10,7 @@ namespace PG.Bussiness.Services
 {
     public interface IAccountsService
     {
-        Task<AuthenticationResponse> Register(CreateUserDTO createUser);
+        Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux);
         Task<AuthenticationResponse> Login(UserCredentials userCredentials);
     }
 }

@@ -7,5 +7,6 @@ namespace WebAPIProyectoDeGrado.Services
     {
         Task<ResidentDTO> GetUserById(int id);
         Task<ResidentDTO> GetUserByEmail(string email);
+        Task DeleteAll(int id);
     }
 }
