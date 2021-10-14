@@ -97,6 +97,7 @@ namespace WebAPIProyectoDeGrado
             {
                 opciones.AddPolicy("IsString", politica => politica.RequireClaim("isString"));
                 opciones.AddPolicy("IsResident", politica => politica.RequireClaim("isResident"));
+                opciones.AddPolicy("IsAdmin", politica => politica.RequireClaim("isAdmin"));
             });
             //services.AddScoped(typeof(AutoMapperProfile));
 
