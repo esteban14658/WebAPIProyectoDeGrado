@@ -20,9 +20,16 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _mapper = mapper;
         }
 
-        public Task<List<CollectionPointDTO>> GetByEmail(string email)
+        public async Task<List<CollectionPointDTO>> GetByEmail(string email)
         {
-            throw new NotImplementedException();
+            var result = await _collectionPointRepository.GetByEmail(email);
+            List<CollectionPointDTO> auxList = new();
+            foreach (var item in result)
+            {
+                var mapping = _mapper.Map<CollectionPointDTO>(item);
+                auxList.Add(mapping);
+            }
+            return auxList;
         }
 
         public async override Task<CreateCollectionPointDTO> Insert(CreateCollectionPointDTO dto)

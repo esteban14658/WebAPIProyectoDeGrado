@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Services;
@@ -21,6 +22,13 @@ namespace PG.Presentation.Controllers
         {
             var collectionPoint = await _collectionPoint.Insert(createCollectionPointDTO);
             return Created("", collectionPoint);
+        }
+
+        [HttpGet("GetByEmail/{email}")]
+        public async Task<ActionResult<List<CollectionPointDTO>>> GetByEmail(string email)
+        {
+            var result = await _collectionPoint.GetByEmail(email);
+            return Ok(result);
         }
     }
 }
