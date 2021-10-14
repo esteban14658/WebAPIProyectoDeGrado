@@ -50,6 +50,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Post([FromBody] CreateRecyclerDTO recyclerDTO)
         {
             var recycler = await recyclerService.Insert(recyclerDTO);

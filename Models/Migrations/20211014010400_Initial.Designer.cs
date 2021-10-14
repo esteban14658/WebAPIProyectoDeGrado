@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211013233055_Initial")]
+    [Migration("20211014010400_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

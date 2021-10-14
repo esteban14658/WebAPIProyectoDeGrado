@@ -11,6 +11,6 @@ namespace WebAPIProyectoDeGrado.DTOs
         public string Description { get; set; }
         public Boolean State { get; set; }
         public AddressDTO Address { get; set; }
-        public CollectionPointDTO CollectionPoint { get; set; }
+        public UserDTO User { get; set; }
     }
 }
