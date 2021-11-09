@@ -6,7 +6,6 @@ using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Bussiness.Services;
 using System.Threading.Tasks;
-using WebAPIProyectoDeGrado.Repositories;
 
 namespace PG.Presentation.Controllers
 {
