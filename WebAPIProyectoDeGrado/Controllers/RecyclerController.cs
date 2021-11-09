@@ -11,6 +11,7 @@ namespace WebAPIProyectoDeGrado.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsString")]
     [ApiController]
     [Route("api/recyclers")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsRecycler")]
     public class RecyclerController : ControllerBase
     {
         private readonly IRecyclerService recyclerService;

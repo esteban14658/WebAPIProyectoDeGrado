@@ -31,6 +31,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         public async Task<ActionResult<List<UserDTO>>> Get()
         {
             //var us = await userService.GetAll();
+            
             var users = await context.UsersApp.Where(x => x.Role != "Admin").ToListAsync();
             return mapper.Map<List<UserDTO>>(users);
         }
