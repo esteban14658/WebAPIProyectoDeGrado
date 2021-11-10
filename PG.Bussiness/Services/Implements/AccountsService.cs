@@ -13,6 +13,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using PG.Bussiness.Exceptions;
 using WebAPIProyectoDeGrado.DTOs;
+using PG.Bussiness.DTOs.UpdateDTOs;
 
 namespace PG.Bussiness.Services.Implements
 {
@@ -90,6 +91,22 @@ namespace PG.Bussiness.Services.Implements
                 Token = new JwtSecurityTokenHandler().WriteToken(securityToken),
                 Expiration = expiration
             };
+        }
+
+        public async Task DoAdmin(EditAdminDTO editAdminDTO)
+        {
+            var user = await userManager.FindByEmailAsync(editAdminDTO.Email);
+            await DeleteAllRoles(user);
+            await userManager.AddClaimAsync(user, new Claim("isResident", "1"));
+            await userManager.AddClaimAsync(user, new Claim("isRecycler", "2"));
+            await userManager.AddClaimAsync(user, new Claim("isAdmin", "3"));
+        }
+
+        private async Task DeleteAllRoles(IdentityUser user)
+        {
+            await userManager.RemoveClaimAsync(user, new Claim("isResident", "1"));
+            await userManager.RemoveClaimAsync(user, new Claim("isRecycler", "2"));
+            await userManager.RemoveClaimAsync(user, new Claim("isAdmin", "3"));
         }
     }
 }

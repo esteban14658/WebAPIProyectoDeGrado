@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PG.Bussiness.DTOs.GetDTOs;
+using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Bussiness.Services;
 using System.Threading.Tasks;
-using WebAPIProyectoDeGrado.Repositories;
 
 namespace PG.Presentation.Controllers
 {
@@ -27,5 +27,11 @@ namespace PG.Presentation.Controllers
             return Ok(result);
         }
 
+        [HttpPost("DoAdmin")]
+        public async Task<ActionResult> DoAdmin(EditAdminDTO editAdminDTO)
+        {
+            await _accountService.DoAdmin(editAdminDTO);
+            return NoContent();
+        }
     }
 }
