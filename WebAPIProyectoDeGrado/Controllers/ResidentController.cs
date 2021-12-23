@@ -43,6 +43,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Post([FromBody] CreateResidentDTO createResidentDTO)
         {
             var resident = await residentService.Insert(createResidentDTO);

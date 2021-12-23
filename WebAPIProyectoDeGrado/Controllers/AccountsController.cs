@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPost("Login")]
+        [AllowAnonymous]
         public async Task<ActionResult<AuthenticationResponse>> Login(UserCredentials userCredentials)
         {
             var result = await _accountService.Login(userCredentials);
@@ -28,6 +30,7 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPost("DoAdmin")]
+        [AllowAnonymous]
         public async Task<ActionResult> DoAdmin(EditAdminDTO editAdminDTO)
         {
             await _accountService.DoAdmin(editAdminDTO);
