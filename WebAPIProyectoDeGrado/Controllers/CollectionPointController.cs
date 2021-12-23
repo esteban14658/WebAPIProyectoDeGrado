@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
@@ -18,6 +19,7 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Post([FromBody] CreateCollectionPointDTO createCollectionPointDTO)
         {
             var collectionPoint = await _collectionPoint.Insert(createCollectionPointDTO);

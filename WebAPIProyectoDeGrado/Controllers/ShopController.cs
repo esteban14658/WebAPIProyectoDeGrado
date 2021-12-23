@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -65,6 +66,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Post([FromBody] CreateShopDTO createShopDTO)
         {
             var userExists = await context.Users.AnyAsync(x => x.Email == createShopDTO.User.Email);
