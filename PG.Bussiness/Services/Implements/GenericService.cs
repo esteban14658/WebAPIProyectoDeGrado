@@ -39,7 +39,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 genericList.Add(result);
             }
             var paged = PagedList<TDto>.Create(genericList, page, amount);
-            PaginateDTO<TDto> paginate = new PaginateDTO<TDto>
+            PaginateDTO<TDto> paginate = new()
             {
                 Page = page,
                 Size = paged.Count,

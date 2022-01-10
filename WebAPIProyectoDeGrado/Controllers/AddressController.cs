@@ -24,5 +24,20 @@ namespace PG.Presentation.Controllers
             var address = await _addressService.Insert(createAddressDTO);
             return Created("", address);
         }
+
+        [HttpPost("AddAddressToResident/{idResident:int}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> AddAddressToResident([FromBody] CreateAddressDTO createAddressDTO, int idResident)
+        {
+            var address = await _addressService.AddAddressToResident(idResident,createAddressDTO);
+            return Created("", address);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _addressService.Delete(id);
+            return NoContent();
+        }
     }
 }
