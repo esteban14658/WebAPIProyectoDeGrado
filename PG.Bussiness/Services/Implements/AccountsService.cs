@@ -42,7 +42,7 @@ namespace PG.Bussiness.Services.Implements
                 UserName = createUser.Email,
                 Email = createUser.Email
             };
-            var result = await userManager.CreateAsync(user, createUser.Password);
+            await userManager.CreateAsync(user, createUser.Password);
             var userAux = await userManager.FindByEmailAsync(createUser.Email);
             await userManager.AddClaimAsync(userAux, new Claim(entry,aux));
             return null;
@@ -100,6 +100,7 @@ namespace PG.Bussiness.Services.Implements
             await userManager.AddClaimAsync(user, new Claim("isResident", "1"));
             await userManager.AddClaimAsync(user, new Claim("isRecycler", "2"));
             await userManager.AddClaimAsync(user, new Claim("isAdmin", "3"));
+            await userManager.AddClaimAsync(user, new Claim("isShop", "4"));
         }
 
         private async Task DeleteAllRoles(IdentityUser user)
@@ -107,6 +108,7 @@ namespace PG.Bussiness.Services.Implements
             await userManager.RemoveClaimAsync(user, new Claim("isResident", "1"));
             await userManager.RemoveClaimAsync(user, new Claim("isRecycler", "2"));
             await userManager.RemoveClaimAsync(user, new Claim("isAdmin", "3"));
+            await userManager.RemoveClaimAsync(user, new Claim("isShop", "4"));
         }
     }
 }

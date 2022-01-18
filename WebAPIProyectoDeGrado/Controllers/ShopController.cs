@@ -1,51 +1,46 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PG.Bussiness.DTOs;
+using PG.Bussiness.Exceptions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
+using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/shops")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsShop")]
     public class ShopController : ControllerBase
     {
-
+        private readonly IShopService _shopService;
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public ShopController(ApplicationDbContext context, IMapper mapper)
+        public ShopController(ApplicationDbContext context, IMapper mapper, IShopService shopService)
         {
+            _shopService = shopService;
             this.context = context;
             this.mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<ShopDTO>>> Get()
+        [HttpGet("{page:int}/{amount:int}")]
+        public async Task<ActionResult<PaginateDTO<ShopDTO>>> Get(int page, int amount)
         {
-            var shops = await context.Shops.Include(x =>
-                x.User).Include(x => x.Address).ToListAsync();
-            return mapper.Map<List<ShopDTO>>(shops);
+            var shops = await _shopService.GetAll(page, amount);
+            return Ok(shops);
         }
 
-        [HttpGet("GetUserById/{id:int}")]
-        public async Task<ActionResult<ShopDTO>> GetUserById(int id)
+        [HttpGet("GetById/{id:int}")]
+        public async Task<ActionResult<ShopDTO>> GetById(int id)
         {
-            var exists = await context.Shops.AnyAsync(x =>
-                x.User.Id == id);
-
-            if (!exists)
-            {
-                return NotFound();
-            }
-
-            var shop = await context.Shops.Include(x => x.User).Include(x =>
-                x.Address).FirstOrDefaultAsync(x => x.User.Id == id);
-
-            return mapper.Map<ShopDTO>(shop);
+            var shop = await _shopService.GetById(id);
+            return Ok(shop);
         }
 
         [HttpGet("GetUserByEmail/{email}")]
@@ -69,42 +64,29 @@ namespace WebAPIProyectoDeGrado.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Post([FromBody] CreateShopDTO createShopDTO)
         {
-            var userExists = await context.Users.AnyAsync(x => x.Email == createShopDTO.User.Email);
-
-            if (userExists)
+            try
             {
-                return BadRequest($"There is already a shop with the email: {createShopDTO.User.Email}");
+                var shop = await _shopService.Insert(createShopDTO);
+                return Created("", shop);
             }
-
-            var shop = mapper.Map<Shop>(createShopDTO);
-
-            context.Add(shop);
-            await context.SaveChangesAsync();
-            return Ok();
+            catch (AppException e)
+            {
+                throw e;
+            }
         }
+    
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(CreateShopDTO createShopDTO, int id)
+        public async Task<ActionResult> Put(ShopDTO dto, int id)
         {
-            var exist = await context.Shops.AnyAsync(x => x.Id == id);
-
-            if (!exist)
-            {
-                return NotFound();
-            }
-
-            var shop = mapper.Map<Shop>(createShopDTO);
-            shop.Id = id;
-
-            context.Update(shop);
-            await context.SaveChangesAsync();
+            await _shopService.Update(dto, id);
             return NoContent();
         }
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await context.Shops.AnyAsync(x => x.Id == id);
+            /*var existe = await context.Shops.AnyAsync(x => x.Id == id);
 
             if (!existe)
             {
@@ -112,7 +94,8 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
 
             context.Remove(new Shop() { Id = id });
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync();*/
+            await _shopService.DeleteAll(id);
             return NoContent();
         }
     }

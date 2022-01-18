@@ -22,7 +22,6 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("{page:int}/{amount:int}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "string")]
         public async Task<ActionResult<PaginateDTO<RecyclerDTO>>> Get(int page, int amount)
         {
             var recyclers = await recyclerService.GetAll(page, amount);
