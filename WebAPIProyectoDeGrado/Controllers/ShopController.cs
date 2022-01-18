@@ -15,18 +15,14 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/shops")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsShop")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsShop")]
     public class ShopController : ControllerBase
     {
         private readonly IShopService _shopService;
-        private readonly ApplicationDbContext context;
-        private readonly IMapper mapper;
 
-        public ShopController(ApplicationDbContext context, IMapper mapper, IShopService shopService)
+        public ShopController(IShopService shopService)
         {
             _shopService = shopService;
-            this.context = context;
-            this.mapper = mapper;
         }
 
         [HttpGet("{page:int}/{amount:int}")]
@@ -41,23 +37,6 @@ namespace WebAPIProyectoDeGrado.Controllers
         {
             var shop = await _shopService.GetById(id);
             return Ok(shop);
-        }
-
-        [HttpGet("GetUserByEmail/{email}")]
-        public async Task<ActionResult<ShopDTO>> GetUserByEmail(string email)
-        {
-            var existe = await context.Shops.AnyAsync(x =>
-                x.User.Email == email);
-
-            if (!existe)
-            {
-                return NotFound();
-            }
-
-            var shop = await context.Shops.Include(x => x.User).Include(x =>
-                x.Address).FirstOrDefaultAsync(x => x.User.Email == email);
-
-            return mapper.Map<ShopDTO>(shop);
         }
 
         [HttpPost]
@@ -86,15 +65,6 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            /*var existe = await context.Shops.AnyAsync(x => x.Id == id);
-
-            if (!existe)
-            {
-                return NotFound();
-            }
-
-            context.Remove(new Shop() { Id = id });
-            await context.SaveChangesAsync();*/
             await _shopService.DeleteAll(id);
             return NoContent();
         }
