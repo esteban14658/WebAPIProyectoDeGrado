@@ -98,6 +98,7 @@ namespace WebAPIProyectoDeGrado
                 opciones.AddPolicy("IsRecycler", politica => politica.RequireClaim("isRecycler"));
                 opciones.AddPolicy("IsResident", politica => politica.RequireClaim("isResident"));
                 opciones.AddPolicy("IsAdmin", politica => politica.RequireClaim("isAdmin"));
+                opciones.AddPolicy("IsShop", politica => politica.RequireClaim("isShop"));
             });
             //services.AddScoped(typeof(AutoMapperProfile));
 

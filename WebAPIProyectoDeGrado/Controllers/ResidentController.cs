@@ -28,14 +28,14 @@ namespace WebAPIProyectoDeGrado.Controllers
             return Ok(residents);
         }
 
-        [HttpGet("GetUserById/{id:int}")]
+        [HttpGet("GetById/{id:int}")]
         public async Task<ActionResult<ResidentDTO>> GetUserById(int id)
         {
             var resident = await residentService.GetUserById(id);
             return Ok(resident);
         }
 
-        [HttpGet("GetUserByEmail/{email}")]
+        [HttpGet("GetByEmail/{email}")]
         public async Task<ActionResult<ResidentDTO>> GetUserByEmail(string email)
         {
             var resident = await residentService.GetUserByEmail(email);

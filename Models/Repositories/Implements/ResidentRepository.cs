@@ -84,7 +84,6 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         {
             var resident = await _resident.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == idResident);
             var user = await _context.UsersApp.FirstOrDefaultAsync(x => x.Id == resident.User.Id);
-            if (resident == null)
             _context.UsersApp.Remove(user);
             await _context.SaveChangesAsync();
         }
