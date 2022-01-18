@@ -67,7 +67,7 @@ namespace PG.Models.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     email = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    password = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                    password = table.Column<string>(type: "text", nullable: false),
                     state = table.Column<bool>(type: "boolean", nullable: false),
                     role = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false)
                 },

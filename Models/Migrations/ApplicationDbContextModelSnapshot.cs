@@ -522,8 +522,7 @@ namespace PG.Models.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("character varying(15)")
+                        .HasColumnType("text")
                         .HasColumnName("password");
 
                     b.Property<string>("Role")

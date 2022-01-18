@@ -69,6 +69,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             dto.User.Role = "isResident";
             await _accountService.Register(dto.User, "isResident", "1");
             var resident = _mapper.Map<Resident>(dto);
+            resident.User.Password = _accountService.HashPassword(dto.User);
             foreach (var item in resident.AddressList)
             {
                 item.Resident = resident;
