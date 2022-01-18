@@ -43,6 +43,7 @@ namespace PG.Bussiness.Services.Implements
                 Email = createUser.Email
             };
             await userManager.CreateAsync(user, createUser.Password);
+   
             var userAux = await userManager.FindByEmailAsync(createUser.Email);
             await userManager.AddClaimAsync(userAux, new Claim(entry,aux));
             return null;
@@ -109,6 +110,17 @@ namespace PG.Bussiness.Services.Implements
             await userManager.RemoveClaimAsync(user, new Claim("isRecycler", "2"));
             await userManager.RemoveClaimAsync(user, new Claim("isAdmin", "3"));
             await userManager.RemoveClaimAsync(user, new Claim("isShop", "4"));
+        }
+
+        public string HashPassword(CreateUserDTO createUser)
+        {
+            var user = new IdentityUser
+            {
+                UserName = createUser.Email,
+                Email = createUser.Email
+            };
+            string userPass = userManager.PasswordHasher.HashPassword(user, createUser.Password);
+            return userPass;
         }
     }
 }

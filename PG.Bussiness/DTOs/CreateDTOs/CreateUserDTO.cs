@@ -11,7 +11,7 @@ namespace WebAPIProyectoDeGrado.DTOs
         [EmailAddress]
         public string Email { get; set; }
         [Required(ErrorMessage = "Field {0} is required")]
-        [StringLength(maximumLength: 15, ErrorMessage = "field {0} must be less than {1} characters")]
+        [StringLength(maximumLength: 40, ErrorMessage = "field {0} must be less than {1} characters")]
         [PasswordPropertyText]
         public string Password { get; set; }
         [Required]

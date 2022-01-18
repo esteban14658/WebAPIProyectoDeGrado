@@ -14,5 +14,6 @@ namespace PG.Bussiness.Services
         Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux);
         Task<AuthenticationResponse> Login(UserCredentials userCredentials);
         Task DoAdmin(EditAdminDTO editAdminDTO);
+        string HashPassword(CreateUserDTO createUser);
     }
 }
