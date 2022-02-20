@@ -6,6 +6,6 @@ namespace WebAPIProyectoDeGrado.Services
 {
     public interface ICollectionPointService : IGenericService<CollectionPointDTO, CreateCollectionPointDTO>
     {
-        Task<List<CollectionPointDTO>> GetByEmail(string email);
+        
     }
 }

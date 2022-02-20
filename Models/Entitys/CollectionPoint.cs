@@ -31,6 +31,7 @@ namespace WebAPIProyectoDeGrado.Entitys
         public Address Address { get; set; }
         [Required]
         [Column(name: "user_id")]
-        public User User { get; set; }
+        [ForeignKey("User")]
+        public int User { get; set; }
     }
 }
