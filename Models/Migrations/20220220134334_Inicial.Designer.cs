@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220219230943_Inicial")]
+    [Migration("20220220134334_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -249,8 +249,9 @@ namespace PG.Models.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("end_date");
 
-                    b.Property<int?>("RecyclerId")
-                        .HasColumnType("integer");
+                    b.Property<int>("Recycler")
+                        .HasColumnType("integer")
+                        .HasColumnName("recycler_id");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp without time zone")
@@ -259,8 +260,6 @@ namespace PG.Models.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CommentId");
-
-                    b.HasIndex("RecyclerId");
 
                     b.ToTable("route");
                 });
@@ -598,13 +597,7 @@ namespace PG.Models.Migrations
                         .WithMany()
                         .HasForeignKey("CommentId");
 
-                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Recycler", "Recycler")
-                        .WithMany()
-                        .HasForeignKey("RecyclerId");
-
                     b.Navigation("Comment");
-
-                    b.Navigation("Recycler");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Address", b =>

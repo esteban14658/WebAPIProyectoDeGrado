@@ -18,7 +18,7 @@ namespace PG.Models.Entitys
         [Column(name: "comment_id")]
         public Comment Comment { get; set; }
         [Column(name: "recycler_id")]
-        public Recycler Recycler { get; set; }
-
+        [ForeignKey("Recycler")]
+        public int Recycler { get; set; }
     }
 }

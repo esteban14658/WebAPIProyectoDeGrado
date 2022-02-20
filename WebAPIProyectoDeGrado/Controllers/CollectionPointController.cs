@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PG.Bussiness.DTOs;
 using PG.Presentation.Storage;
 using System;
 using System.Collections.Generic;
@@ -51,6 +52,13 @@ namespace PG.Presentation.Controllers
             }
             var result = await _collectionPoint.Insert(createCollectionPointDTO);
             return Created("", collectionPoint);
+        }
+
+        [HttpGet("{page:int}/{amount:int}")]
+        public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> Get(int page, int amount)
+        {
+            var collectionPoint = await _collectionPoint.GetAll(page, amount);
+            return Ok(collectionPoint);
         }
     }
 }

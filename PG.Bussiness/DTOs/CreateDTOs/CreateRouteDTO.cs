@@ -10,6 +10,6 @@ namespace PG.Bussiness.DTOs.CreateDTOs
         public DateTime EndDate { get; set; }
         public List<CreateCollectionPointDTO> CollectionPoints { get; set; }
         public CreateCommentDTO Comment { get; set; }
-        public CreateRecyclerDTO Recycler { get; set; }
+        public int Recycler { get; set; }
     }
 }
