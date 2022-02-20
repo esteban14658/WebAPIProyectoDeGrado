@@ -11,6 +11,6 @@ namespace PG.Bussiness.DTOs.GetDTOs
         public DateTime EndDate { get; set; }
         public List<CollectionPointDTO> CollectionPoints { get; set; }
         public CommentDTO Comment { get; set; }
-        public RecyclerDTO Recycler { get; set; }
+        public int Recycler { get; set; }
     }
 }

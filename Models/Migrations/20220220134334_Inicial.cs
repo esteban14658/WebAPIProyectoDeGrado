@@ -183,6 +183,28 @@ namespace PG.Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "route",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    start_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    end_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CommentId = table.Column<int>(type: "integer", nullable: true),
+                    recycler_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_route", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_route_comment_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "comment",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "recycler",
                 columns: table => new
                 {
@@ -247,34 +269,6 @@ namespace PG.Models.Migrations
                         name: "FK_shop_user_UserId",
                         column: x => x.UserId,
                         principalTable: "user",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "route",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    start_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    end_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    CommentId = table.Column<int>(type: "integer", nullable: true),
-                    RecyclerId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_route", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_route_comment_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "comment",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_route_recycler_RecyclerId",
-                        column: x => x.RecyclerId,
-                        principalTable: "recycler",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -418,11 +412,6 @@ namespace PG.Models.Migrations
                 column: "CommentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_route_RecyclerId",
-                table: "route",
-                column: "RecyclerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_shop_UserId",
                 table: "shop",
                 column: "UserId");
@@ -449,6 +438,9 @@ namespace PG.Models.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "recycler");
+
+            migrationBuilder.DropTable(
                 name: "collection_point");
 
             migrationBuilder.DropTable(
@@ -467,13 +459,10 @@ namespace PG.Models.Migrations
                 name: "route");
 
             migrationBuilder.DropTable(
-                name: "comment");
-
-            migrationBuilder.DropTable(
-                name: "recycler");
-
-            migrationBuilder.DropTable(
                 name: "user");
+
+            migrationBuilder.DropTable(
+                name: "comment");
         }
     }
 }

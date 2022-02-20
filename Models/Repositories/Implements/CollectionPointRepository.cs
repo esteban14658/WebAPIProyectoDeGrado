@@ -16,5 +16,12 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             _collectionPoints = context.Set<CollectionPoint>();
         }
 
+        public override async Task<List<CollectionPoint>> GetAll()
+        {
+            var result = await _collectionPoints.Include(x =>
+                x.Address).ToListAsync();
+            return result;
+        }
+
     }
 }
