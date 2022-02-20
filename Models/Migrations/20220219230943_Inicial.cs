@@ -290,7 +290,7 @@ namespace PG.Models.Migrations
                     image = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false),
                     description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     state = table.Column<bool>(type: "boolean", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    user_id = table.Column<int>(type: "integer", nullable: false),
                     RouteId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -300,12 +300,6 @@ namespace PG.Models.Migrations
                         name: "FK_collection_point_route_RouteId",
                         column: x => x.RouteId,
                         principalTable: "route",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_collection_point_user_UserId",
-                        column: x => x.UserId,
-                        principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -407,11 +401,6 @@ namespace PG.Models.Migrations
                 name: "IX_collection_point_RouteId",
                 table: "collection_point",
                 column: "RouteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_collection_point_UserId",
-                table: "collection_point",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_recycler_UserId",

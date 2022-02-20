@@ -16,19 +16,5 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             _collectionPoints = context.Set<CollectionPoint>();
         }
 
-        public async Task<List<CollectionPoint>> GetByEmail(string email)
-        {
-            var result = await _collectionPoints.Include(x => x.Address)
-                .Include(x => x.User).ToListAsync();
-            List<CollectionPoint> list = new();
-            foreach (var item in result)
-            {
-                if (item.User.Email == email)
-                {
-                    list.Add(item);
-                }
-            }
-            return list;
-        }
     }
 }

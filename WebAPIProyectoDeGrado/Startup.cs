@@ -13,6 +13,7 @@ using PG.Bussiness.Services.Implements;
 using PG.Models.Repositories;
 using PG.Models.Repositories.Implements;
 using PG.Presentation.Middlewares;
+using PG.Presentation.Storage;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -76,7 +77,11 @@ namespace WebAPIProyectoDeGrado
 
             });
 
+            services.AddTransient<IImageStorage, ImageStorage>();
+
             services.AddAutoMapper(typeof(AutoMapperProfile));
+
+            services.AddHttpContextAccessor();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("defaultConnection")));
@@ -147,6 +152,8 @@ namespace WebAPIProyectoDeGrado
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 

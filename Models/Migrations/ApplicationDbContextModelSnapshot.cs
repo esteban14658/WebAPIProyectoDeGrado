@@ -368,14 +368,13 @@ namespace PG.Models.Migrations
                         .HasColumnType("character varying(25)")
                         .HasColumnName("type_of_material");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<int>("User")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RouteId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("collection_point");
                 });
@@ -628,12 +627,6 @@ namespace PG.Models.Migrations
                     b.HasOne("PG.Models.Entitys.Route", null)
                         .WithMany("CollectionPoints")
                         .HasForeignKey("RouteId");
-
-                    b.HasOne("WebAPIProyectoDeGrado.Entitys.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Recycler", b =>

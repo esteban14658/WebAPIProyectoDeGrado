@@ -6,6 +6,7 @@ namespace WebAPIProyectoDeGrado.Repositories
 {
     public interface ICollectionPointRepository : IGenericRepository<CollectionPoint>
     {
-        Task<List<CollectionPoint>> GetByEmail(string email);
+       
+
     }
 }
