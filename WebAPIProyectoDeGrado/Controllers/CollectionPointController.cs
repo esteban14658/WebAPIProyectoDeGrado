@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using WebAPIProyectoDeGrado;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Services;
@@ -21,22 +22,30 @@ namespace PG.Presentation.Controllers
         private readonly IImageStorage imageStorage;
         private readonly IMapper mapper;
         private readonly string container = "collectionPoints";
+        private readonly ApplicationDbContext _context;
 
         public CollectionPointController(ICollectionPointService collectionPoint, IImageStorage imageStorage,
-            IMapper mapper)
+            IMapper mapper, ApplicationDbContext context)
         {
             _collectionPoint = collectionPoint;
             this.imageStorage = imageStorage;
             this.mapper = mapper;
+            _context = context;
         }
 
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> Post([FromForm] CreateCollectionPointDTO createCollectionPointDTO)
         {
+            var resident = await _context.Residents.FindAsync(createCollectionPointDTO.Resident);
+
+            if (resident == null)
+            {
+                return BadRequest();
+            }
+
             DateTime date = DateTime.Now;
             createCollectionPointDTO.CreateDate = date;
-            createCollectionPointDTO.State = false;
             var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
 
             if (createCollectionPointDTO.Image != null)
@@ -50,8 +59,10 @@ namespace PG.Presentation.Controllers
                         createCollectionPointDTO.Image.ContentType);
                 }
             }
-            var result = await _collectionPoint.Insert(createCollectionPointDTO);
-            return Created("", collectionPoint);
+            _context.Add(collectionPoint);
+            await _context.SaveChangesAsync();
+            var result = mapper.Map<CollectionPointDTO>(collectionPoint);
+            return Created("", result);
         }
 
         [HttpGet("{page:int}/{amount:int}")]

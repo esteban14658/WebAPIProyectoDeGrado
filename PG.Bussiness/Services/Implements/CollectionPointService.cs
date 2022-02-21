@@ -25,7 +25,6 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         {
             DateTime date = DateTime.Now;
             dto.CreateDate = date;
-            dto.State = false;
             var collectionPoint = _mapper.Map<CollectionPoint>(dto);
 
             

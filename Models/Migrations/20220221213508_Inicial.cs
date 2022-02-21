@@ -281,10 +281,10 @@ namespace PG.Models.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     type_of_material = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    image = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false),
+                    image = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    state = table.Column<bool>(type: "boolean", nullable: false),
-                    user_id = table.Column<int>(type: "integer", nullable: false),
+                    state = table.Column<string>(type: "text", nullable: true),
+                    resident_id = table.Column<int>(type: "integer", nullable: false),
                     RouteId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
