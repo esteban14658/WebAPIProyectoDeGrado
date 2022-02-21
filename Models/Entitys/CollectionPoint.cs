@@ -18,20 +18,19 @@ namespace WebAPIProyectoDeGrado.Entitys
         public string TypeOfMaterial { get; set; }
         [Column(name: "image")]
         [Required(ErrorMessage = "Field {0} is required")]
-        [StringLength(maximumLength: 35, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Image { get; set; }
         [Column(name: "description")]
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
         [Column(name: "state")]
-        public Boolean State { get; set; }
+        public string State { get; set; }
         [Required]
         [Column(name: "adress_id")]
         public Address Address { get; set; }
         [Required]
-        [Column(name: "user_id")]
-        [ForeignKey("User")]
-        public int User { get; set; }
+        [Column(name: "resident_id")]
+        [ForeignKey("Resident")]
+        public int Resident { get; set; }
     }
 }
