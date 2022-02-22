@@ -78,5 +78,12 @@ namespace PG.Presentation.Controllers
             var collectionPoint = await _collectionPoint.GetByState(page, amount, state);
             return Ok(collectionPoint);
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<CollectionPointDTO>> GetById(int id)
+        {
+            var collectionPoint = await _collectionPoint.GetById(id);
+            return Ok(collectionPoint);
+        }
     }
 }

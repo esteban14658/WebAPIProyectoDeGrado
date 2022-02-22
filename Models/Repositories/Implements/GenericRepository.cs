@@ -46,6 +46,15 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return entity;
         }
 
+        public virtual async Task<bool> isExists(int id)
+        {
+            var result = await _entities.FindAsync(id);
+            if (result == null)
+            {
+                return false;
+            }
+            return true;
+        }
 
         public virtual async Task<TEntity> Update(TEntity entity)
         {

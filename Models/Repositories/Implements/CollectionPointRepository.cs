@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Entitys;
 
@@ -25,16 +26,19 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public async Task<List<CollectionPoint>> GetByState(string state)
         {
-            var get = await _collectionPoints.ToListAsync();
-            List<CollectionPoint> auxList = new List<CollectionPoint>();
-            foreach (var point in get)
-            {
-                if (point.State == state)
-                {
-                    auxList.Add(point);
-                }
-            }
-            return auxList;
+            var get = await _collectionPoints.Where(x => x.State.Equals(state)).ToListAsync();
+            return get;
+        }
+
+        public override async Task<CollectionPoint> GetById(int id)
+        {
+            var result = await _collectionPoints.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
+            return result;
+        }
+
+        public bool Exists(int id)
+        {
+            return _collectionPoints.Any(x => x.Id == id);
         }
     }
 }
