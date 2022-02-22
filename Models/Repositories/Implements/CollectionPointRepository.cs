@@ -23,5 +23,18 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return result;
         }
 
+        public async Task<List<CollectionPoint>> GetByState(string state)
+        {
+            var get = await _collectionPoints.ToListAsync();
+            List<CollectionPoint> auxList = new List<CollectionPoint>();
+            foreach (var point in get)
+            {
+                if (point.State == state)
+                {
+                    auxList.Add(point);
+                }
+            }
+            return auxList;
+        }
     }
 }
