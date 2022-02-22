@@ -49,13 +49,20 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             DateTime date = DateTime.Now;
             dto.CreateDate = date;
             var collectionPoint = _mapper.Map<CollectionPoint>(dto);
-
-            
-
             await _collectionPointRepository.Insert(collectionPoint);
             return dto;
         }
 
-
+        public override async Task<CollectionPointDTO> GetById(int id)
+        {
+            var isExists = _collectionPointRepository.Exists(id);
+            if (isExists == false)
+            {
+                throw new KeyNotFoundException("The collection point didn´t found");
+            }
+            var genericResult = await _collectionPointRepository.GetById(id);
+            var collectionPointDto = _mapper.Map<CollectionPointDTO>(genericResult);
+            return collectionPointDto;
+        }
     }
 }

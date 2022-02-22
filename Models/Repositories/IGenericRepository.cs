@@ -10,5 +10,6 @@ namespace WebAPIProyectoDeGrado.Repositories
         Task<TEntity> Insert(TEntity entity);
         Task<TEntity> Update(TEntity entity);
         Task Delete(int id);
+        Task<bool> isExists(int id);
     }
 }
