@@ -283,7 +283,9 @@ namespace PG.Models.Migrations
                     type_of_material = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     image = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    state = table.Column<string>(type: "text", nullable: true),
+                    state = table.Column<string>(type: "text", nullable: false),
+                    length = table.Column<string>(type: "text", nullable: false),
+                    latitude = table.Column<string>(type: "text", nullable: false),
                     resident_id = table.Column<int>(type: "integer", nullable: false),
                     RouteId = table.Column<int>(type: "integer", nullable: true)
                 },
