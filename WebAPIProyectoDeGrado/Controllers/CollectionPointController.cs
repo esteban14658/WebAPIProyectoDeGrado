@@ -72,7 +72,7 @@ namespace PG.Presentation.Controllers
             return Ok(collectionPoint);
         }
 
-        [HttpGet("{page:int}/{amount:int}/{state}")]
+        [HttpGet("GetByState/{page:int}/{amount:int}/{state}")]
         public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> GetByState(int page, int amount, string state)
         {
             var collectionPoint = await _collectionPoint.GetByState(page, amount, state);
@@ -83,6 +83,20 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult<CollectionPointDTO>> GetById(int id)
         {
             var collectionPoint = await _collectionPoint.GetById(id);
+            return Ok(collectionPoint);
+        }
+
+        [HttpGet("GetByTypeOfMaterial/{page:int}/{amount:int}/{typeOfMaterial}")]
+        public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> GetByTypeOfMaterial(int page, int amount, string typeOfMaterial)
+        {
+            var collectionPoint = await _collectionPoint.GetByTypeOfMaterial(page, amount, typeOfMaterial);
+            return Ok(collectionPoint);
+        }
+
+        [HttpGet("GetByDate/{page:int}/{amount:int}")]
+        public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> GetByDate(int page, int amount)
+        {
+            var collectionPoint = await _collectionPoint.GetByDate(page, amount);
             return Ok(collectionPoint);
         }
     }

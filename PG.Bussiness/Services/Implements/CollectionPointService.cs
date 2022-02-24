@@ -26,7 +26,6 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         public async Task<PaginateDTO<CollectionPointDTO>> GetByState(int page, int amount, string state)
         {
             var genericResult = await _collectionPointRepository.GetByState(state);
-            //var genericResult = await _collectionPointRepository.GetAll();
             List<CollectionPointDTO> genericList = new();
             foreach (var item in genericResult)
             {
@@ -63,6 +62,46 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var genericResult = await _collectionPointRepository.GetById(id);
             var collectionPointDto = _mapper.Map<CollectionPointDTO>(genericResult);
             return collectionPointDto;
+        }
+
+        public async Task<PaginateDTO<CollectionPointDTO>> GetByTypeOfMaterial(int page, int amount, string typeOfMaterial)
+        {
+            var genericResult = await _collectionPointRepository.GetByTypeOfMaterial(typeOfMaterial);
+            List<CollectionPointDTO> genericList = new();
+            foreach (var item in genericResult)
+            {
+                var result = _mapper.Map<CollectionPointDTO>(item);
+                genericList.Add(result);
+            }
+            var paged = PagedList<CollectionPointDTO>.Create(genericList, page, amount);
+            PaginateDTO<CollectionPointDTO> paginate = new()
+            {
+                Page = page,
+                Size = paged.Count,
+                NumberOfRecords = genericResult.Count,
+                Records = paged
+            };
+            return paginate;
+        }
+
+        public async Task<PaginateDTO<CollectionPointDTO>> GetByDate(int page, int amount)
+        {
+            var genericResult = await _collectionPointRepository.GetByDate();
+            List<CollectionPointDTO> genericList = new();
+            foreach (var item in genericResult)
+            {
+                var result = _mapper.Map<CollectionPointDTO>(item);
+                genericList.Add(result);
+            }
+            var paged = PagedList<CollectionPointDTO>.Create(genericList, page, amount);
+            PaginateDTO<CollectionPointDTO> paginate = new()
+            {
+                Page = page,
+                Size = paged.Count,
+                NumberOfRecords = genericResult.Count,
+                Records = paged
+            };
+            return paginate;
         }
     }
 }

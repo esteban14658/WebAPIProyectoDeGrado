@@ -26,19 +26,35 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public async Task<List<CollectionPoint>> GetByState(string state)
         {
-            var get = await _collectionPoints.Where(x => x.State.Equals(state)).ToListAsync();
+            var get = await _collectionPoints.Where(x => x.State.Equals(state)).
+                Include(x => x.Address).ToListAsync();
             return get;
         }
 
         public override async Task<CollectionPoint> GetById(int id)
         {
-            var result = await _collectionPoints.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _collectionPoints.Include(x => x.Address).
+                FirstOrDefaultAsync(x => x.Id == id);
             return result;
         }
 
         public bool Exists(int id)
         {
             return _collectionPoints.Any(x => x.Id == id);
+        }
+
+        public async Task<List<CollectionPoint>> GetByTypeOfMaterial(string typeOfMaterial)
+        {
+            var result = await _collectionPoints.Where(x => x.TypeOfMaterial.Equals(typeOfMaterial)).
+                Include(x => x.Address).ToListAsync();
+            return result;
+        }
+
+        public async Task<List<CollectionPoint>> GetByDate()
+        {
+            var result = await _collectionPoints.OrderByDescending(x => x.CreateDate).
+                Include(x => x.Address).ToListAsync();
+            return result;
         }
     }
 }
