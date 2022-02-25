@@ -45,9 +45,8 @@ namespace PG.Presentation.Controllers
             }
 
             DateTime date = DateTime.Now;
-            createCollectionPointDTO.CreateDate = date;
             var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
-
+            collectionPoint.CreateDate = date;
             if (createCollectionPointDTO.Image != null)
             {
                 using (var memoryStream = new MemoryStream())
