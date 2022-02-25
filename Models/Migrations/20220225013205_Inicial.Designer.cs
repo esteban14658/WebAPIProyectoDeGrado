@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220223234301_Inicial")]
+    [Migration("20220225013205_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,15 +355,13 @@ namespace PG.Models.Migrations
                         .HasColumnType("text")
                         .HasColumnName("image");
 
-                    b.Property<string>("Latitude")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision")
                         .HasColumnName("latitude");
 
-                    b.Property<string>("Length")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("length");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("longitude");
 
                     b.Property<int>("Resident")
                         .HasColumnType("integer")

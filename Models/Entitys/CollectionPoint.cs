@@ -27,11 +27,11 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Column(name: "state")]
         public string State { get; set; }
         [Required]
-        [Column(name: "length")]
-        public string Length { get; set; }
+        [Column(name: "longitude")]
+        public double Longitude { get; set; }
         [Required]
         [Column(name: "latitude")]
-        public string Latitude { get; set; }
+        public double Latitude { get; set; }
         [Required]
         [Column(name: "adress_id")]
         public Address Address { get; set; }

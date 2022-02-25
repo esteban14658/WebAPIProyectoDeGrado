@@ -353,15 +353,13 @@ namespace PG.Models.Migrations
                         .HasColumnType("text")
                         .HasColumnName("image");
 
-                    b.Property<string>("Latitude")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision")
                         .HasColumnName("latitude");
 
-                    b.Property<string>("Length")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("length");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("longitude");
 
                     b.Property<int>("Resident")
                         .HasColumnType("integer")
