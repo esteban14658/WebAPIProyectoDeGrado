@@ -45,8 +45,6 @@ namespace WebAPIProyectoDeGrado.Services.Implements
 
         public async override Task<CreateCollectionPointDTO> Insert(CreateCollectionPointDTO dto)
         {
-            DateTime date = DateTime.Now;
-            dto.CreateDate = date;
             var collectionPoint = _mapper.Map<CollectionPoint>(dto);
             await _collectionPointRepository.Insert(collectionPoint);
             return dto;
