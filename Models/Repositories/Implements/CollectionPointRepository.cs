@@ -62,7 +62,11 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             var query = from c in _context.CollectionPoints
                         where c.Id == entity.Id
                         select c;
-            foreach (CollectionPoint c in query) c.RouteId = entity.RouteId;
+            foreach (CollectionPoint c in query) {
+                c.RouteId = entity.RouteId;
+                c.TypeOfMaterial = entity.TypeOfMaterial;
+                c.State = entity.State;
+            }
             _context.SaveChanges();
             return entity;
         }
