@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.GetDTOs;
+using PG.Bussiness.DTOs.UpdateDTOs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -100,6 +101,22 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 Records = paged
             };
             return paginate;
+        }
+
+        public async Task<int> AssignToRoute(CollectionPointUpdateDTO dto)
+        {
+            var isExists = _collectionPointRepository.Exists(dto.Id);
+            if (isExists == false)
+            {
+                throw new KeyNotFoundException("The collection point didn´t found");
+            }
+            var result = await GetById(dto.Id);
+            result.TypeOfMaterial = dto.TypeOfMaterial;
+            result.RouteId = dto.RouteId;
+            result.State = dto.State;
+            var collectionPoint = _mapper.Map<CollectionPoint>(result);
+            await _collectionPointRepository.Update(collectionPoint);
+            return dto.Id;
         }
     }
 }

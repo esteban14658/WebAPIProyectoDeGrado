@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220225013205_Inicial")]
+    [Migration("20220226231916_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,7 +245,7 @@ namespace PG.Models.Migrations
                     b.Property<int?>("CommentId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("end_date");
 
@@ -287,6 +287,16 @@ namespace PG.Models.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("character varying(25)")
                         .HasColumnName("description");
+
+                    b.Property<double?>("Latitude")
+                        .IsRequired()
+                        .HasColumnType("double precision")
+                        .HasColumnName("latitude");
+
+                    b.Property<double?>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("double precision")
+                        .HasColumnName("longitude");
 
                     b.Property<string>("Neighborhood")
                         .IsRequired()
@@ -355,20 +365,13 @@ namespace PG.Models.Migrations
                         .HasColumnType("text")
                         .HasColumnName("image");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("double precision")
-                        .HasColumnName("latitude");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("double precision")
-                        .HasColumnName("longitude");
-
                     b.Property<int>("Resident")
                         .HasColumnType("integer")
                         .HasColumnName("resident_id");
 
                     b.Property<int?>("RouteId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("route_id");
 
                     b.Property<string>("State")
                         .IsRequired()

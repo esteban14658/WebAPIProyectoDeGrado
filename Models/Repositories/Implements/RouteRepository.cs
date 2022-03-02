@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PG.Models.Entitys;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado;
 using WebAPIProyectoDeGrado.Repositories.Implements;
@@ -16,6 +17,11 @@ namespace PG.Models.Repositories.Implements
         {
             _context = context;
             _routes = context.Set<Route>();
+        }
+
+        public bool Exists(int id)
+        {
+            return _routes.Any(x => x.Id == id);
         }
 
         public override async Task<List<Route>> GetAll()

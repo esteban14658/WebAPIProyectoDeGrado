@@ -56,5 +56,15 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 Include(x => x.Address).ToListAsync();
             return result;
         }
+
+        public async override Task<CollectionPoint> Update(CollectionPoint entity)
+        {
+            var query = from c in _context.CollectionPoints
+                        where c.Id == entity.Id
+                        select c;
+            foreach (CollectionPoint c in query) c.RouteId = entity.RouteId;
+            _context.SaveChanges();
+            return entity;
+        }
     }
 }

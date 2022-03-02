@@ -23,5 +23,7 @@ namespace WebAPIProyectoDeGrado.DTOs
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
     }
 }

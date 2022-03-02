@@ -84,7 +84,10 @@ namespace WebAPIProyectoDeGrado
             services.AddHttpContextAccessor();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("defaultConnection")));
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("defaultConnection"));
+                options.EnableSensitiveDataLogging();
+            });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(op => op.TokenValidationParameters = new TokenValidationParameters

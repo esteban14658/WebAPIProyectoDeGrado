@@ -189,7 +189,7 @@ namespace PG.Models.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     start_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    end_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    end_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     CommentId = table.Column<int>(type: "integer", nullable: true),
                     recycler_id = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -284,17 +284,15 @@ namespace PG.Models.Migrations
                     image = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     state = table.Column<string>(type: "text", nullable: false),
-                    longitude = table.Column<double>(type: "double precision", nullable: false),
-                    latitude = table.Column<double>(type: "double precision", nullable: false),
                     resident_id = table.Column<int>(type: "integer", nullable: false),
-                    RouteId = table.Column<int>(type: "integer", nullable: true)
+                    route_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_collection_point", x => x.id);
                     table.ForeignKey(
-                        name: "FK_collection_point_route_RouteId",
-                        column: x => x.RouteId,
+                        name: "FK_collection_point_route_route_id",
+                        column: x => x.route_id,
                         principalTable: "route",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
@@ -312,6 +310,8 @@ namespace PG.Models.Migrations
                     number_one = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     number_two = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    longitude = table.Column<double>(type: "double precision", nullable: false),
+                    latitude = table.Column<double>(type: "double precision", nullable: false),
                     ResidentId = table.Column<int>(type: "integer", nullable: true),
                     shop_id = table.Column<int>(type: "integer", nullable: true),
                     collection_point_id = table.Column<int>(type: "integer", nullable: true)
@@ -394,9 +394,9 @@ namespace PG.Models.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_collection_point_RouteId",
+                name: "IX_collection_point_route_id",
                 table: "collection_point",
-                column: "RouteId");
+                column: "route_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_recycler_UserId",

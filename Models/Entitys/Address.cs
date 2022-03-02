@@ -32,6 +32,12 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
+        [Required]
+        [Column(name: "longitude")]
+        public double? Longitude { get; set; }
+        [Required]
+        [Column(name: "latitude")]
+        public double? Latitude { get; set; }
         [Column(name: "resident_id")]
         public Resident Resident { get; set; }
         [Column(name: "shop_id")]

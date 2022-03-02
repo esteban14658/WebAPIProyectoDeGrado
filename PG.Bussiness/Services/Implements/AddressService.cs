@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PG.Bussiness.Exceptions;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -34,6 +35,17 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         public async override Task Delete(int id)
         {
             await _addressRepository.Delete(id);
+        }
+
+        public async Task<CreateAddressDTO> AddAddressToShop(int idShop, CreateAddressDTO dto)
+        {
+            var address = _mapper.Map<Address>(dto);
+            var result = await _addressRepository.AddAddressToResident(idShop, address);
+            if (result == null)
+            {
+                throw new CustomConflictException("The store user already has an address assigned");
+            }
+            return dto;
         }
     }
 }

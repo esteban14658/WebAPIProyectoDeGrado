@@ -27,17 +27,14 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Column(name: "state")]
         public string State { get; set; }
         [Required]
-        [Column(name: "longitude")]
-        public double Longitude { get; set; }
-        [Required]
-        [Column(name: "latitude")]
-        public double Latitude { get; set; }
-        [Required]
         [Column(name: "adress_id")]
         public Address Address { get; set; }
         [Required]
         [Column(name: "resident_id")]
         [ForeignKey("Resident")]
         public int Resident { get; set; }
+        [Column(name: "route_id")]
+        [ForeignKey("Route")]
+        public int? RouteId { get; set; }
     }
 }

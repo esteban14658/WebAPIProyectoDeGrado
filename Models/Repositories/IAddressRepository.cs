@@ -6,5 +6,6 @@ namespace WebAPIProyectoDeGrado.Repositories
     public interface IAddressRepository : IGenericRepository<Address>
     {
         Task<Address> AddAddressToResident(int idResident, Address address);
+        Task<Address> AddAddressToShop(int idShop, Address address);
     }
 }

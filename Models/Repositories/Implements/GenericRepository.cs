@@ -60,6 +60,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         {
             _entities.Update(entity);
             await context.SaveChangesAsync();
+            
             return entity;
         }
     }
