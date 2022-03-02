@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PG.Bussiness.DTOs;
+using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Presentation.Storage;
 using System;
 using System.Collections.Generic;
@@ -97,6 +98,13 @@ namespace PG.Presentation.Controllers
         {
             var collectionPoint = await _collectionPoint.GetByDate(page, amount);
             return Ok(collectionPoint);
+        }
+
+        [HttpPut("AssignToRoute")]
+        public async Task<ActionResult<int>> AssignToRoute([FromBody] CollectionPointUpdateDTO dto)
+        {
+            await _collectionPoint.AssignToRoute(dto);
+            return Ok(dto.Id);
         }
     }
 }

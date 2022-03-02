@@ -1,14 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.Exceptions;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
-using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Services;
 
 namespace WebAPIProyectoDeGrado.Controllers

@@ -5,5 +5,6 @@ namespace PG.Models.Repositories
 {
     public interface IRouteRepository : IGenericRepository<Route>
     {
+        bool Exists(int id);
     }
 }

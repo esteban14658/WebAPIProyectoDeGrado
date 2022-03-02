@@ -13,7 +13,7 @@ namespace PG.Models.Entitys
         [Column(name: "start_date")]
         public DateTime StartDate { get; set; }
         [Column(name: "end_date")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public List<CollectionPoint> CollectionPoints { get; set; }
         [Column(name: "comment_id")]
         public Comment Comment { get; set; }

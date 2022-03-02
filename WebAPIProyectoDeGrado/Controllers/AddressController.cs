@@ -33,6 +33,14 @@ namespace PG.Presentation.Controllers
             return Created("", address);
         }
 
+        [HttpPost("AddAddressToShop/{idShop:int}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> AddAddressToShop([FromBody] CreateAddressDTO createAddressDTO, int idShop)
+        {
+            var address = await _addressService.AddAddressToResident(idShop, createAddressDTO);
+            return Created("", address);
+        }
+
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {

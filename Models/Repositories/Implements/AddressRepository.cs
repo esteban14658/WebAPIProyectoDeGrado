@@ -30,7 +30,23 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return address;
         }
 
-
+        public async Task<Address> AddAddressToShop(int idShop, Address address)
+        {
+            var shop = await _context.Shops.Include(x => x.Address)
+                .FirstOrDefaultAsync(x => x.Id == idShop);
+            if (shop == null)
+            {
+                throw new KeyNotFoundException("the shop is not registered");
+            }
+            if (shop.Address != null)
+            {
+                return null;
+            }
+            address.ShopId = idShop;
+            _address.Add(address);
+            await _context.SaveChangesAsync();
+            return address;
+        }
 
         public override async Task Delete(int id)
         {

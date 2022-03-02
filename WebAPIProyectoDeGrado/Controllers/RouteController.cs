@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PG.Bussiness.DTOs;
+using PG.Bussiness.DTOs.CreateDTOs;
 using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.Services;
 using System.Threading.Tasks;
@@ -22,6 +23,20 @@ namespace PG.Presentation.Controllers
         {
             var route = await _routeService.GetAll(page, amount);
             return Ok(route);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<int>> Finalize(RouteDTO dto, int id)
+        {
+            var route = await _routeService.Finalize(dto, id);
+            return Accepted(route.Id);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(CreateRouteDTO dto)
+        {
+            await _routeService.Insert(dto);
+            return Created("", dto);
         }
     }
 }
