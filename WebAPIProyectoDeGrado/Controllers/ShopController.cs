@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.Exceptions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Services;
@@ -11,7 +12,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/shops")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsShop")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsShop")]
     public class ShopController : ControllerBase
     {
         private readonly IShopService _shopService;
@@ -63,6 +64,13 @@ namespace WebAPIProyectoDeGrado.Controllers
         {
             await _shopService.DeleteAll(id);
             return NoContent();
+        }
+
+        [HttpGet("GetAllList")]
+        public async Task<ActionResult<List<ShopDTO>>> GetAllList()
+        {
+            var shops = await _shopService.GetAllList();
+            return Ok(shops);
         }
     }
 }

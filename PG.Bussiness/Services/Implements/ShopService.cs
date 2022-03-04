@@ -71,5 +71,17 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await _shopRepository.DeleteUser(id);
             await _shopRepository.Delete(id);
         }
+
+        public async Task<List<ShopDTO>> GetAllList()
+        {
+            var list = await _shopRepository.GetAll();
+            List<ShopDTO> result = new();
+            foreach (var item in list)
+            {
+                var mapping = _mapper.Map<ShopDTO>(item);
+                result.Add(mapping);
+            }
+            return result;
+        }
     }
 }

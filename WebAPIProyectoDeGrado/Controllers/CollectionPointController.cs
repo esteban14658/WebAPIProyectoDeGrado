@@ -44,6 +44,7 @@ namespace PG.Presentation.Controllers
             {
                 return BadRequest();
             }
+            Console.WriteLine(createCollectionPointDTO.Image.ToString());
 
             DateTime date = DateTime.Now;
             var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
