@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.Exceptions;
+using PG.Bussiness.Services;
 using PG.Presentation.Storage;
 using System.Collections.Generic;
 using System.IO;
@@ -25,14 +26,16 @@ namespace WebAPIProyectoDeGrado.Controllers
         private readonly IMapper _mapper;
         private readonly string container = "shops";
         private readonly ApplicationDbContext _context;
+        private readonly IAccountsService _accountService;
 
         public ShopController(IShopService shopService, IImageStorage imageStorage,
-            IMapper mapper, ApplicationDbContext context)
+            IMapper mapper, ApplicationDbContext context, IAccountsService accountsService)
         {
             _shopService = shopService;
             _imageStorage = imageStorage;
             _mapper = mapper;
             _context = context;
+            _accountService = accountsService;
         }
 
         [HttpGet("{page:int}/{amount:int}")]
@@ -70,9 +73,9 @@ namespace WebAPIProyectoDeGrado.Controllers
             return Ok(shops);
         }
 
-        [HttpPost("Post2")]
+        [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Post2([FromForm] CreateShopDTO createShopDTO)
+        public async Task<ActionResult> Post([FromForm] CreateShopDTO createShopDTO)
         {
             var verify = _context.Shops.FirstOrDefaultAsync(x => 
                 x.User.Email.Equals(createShopDTO.User.Email));
@@ -94,6 +97,7 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
             _context.Add(shop);
             await _context.SaveChangesAsync();
+            await _accountService.Register(createShopDTO.User, "isShop", "4");
             var result = _mapper.Map<ShopDTO>(shop);
             return Created("", result);
         }
