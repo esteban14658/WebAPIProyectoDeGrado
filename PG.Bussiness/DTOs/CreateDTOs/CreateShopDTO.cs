@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using PG.Bussiness.DTOs.CreateDTOs;
+using PG.Bussiness.Validations;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
@@ -17,6 +21,10 @@ namespace WebAPIProyectoDeGrado.DTOs
         [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
 
         public string Phone { get; set; }
+        [FileSizeWeightValidation(maxWeightOnMB: 4)]
+        [TypeOfFileValidation(typeOfFyleGroup: TypeOfFyleGroup.Image)]
+        public IFormFile Image { get; set; }
+        public List<CreateOrderDTO> OrderList { get; set; }
         public CreateUserDTO User { get; set; }
         public CreateAddressDTO Address { get; set; }
     }

@@ -260,6 +260,7 @@ namespace PG.Models.Migrations
                     document_type = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     document = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    image = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -294,6 +295,27 @@ namespace PG.Models.Migrations
                         name: "FK_collection_point_route_route_id",
                         column: x => x.route_id,
                         principalTable: "route",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "order",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    type_of_material = table.Column<string>(type: "text", nullable: true),
+                    price = table.Column<long>(type: "bigint", nullable: false),
+                    shop_id = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_order", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_order_shop_shop_id",
+                        column: x => x.shop_id,
+                        principalTable: "shop",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -399,6 +421,11 @@ namespace PG.Models.Migrations
                 column: "route_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_order_shop_id",
+                table: "order",
+                column: "shop_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_recycler_UserId",
                 table: "recycler",
                 column: "UserId");
@@ -440,6 +467,9 @@ namespace PG.Models.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "order");
+
+            migrationBuilder.DropTable(
                 name: "recycler");
 
             migrationBuilder.DropTable(
@@ -449,13 +479,13 @@ namespace PG.Models.Migrations
                 name: "resident");
 
             migrationBuilder.DropTable(
-                name: "shop");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "shop");
 
             migrationBuilder.DropTable(
                 name: "route");
