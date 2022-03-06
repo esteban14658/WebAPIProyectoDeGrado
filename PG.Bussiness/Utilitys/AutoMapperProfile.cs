@@ -22,6 +22,8 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<Shop, ShopDTO>().ReverseMap();
             CreateMap<Comment, CommentDTO>().ReverseMap();
             CreateMap<Route, RouteDTO>().ReverseMap();
+            CreateMap<Order, OrderDTO>().ReverseMap();
+
 
             // **** *** **************************************************
 
@@ -31,10 +33,11 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<CreateUserDTO, User>().ReverseMap();
             CreateMap<CreateAddressDTO, Address>().ReverseMap();
             CreateMap<CreateCollectionPointDTO, CollectionPoint>().ReverseMap();
-            CreateMap<CreateResidentDTO, Resident>().ReverseMap();
+            CreateMap<CreateResidentDTO, Order>().ReverseMap();
             CreateMap<CreateShopDTO, Shop>().ReverseMap();
             CreateMap<CreateRouteDTO, Route>().ReverseMap();
             CreateMap<CreateCommentDTO, Comment>().ReverseMap();
+            CreateMap<CreateOrderDTO, Order>().ReverseMap();
 
 
             CreateMap<CreateRecyclerDTO, RecyclerDTO>().ReverseMap();

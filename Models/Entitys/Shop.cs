@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PG.Models.Entitys;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPIProyectoDeGrado.Entitys
@@ -24,6 +26,10 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Phone { get; set; }
+        [Column(name: "image")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        public string Image { get; set; }
+        public List<Order> OrderList { get; set; }
         [Column(name: "address_id")]
         public Address Address { get; set; }
         [Column(name: "user_id")]

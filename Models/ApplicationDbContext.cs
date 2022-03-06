@@ -23,6 +23,7 @@ namespace WebAPIProyectoDeGrado
         public DbSet<User> UsersApp { get; set; }
         public DbSet<CollectionPoint> CollectionPoints { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Route> Routes { get; set; }
     }
 }

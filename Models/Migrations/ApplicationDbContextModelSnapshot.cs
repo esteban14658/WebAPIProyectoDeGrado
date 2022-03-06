@@ -232,6 +232,33 @@ namespace PG.Models.Migrations
                     b.ToTable("comment");
                 });
 
+            modelBuilder.Entity("PG.Models.Entitys.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint")
+                        .HasColumnName("price");
+
+                    b.Property<int?>("ShopId")
+                        .HasColumnType("integer")
+                        .HasColumnName("shop_id");
+
+                    b.Property<string>("TypeOfMaterial")
+                        .HasColumnType("text")
+                        .HasColumnName("type_of_material");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShopId");
+
+                    b.ToTable("order");
+                });
+
             modelBuilder.Entity("PG.Models.Entitys.Route", b =>
                 {
                     b.Property<int>("Id")
@@ -493,6 +520,11 @@ namespace PG.Models.Migrations
                         .HasColumnType("character varying(15)")
                         .HasColumnName("document_type");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("image");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -600,6 +632,13 @@ namespace PG.Models.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PG.Models.Entitys.Order", b =>
+                {
+                    b.HasOne("WebAPIProyectoDeGrado.Entitys.Shop", null)
+                        .WithMany("OrderList")
+                        .HasForeignKey("ShopId");
+                });
+
             modelBuilder.Entity("PG.Models.Entitys.Route", b =>
                 {
                     b.HasOne("PG.Models.Entitys.Comment", "Comment")
@@ -679,6 +718,8 @@ namespace PG.Models.Migrations
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.Shop", b =>
                 {
                     b.Navigation("Address");
+
+                    b.Navigation("OrderList");
                 });
 #pragma warning restore 612, 618
         }
