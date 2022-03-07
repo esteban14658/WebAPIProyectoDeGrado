@@ -122,6 +122,7 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(ICommentService), typeof(CommentService));
             services.AddScoped(typeof(IRouteService), typeof(RouteService));
             services.AddScoped(typeof(IAccountsService), typeof(AccountsService));
+            services.AddScoped(typeof(IOrderService), typeof(OrderService));
 
             //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IRecyclerRepository), typeof(RecyclerRepository));
@@ -132,6 +133,7 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
             services.AddScoped(typeof(IRouteRepository), typeof(RouteRepository));
+            services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
 
             services.AddCors(opciones =>
             {
