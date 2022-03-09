@@ -33,7 +33,7 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<CreateUserDTO, User>().ReverseMap();
             CreateMap<CreateAddressDTO, Address>().ReverseMap();
             CreateMap<CreateCollectionPointDTO, CollectionPoint>().ReverseMap();
-            CreateMap<CreateResidentDTO, Order>().ReverseMap();
+            CreateMap<CreateResidentDTO, Resident>().ReverseMap();
             CreateMap<CreateShopDTO, Shop>().ReverseMap();
             CreateMap<CreateRouteDTO, Route>().ReverseMap();
             CreateMap<CreateCommentDTO, Comment>().ReverseMap();

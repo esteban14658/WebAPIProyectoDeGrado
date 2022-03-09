@@ -77,12 +77,12 @@ namespace WebAPIProyectoDeGrado.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Post([FromForm] CreateShopDTO createShopDTO)
         {
-            var verify = _context.Shops.FirstOrDefaultAsync(x => 
+            /*var verify = _context.Shops.FirstOrDefaultAsync(x => 
                 x.User.Email.Equals(createShopDTO.User.Email));
             if (verify != null)
             {
                 return Conflict("The shop is already exists");
-            }
+            }*/
             var shop = _mapper.Map<Shop>(createShopDTO);
             if (createShopDTO.Image != null)
             {
