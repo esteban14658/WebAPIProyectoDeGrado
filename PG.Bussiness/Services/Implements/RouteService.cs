@@ -46,7 +46,7 @@ namespace PG.Bussiness.Services.Implements
             return dto;
         }
 
-        public async override Task<CreateRouteDTO> Insert(CreateRouteDTO dto)
+        public async Task<RouteDTO> InsertCustom(CreateRouteDTO dto)
         {
             var existsRecycler = _recyclerRepository.Exists(dto.Recycler);
             if (existsRecycler == false)
@@ -55,8 +55,9 @@ namespace PG.Bussiness.Services.Implements
             }
             var send = _mapper.Map<Route>(dto);
             send.StartDate = DateTime.Now;
-            await _routeRepository.Insert(send);
-            return dto;
+            var body = await _routeRepository.Insert(send);
+            var getWithId = _mapper.Map<RouteDTO>(body);
+            return getWithId;
         }
     }
 }

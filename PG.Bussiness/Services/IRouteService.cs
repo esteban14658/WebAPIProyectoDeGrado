@@ -8,5 +8,6 @@ namespace PG.Bussiness.Services
     public interface IRouteService : IGenericService<RouteDTO, CreateRouteDTO>
     {
         Task<RouteDTO> Finalize(RouteDTO routeDTO, int id);
+        Task<RouteDTO> InsertCustom(CreateRouteDTO dto);
     }
 }

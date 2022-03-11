@@ -33,7 +33,9 @@ namespace PG.Models.Repositories.Implements
 
         public override async Task<Route> GetById(int id)
         {
-            var result = await _routes.FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _routes.Include(x => x.CollectionPoints)
+                .Include(x => x.Comment)
+                .FirstOrDefaultAsync(x => x.Id == id);
             return result;
         }
     }
