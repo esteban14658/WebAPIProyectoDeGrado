@@ -101,6 +101,13 @@ namespace PG.Presentation.Controllers
             return Ok(collectionPoint);
         }
 
+        [HttpGet("GetByIdResident/{page:int}/{amount:int}/{idResident:int}/{state}")]
+        public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> GetByIdResident(int page, int amount, int idResident, string state)
+        {
+            var collectionPoint = await _collectionPoint.GetByIdResident(page, amount, idResident, state);
+            return Ok(collectionPoint);
+        }
+
         [HttpPut("AssignToRoute")]
         public async Task<ActionResult<int>> AssignToRoute([FromBody] CollectionPointUpdateDTO dto)
         {

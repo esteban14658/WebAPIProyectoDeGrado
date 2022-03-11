@@ -35,8 +35,8 @@ namespace PG.Presentation.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(CreateRouteDTO dto)
         {
-            await _routeService.Insert(dto);
-            return Created("", dto);
+            var getWithId = await _routeService.InsertCustom(dto);
+            return Created("", getWithId);
         }
     }
 }
