@@ -54,6 +54,13 @@ namespace WebAPIProyectoDeGrado.Controllers
             return Ok(shop);
         }
 
+        [HttpGet("GetByEmail/{email}")]
+        public async Task<ActionResult<ShopDTO>> GetByEmail(string email)
+        {
+            var shop = await _shopService.GetByEmail(email);
+            return Ok(shop);
+        }
+
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(ShopDTO dto, int id)
         {

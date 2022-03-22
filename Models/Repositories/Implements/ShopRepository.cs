@@ -56,6 +56,13 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return result;
         }
 
+        public async Task<Shop> GetByEmail(string email)
+        {
+            var result = await _shop.Include(x => x.User).Include(x =>
+                x.Address).FirstOrDefaultAsync(x => x.User.Email.Equals(email));
+            return result;
+        }
+
         public override async Task<Shop> GetById(int id)
         {
             var result = await _shop.Include(x => x.User).Include(x =>
