@@ -32,7 +32,6 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             dto.User.Role = "isShop";
             await _accountService.Register(dto.User, "isShop", "4");
             var shop = _mapper.Map<Shop>(dto);
-            shop.Address.ShopId = shop.Id;
             await _shopRepository.Insert(shop);
             return dto;
         }

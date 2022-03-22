@@ -48,6 +48,7 @@ namespace WebAPIProyectoDeGrado.Utilitys
             CreateMap<CreateShopDTO, ShopDTO>().ReverseMap();
 
             CreateMap<CollectionPoint, CollectionPointUpdateDTO>().ReverseMap();
+            CreateMap<Shop, ShopUpdateDTO>().ReverseMap();
         }
     }
 }

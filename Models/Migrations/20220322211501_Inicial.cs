@@ -66,7 +66,7 @@ namespace PG.Models.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    email = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
+                    email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
                     state = table.Column<bool>(type: "boolean", nullable: false),
                     role = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false)
@@ -260,7 +260,7 @@ namespace PG.Models.Migrations
                     document_type = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     document = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    image = table.Column<string>(type: "text", nullable: false),
+                    image = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -321,7 +321,7 @@ namespace PG.Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "adress",
+                name: "address",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -329,8 +329,8 @@ namespace PG.Models.Migrations
                     neighborhood = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     street_type = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     career = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    number_one = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    number_two = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    number_one = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    number_two = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
                     description = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     longitude = table.Column<double>(type: "double precision", nullable: false),
                     latitude = table.Column<double>(type: "double precision", nullable: false),
@@ -340,21 +340,21 @@ namespace PG.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_adress", x => x.id);
+                    table.PrimaryKey("PK_address", x => x.id);
                     table.ForeignKey(
-                        name: "FK_adress_collection_point_collection_point_id",
+                        name: "FK_address_collection_point_collection_point_id",
                         column: x => x.collection_point_id,
                         principalTable: "collection_point",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_adress_resident_ResidentId",
+                        name: "FK_address_resident_ResidentId",
                         column: x => x.ResidentId,
                         principalTable: "resident",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_adress_shop_shop_id",
+                        name: "FK_address_shop_shop_id",
                         column: x => x.shop_id,
                         principalTable: "shop",
                         principalColumn: "id",
@@ -362,19 +362,19 @@ namespace PG.Models.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_adress_collection_point_id",
-                table: "adress",
+                name: "IX_address_collection_point_id",
+                table: "address",
                 column: "collection_point_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_adress_ResidentId",
-                table: "adress",
+                name: "IX_address_ResidentId",
+                table: "address",
                 column: "ResidentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_adress_shop_id",
-                table: "adress",
+                name: "IX_address_shop_id",
+                table: "address",
                 column: "shop_id",
                 unique: true);
 
@@ -449,7 +449,7 @@ namespace PG.Models.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "adress");
+                name: "address");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

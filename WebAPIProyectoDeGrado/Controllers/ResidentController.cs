@@ -11,7 +11,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/residents")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsResident")]
+ //   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsResident")]
     public class ResidentController : ControllerBase
     {
         private readonly IResidentService residentService;

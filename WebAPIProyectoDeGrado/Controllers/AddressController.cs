@@ -41,6 +41,13 @@ namespace PG.Presentation.Controllers
             return Created("", address);
         }
 
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(AddressDTO addressDTO, int id)
+        {
+            await _addressService.Update(addressDTO, id);
+            return NoContent();
+        }
+
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {

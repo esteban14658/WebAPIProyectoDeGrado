@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Entitys;
 
@@ -61,6 +62,9 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             await _context.SaveChangesAsync();
         }
 
-        
+        public bool Exists(int id)
+        {
+            return _address.Any(x => x.Id == id);
+        }
     }
 }

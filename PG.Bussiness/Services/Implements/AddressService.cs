@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PG.Bussiness.Exceptions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -45,6 +46,20 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("The store user already has an address assigned");
             }
+            return dto;
+        }
+
+        public override async Task<AddressDTO> Update(AddressDTO dto, int id)
+        {
+            var exist = _addressRepository.Exists(id);
+
+            if (!exist)
+            {
+                throw new KeyNotFoundException("Address not found");
+            }
+            var address = _mapper.Map<Address>(dto);
+            address.Id = id;
+            await _addressRepository.Update(address);
             return dto;
         }
     }

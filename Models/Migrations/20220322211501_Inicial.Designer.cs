@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220306221018_Inicial")]
+    [Migration("20220322211501_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -332,13 +332,11 @@ namespace PG.Models.Migrations
                         .HasColumnName("neighborhood");
 
                     b.Property<string>("NumberOne")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
                         .HasColumnName("number_one");
 
                     b.Property<string>("NumberTwo")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
                         .HasColumnName("number_two");
@@ -366,7 +364,7 @@ namespace PG.Models.Migrations
                     b.HasIndex("ShopId")
                         .IsUnique();
 
-                    b.ToTable("adress");
+                    b.ToTable("address");
                 });
 
             modelBuilder.Entity("WebAPIProyectoDeGrado.Entitys.CollectionPoint", b =>
@@ -523,7 +521,6 @@ namespace PG.Models.Migrations
                         .HasColumnName("document_type");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("image");
 
@@ -559,8 +556,8 @@ namespace PG.Models.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("email");
 
                     b.Property<string>("Password")
