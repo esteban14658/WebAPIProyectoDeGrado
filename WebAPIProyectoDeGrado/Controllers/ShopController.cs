@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PG.Bussiness.DTOs;
+using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Bussiness.Exceptions;
+using System.Linq;
 using PG.Bussiness.Services;
 using PG.Presentation.Storage;
 using System.Collections.Generic;
@@ -50,7 +52,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         {
             var shop = await _shopService.GetById(id);
             return Ok(shop);
-        }    
+        }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(ShopDTO dto, int id)
@@ -73,33 +75,40 @@ namespace WebAPIProyectoDeGrado.Controllers
             return Ok(shops);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Post([FromForm] CreateShopDTO createShopDTO)
+        [HttpPut("UpdateImage/{id:int}")]
+        public async Task<ActionResult> UpdateImage(int id, [FromForm] ShopUpdateDTO shopUpdateDTO)
         {
-            /*var verify = _context.Shops.FirstOrDefaultAsync(x => 
-                x.User.Email.Equals(createShopDTO.User.Email));
-            if (verify != null)
-            {
-                return Conflict("The shop is already exists");
-            }*/
-            var shop = _mapper.Map<Shop>(createShopDTO);
-            if (createShopDTO.Image != null)
+            var shopDB = await _context.Shops.FirstOrDefaultAsync(x => x.Id == id);
+            if (shopDB == null) { return NotFound(); }
+            shopDB = _mapper.Map<Shop>(shopUpdateDTO);
+            if (shopUpdateDTO.Image != null)
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await createShopDTO.Image.CopyToAsync(memoryStream);
+                    await shopUpdateDTO.Image.CopyToAsync(memoryStream);
                     var contents = memoryStream.ToArray();
-                    var extension = Path.GetExtension(createShopDTO.Image.FileName);
-                    shop.Image = await _imageStorage.SaveFile(contents, extension, container,
-                        createShopDTO.Image.ContentType);
+                    var extension = Path.GetExtension(shopUpdateDTO.Image.FileName);
+                    shopDB.Image = await _imageStorage.EditFile(contents, extension, container,
+                        shopDB.Image,
+                        shopUpdateDTO.Image.ContentType);
                 }
             }
-            _context.Add(shop);
+            var query = from s in _context.Shops
+                        where s.Id == shopDB.Id
+                        select s;
+            foreach (Shop s in query)
+            {
+                s.Image = shopDB.Image;
+            }
             await _context.SaveChangesAsync();
-            await _accountService.Register(createShopDTO.User, "isShop", "4");
-            var result = _mapper.Map<ShopDTO>(shop);
-            return Created("", result);
+            return NoContent();
+        }
+
+        [HttpPost("Insert")]
+        public async Task<ActionResult> Insert([FromBody] CreateShopDTO createShopDTO)
+        {
+            var shop = await _shopService.Insert(createShopDTO);
+            return Created("", shop);
         }
     }
 }

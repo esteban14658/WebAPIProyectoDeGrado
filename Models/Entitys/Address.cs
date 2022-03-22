@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPIProyectoDeGrado.Entitys
 {
-    [Table(name: "adress")]
+    [Table(name: "address")]
     public class Address
     {
         [Column(name: "id")]
@@ -21,11 +21,9 @@ namespace WebAPIProyectoDeGrado.Entitys
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Career { get; set; }
         [Column(name: "number_one")]
-        [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
         public string NumberOne { get; set; }
         [Column(name: "number_two")]
-        [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
         public string NumberTwo { get; set; }
         [Column(name: "description")]

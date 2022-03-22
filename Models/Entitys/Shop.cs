@@ -27,7 +27,6 @@ namespace WebAPIProyectoDeGrado.Entitys
         [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Phone { get; set; }
         [Column(name: "image")]
-        [Required(ErrorMessage = "Field {0} is required")]
         public string Image { get; set; }
         public List<Order> OrderList { get; set; }
         [Column(name: "address_id")]

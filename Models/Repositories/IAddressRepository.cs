@@ -7,5 +7,6 @@ namespace WebAPIProyectoDeGrado.Repositories
     {
         Task<Address> AddAddressToResident(int idResident, Address address);
         Task<Address> AddAddressToShop(int idShop, Address address);
+        bool Exists(int id);
     }
 }
