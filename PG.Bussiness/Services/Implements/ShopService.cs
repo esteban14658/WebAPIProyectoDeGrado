@@ -82,5 +82,17 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             }
             return result;
         }
+
+        public async Task<ShopDTO> GetByEmail(string email)
+        {
+            var exist = _shopRepository.ExistUserByEmail(email);
+            if (!exist)
+            {
+                throw new KeyNotFoundException("User not found");
+            }
+            var genericResult = await _shopRepository.GetByEmail(email);
+            var shopDto = _mapper.Map<ShopDTO>(genericResult);
+            return shopDto;
+        }
     }
 }

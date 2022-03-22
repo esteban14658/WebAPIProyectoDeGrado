@@ -8,5 +8,6 @@ namespace WebAPIProyectoDeGrado.Services
     {
         Task DeleteAll(int id);
         Task<List<ShopDTO>> GetAllList();
+        Task<ShopDTO> GetByEmail(string email);
     }
 }
