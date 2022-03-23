@@ -41,7 +41,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         public async Task<CreateAddressDTO> AddAddressToShop(int idShop, CreateAddressDTO dto)
         {
             var address = _mapper.Map<Address>(dto);
-            var result = await _addressRepository.AddAddressToResident(idShop, address);
+            var result = await _addressRepository.AddAddressToShop(idShop, address);
             if (result == null)
             {
                 throw new CustomConflictException("The store user already has an address assigned");
