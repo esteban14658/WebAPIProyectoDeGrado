@@ -114,5 +114,12 @@ namespace PG.Presentation.Controllers
             await _collectionPoint.AssignToRoute(dto);
             return Ok(dto.Id);
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _collectionPoint.Delete(id);
+            return NoContent();
+        }
     }
 }

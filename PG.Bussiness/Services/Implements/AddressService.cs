@@ -52,13 +52,15 @@ namespace WebAPIProyectoDeGrado.Services.Implements
         public override async Task<AddressDTO> Update(AddressDTO dto, int id)
         {
             var exist = _addressRepository.Exists(id);
-
             if (!exist)
             {
                 throw new KeyNotFoundException("Address not found");
             }
+            var getAddressDB = _addressRepository.GetById(id);
             var address = _mapper.Map<Address>(dto);
             address.Id = id;
+            address.ShopId = getAddressDB.Result.ShopId;
+            address.CollectionPointId = getAddressDB.Result.CollectionPointId;
             await _addressRepository.Update(address);
             return dto;
         }

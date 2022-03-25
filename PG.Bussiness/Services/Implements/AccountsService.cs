@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using PG.Bussiness.Exceptions;
 using WebAPIProyectoDeGrado.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
+using WebAPIProyectoDeGrado;
 
 namespace PG.Bussiness.Services.Implements
 {
@@ -24,15 +25,17 @@ namespace PG.Bussiness.Services.Implements
         private readonly UserManager<IdentityUser> userManager;
         private readonly IConfiguration configuration;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IEmailSender _emailSender;
 
         public AccountsService(IUserRepository userRepository, IMapper mapper, UserManager<IdentityUser> userManager,
-            IConfiguration configuration, SignInManager<IdentityUser> signInManager)
+            IConfiguration configuration, SignInManager<IdentityUser> signInManager, IEmailSender emailSender)
         {
             _mapper = mapper;
             this.userManager = userManager;
             this.configuration = configuration;
             this.signInManager = signInManager;
             _userRepository = userRepository;
+            _emailSender = emailSender;
         }
 
         public async Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux)
@@ -43,7 +46,8 @@ namespace PG.Bussiness.Services.Implements
                 Email = createUser.Email
             };
             await userManager.CreateAsync(user, createUser.Password);
-   
+            await _emailSender.SendEmailAsync(user.Email, "Confirm your email","");
+
             var userAux = await userManager.FindByEmailAsync(createUser.Email);
             await userManager.AddClaimAsync(userAux, new Claim(entry,aux));
             return null;

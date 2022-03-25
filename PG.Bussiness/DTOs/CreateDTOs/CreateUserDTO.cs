@@ -7,7 +7,7 @@ namespace WebAPIProyectoDeGrado.DTOs
     public class CreateUserDTO
     {
         [Required(ErrorMessage = "Field {0} is required")]
-        [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
+        [StringLength(maximumLength: 50, ErrorMessage = "field {0} must be less than {1} characters")]
         [EmailAddress]
         public string Email { get; set; }
         [Required(ErrorMessage = "Field {0} is required")]
