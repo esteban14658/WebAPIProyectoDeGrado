@@ -2,6 +2,7 @@
 using PG.Bussiness.DTOs.CreateDTOs;
 using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
+using PG.Bussiness.Exceptions;
 using PG.Models.Entitys;
 using PG.Models.Repositories;
 using System;
@@ -30,6 +31,16 @@ namespace PG.Bussiness.Services.Implements
             _recyclerRepository = recyclerRepository;
         }
 
+        public async Task AddCommentToRoute(int idRoute, CreateCommentDTO dto)
+        {
+            var comment = _mapper.Map<Comment>(dto);
+            var result = await _routeRepository.AddCommentToRoute(idRoute, comment);
+            if (result == null)
+            {
+                throw new CustomConflictException("The store user already has an address assigned");
+            }
+        }
+
         public async Task<RouteDTO> Finalize(RouteDTO dto, int id)
         {
             var isExists = _routeRepository.Exists(id);
@@ -44,6 +55,18 @@ namespace PG.Bussiness.Services.Implements
             var route = _mapper.Map<Route>(dto);
             await _routeRepository.Update(route);
             return dto;
+        }
+
+        public override async Task<RouteDTO> GetById(int id)
+        {
+            var exists = _routeRepository.Exists(id);
+            if (!exists)
+            {
+                throw new KeyNotFoundException("Route not found");
+            }
+            var genericResult = await _routeRepository.GetById(id);
+            var routeDto = _mapper.Map<RouteDTO>(genericResult);
+            return routeDto;
         }
 
         public async Task<RouteDTO> InsertCustom(CreateRouteDTO dto)

@@ -25,6 +25,13 @@ namespace PG.Presentation.Controllers
             return Ok(route);
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<RouteDTO>> Get(int id)
+        {
+            var route = await _routeService.GetById(id);
+            return Ok(route);
+        }
+
         [HttpPut("{id:int}")]
         public async Task<ActionResult<int>> Finalize(RouteDTO dto, int id)
         {
@@ -37,6 +44,13 @@ namespace PG.Presentation.Controllers
         {
             var getWithId = await _routeService.InsertCustom(dto);
             return Created("", getWithId);
+        }
+
+        [HttpPost("AddCommentToRoute/{idRoute:int}")]
+        public async Task<ActionResult> AddCommentToRoute([FromBody] CreateCommentDTO dto, int idRoute)
+        {
+            await _routeService.AddCommentToRoute(idRoute, dto);
+            return Ok(idRoute);
         }
     }
 }

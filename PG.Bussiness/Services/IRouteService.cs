@@ -9,5 +9,6 @@ namespace PG.Bussiness.Services
     {
         Task<RouteDTO> Finalize(RouteDTO routeDTO, int id);
         Task<RouteDTO> InsertCustom(CreateRouteDTO dto);
+        Task AddCommentToRoute(int idRoute, CreateCommentDTO dto);
     }
 }
