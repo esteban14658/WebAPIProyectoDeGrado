@@ -52,21 +52,21 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         public override async Task<List<Shop>> GetAll()
         {
             var result = await _shop.Include(x => x.User).Include(x =>
-                x.Address).ToListAsync();
+                x.Address).Include(x => x.OrderList).ToListAsync();
             return result;
         }
 
         public async Task<Shop> GetByEmail(string email)
         {
             var result = await _shop.Include(x => x.User).Include(x =>
-                x.Address).FirstOrDefaultAsync(x => x.User.Email.Equals(email));
+                x.Address).Include(x => x.OrderList).FirstOrDefaultAsync(x => x.User.Email.Equals(email));
             return result;
         }
 
         public override async Task<Shop> GetById(int id)
         {
             var result = await _shop.Include(x => x.User).Include(x =>
-                x.Address).FirstOrDefaultAsync(x => x.Id == id);
+                x.Address).Include(x => x.OrderList).FirstOrDefaultAsync(x => x.Id == id);
             return result;
         }
 
