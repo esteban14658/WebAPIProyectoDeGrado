@@ -15,6 +15,7 @@ using PG.Bussiness.Exceptions;
 using WebAPIProyectoDeGrado.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using WebAPIProyectoDeGrado;
+using System.Threading;
 
 namespace PG.Bussiness.Services.Implements
 {
@@ -28,7 +29,7 @@ namespace PG.Bussiness.Services.Implements
         private readonly IEmailSender _emailSender;
 
         public AccountsService(IUserRepository userRepository, IMapper mapper, UserManager<IdentityUser> userManager,
-            IConfiguration configuration, SignInManager<IdentityUser> signInManager, IEmailSender emailSender)
+            IConfiguration configuration, SignInManager<IdentityUser> signInManager, IEmailSender emailSender, IUserStore<IdentityUser> userStore)
         {
             _mapper = mapper;
             this.userManager = userManager;
@@ -46,8 +47,9 @@ namespace PG.Bussiness.Services.Implements
                 Email = createUser.Email
             };
             await userManager.CreateAsync(user, createUser.Password);
-            await _emailSender.SendEmailAsync(user.Email, "Confirm your email","");
-
+            //await _emailSender.SendEmailAsync(user.Email, "Confirm your email","");
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            await userManager.ConfirmEmailAsync(user, token);
             var userAux = await userManager.FindByEmailAsync(createUser.Email);
             await userManager.AddClaimAsync(userAux, new Claim(entry,aux));
             return null;
