@@ -19,6 +19,12 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             _address = context.Set<Address>();
         }
 
+        public override async Task<Address> GetById(int id)
+        {
+            var address = await _address.FirstOrDefaultAsync(x => x.Id == id);
+            return address;
+        }
+
         public async Task<Address> AddAddressToResident(int idResident, Address address)
         {
             var resident = await _context.Residents.FirstOrDefaultAsync(x => x.Id == idResident);
@@ -60,6 +66,29 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             }
             _address.Remove(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public async override Task<Address> Update(Address entity)
+        {
+            var query = from a in _context.Addresses
+                        where a.Id == entity.Id
+                        select a;
+            foreach (Address a in query)
+            {
+                a.Neighborhood = entity.Neighborhood;
+                a.StreetType = entity.StreetType;
+                a.Career = entity.Career;
+                a.NumberOne = entity.NumberOne;
+                a.NumberTwo = entity.NumberTwo;
+                a.Description = entity.Description;
+                a.Longitude = entity.Longitude;
+                a.Latitude = entity.Latitude;
+                a.Resident = entity.Resident;
+                a.ShopId = entity.ShopId;
+                a.CollectionPointId = entity.CollectionPointId;
+            }
+            _context.SaveChanges();
+            return entity;
         }
 
         public bool Exists(int id)

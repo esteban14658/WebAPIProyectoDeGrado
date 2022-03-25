@@ -12,6 +12,7 @@ using PG.Bussiness.Services;
 using PG.Bussiness.Services.Implements;
 using PG.Models.Repositories;
 using PG.Models.Repositories.Implements;
+using PG.Models.Services;
 using PG.Presentation.Filters;
 using PG.Presentation.Middlewares;
 using PG.Presentation.Storage;
@@ -45,7 +46,8 @@ namespace WebAPIProyectoDeGrado
             services.AddControllers(opciones =>
             {
                 opciones.Filters.Add(typeof(ExceptionFilter));
-            }).AddJsonOptions(x =>
+            }).AddControllersAsServices()
+                .AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             services.AddSwaggerGen(c =>
@@ -89,6 +91,7 @@ namespace WebAPIProyectoDeGrado
             {
                 options.UseNpgsql(Configuration.GetConnectionString("defaultConnection"));
                 options.EnableSensitiveDataLogging();
+                
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -143,9 +146,15 @@ namespace WebAPIProyectoDeGrado
                 });
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
