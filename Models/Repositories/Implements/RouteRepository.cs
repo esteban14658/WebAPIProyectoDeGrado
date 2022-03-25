@@ -19,6 +19,23 @@ namespace PG.Models.Repositories.Implements
             _routes = context.Set<Route>();
         }
 
+        public async Task<Comment> AddCommentToRoute(int idRoute, Comment comment)
+        {
+            var route = await _context.Routes.Include(x => x.Comment)
+                .FirstOrDefaultAsync(x => x.Id == idRoute);
+            if (route == null)
+            {
+                throw new KeyNotFoundException("the route is not registered");
+            }
+            if (route.Comment != null)
+            {
+                return null;
+            }
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+            return comment;
+        }
+
         public bool Exists(int id)
         {
             return _routes.Any(x => x.Id == id);
@@ -33,7 +50,8 @@ namespace PG.Models.Repositories.Implements
 
         public override async Task<Route> GetById(int id)
         {
-            var result = await _routes.Include(x => x.CollectionPoints)
+            var result = await _routes
+                .Include(x => x.CollectionPoints)
                 .Include(x => x.Comment)
                 .FirstOrDefaultAsync(x => x.Id == id);
             return result;
