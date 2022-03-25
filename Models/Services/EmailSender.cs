@@ -28,7 +28,6 @@ namespace WebAPIProyectoDeGrado
 
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
-            Options.SendGridKey = "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";
             if (string.IsNullOrEmpty(Options.SendGridKey))
             {
                 throw new Exception("Null SendGridKey");
