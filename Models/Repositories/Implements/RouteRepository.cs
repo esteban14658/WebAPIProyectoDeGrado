@@ -48,6 +48,25 @@ namespace PG.Models.Repositories.Implements
             return result;
         }
 
+        public async override Task<Route> Update(Route entity)
+        {
+            var getById = await _routes
+                .Include(x => x.Comment)
+                .FirstOrDefaultAsync(x => x.Id == entity.Id);
+            var query = from r in _context.Routes
+                        where r.Id == entity.Id
+                        select r;
+            foreach (Route r in query)
+            {
+                r.Comment = getById.Comment;
+                r.StartDate = getById.StartDate;
+                r.EndDate = entity.EndDate;
+                r.Recycler = getById.Recycler;
+            }
+            _context.SaveChanges();
+            return entity;
+        }
+
         public override async Task<Route> GetById(int id)
         {
             var result = await _routes

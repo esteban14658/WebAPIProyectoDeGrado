@@ -33,17 +33,17 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<int>> Finalize(RouteDTO dto, int id)
+        public async Task<ActionResult<int>> Finalize(int id)
         {
-            var route = await _routeService.Finalize(dto, id);
-            return Accepted(route.Id);
+            await _routeService.Finalize(id);
+            return Accepted(id);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(CreateRouteDTO dto)
+        public async Task<ActionResult<RouteDTO>> Post(CreateRouteDTO dto)
         {
             var getWithId = await _routeService.InsertCustom(dto);
-            return Created("", getWithId);
+            return Created("", getWithId.Id);
         }
 
         [HttpPost("AddCommentToRoute/{idRoute:int}")]

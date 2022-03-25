@@ -41,7 +41,7 @@ namespace PG.Bussiness.Services.Implements
             }
         }
 
-        public async Task<RouteDTO> Finalize(RouteDTO dto, int id)
+        public async Task<int> Finalize(int id)
         {
             var isExists = _routeRepository.Exists(id);
             if (isExists == false)
@@ -49,12 +49,15 @@ namespace PG.Bussiness.Services.Implements
                 throw new KeyNotFoundException("Not found");
             }
             DateTime date = DateTime.Now;
-            dto.Id = id;
-            dto.CollectionPoints = null;
-            dto.EndDate = date;
+            RouteDTO dto = new RouteDTO
+            {
+                Id = id,
+                CollectionPoints = null,
+                EndDate = date
+            };
             var route = _mapper.Map<Route>(dto);
             await _routeRepository.Update(route);
-            return dto;
+            return id;
         }
 
         public override async Task<RouteDTO> GetById(int id)
