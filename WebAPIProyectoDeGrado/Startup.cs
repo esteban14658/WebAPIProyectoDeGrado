@@ -146,10 +146,14 @@ namespace WebAPIProyectoDeGrado
                 });
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = true;
-            })
+            /*           services.AddIdentity<IdentityUser, IdentityRole>(config =>
+                       {
+                           config.SignIn.RequireConfirmedEmail = true;
+                       })
+                           .AddEntityFrameworkStores<ApplicationDbContext>()
+                           .AddDefaultTokenProviders();
+            */
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
