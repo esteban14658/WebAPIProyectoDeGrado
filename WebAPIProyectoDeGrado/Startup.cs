@@ -142,7 +142,7 @@ namespace WebAPIProyectoDeGrado
             {
                 opciones.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("http://localhost:8100").AllowAnyMethod().AllowAnyHeader();
+                    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
                 });
             });
 
