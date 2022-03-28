@@ -27,9 +27,11 @@ namespace PG.Bussiness.Services.Implements
         private readonly IConfiguration configuration;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public AccountsService(IUserRepository userRepository, IMapper mapper, UserManager<IdentityUser> userManager,
-            IConfiguration configuration, SignInManager<IdentityUser> signInManager, IEmailSender emailSender, IUserStore<IdentityUser> userStore)
+            IConfiguration configuration, SignInManager<IdentityUser> signInManager, IEmailSender emailSender, IUserStore<IdentityUser> userStore,
+            ApplicationDbContext context)
         {
             _mapper = mapper;
             this.userManager = userManager;
@@ -37,6 +39,7 @@ namespace PG.Bussiness.Services.Implements
             this.signInManager = signInManager;
             _userRepository = userRepository;
             _emailSender = emailSender;
+            _context = context;
         }
 
         public async Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux)
@@ -108,6 +111,15 @@ namespace PG.Bussiness.Services.Implements
             await userManager.AddClaimAsync(user, new Claim("isRecycler", "2"));
             await userManager.AddClaimAsync(user, new Claim("isAdmin", "3"));
             await userManager.AddClaimAsync(user, new Claim("isShop", "4"));
+            var query = from a in _context.UsersApp
+                        where a.Email == editAdminDTO.Email
+                        select a;
+            foreach (var a in query)
+            {
+                a.Role = "Administrador";
+            }
+            _context.SaveChanges();
+
         }
 
         private async Task DeleteAllRoles(IdentityUser user)

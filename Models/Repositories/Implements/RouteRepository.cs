@@ -63,7 +63,7 @@ namespace PG.Models.Repositories.Implements
                 r.EndDate = entity.EndDate;
                 r.Recycler = getById.Recycler;
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return entity;
         }
 

@@ -87,7 +87,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 a.ShopId = entity.ShopId;
                 a.CollectionPointId = entity.CollectionPointId;
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return entity;
         }
 
