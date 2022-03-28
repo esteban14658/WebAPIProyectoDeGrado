@@ -68,7 +68,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 c.TypeOfMaterial = entity.TypeOfMaterial;
                 c.State = entity.State;
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return entity;
         }
 
