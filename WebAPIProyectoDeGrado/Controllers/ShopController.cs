@@ -103,7 +103,7 @@ namespace WebAPIProyectoDeGrado.Controllers
                     await call.CopyToAsync(memoryStream);
                     var contents = memoryStream.ToArray();
                     var extension = Path.GetExtension(call.FileName);
-                    shopDB.Image = await _imageStorage.EditFile(contents, extension, container,
+                    shopDB.Image = await _imageStorage.EditFile(contents, ".jpg", container,
                         shopDB.Image,
                         "image/jpeg");
                 }
