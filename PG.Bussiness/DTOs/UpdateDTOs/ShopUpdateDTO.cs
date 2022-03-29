@@ -11,8 +11,6 @@ namespace PG.Bussiness.DTOs.UpdateDTOs
     public class ShopUpdateDTO
     {
         public int Id { get; set; }
-        [FileSizeWeightValidation(maxWeightOnMB: 4)]
-        [TypeOfFileValidation(typeOfFyleGroup: TypeOfFyleGroup.Image)]
-        public IFormFile Image { get; set; }
+        public string Image { get; set; }
     }
 }

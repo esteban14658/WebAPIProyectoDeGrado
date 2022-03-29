@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.Exceptions;
 using PG.Bussiness.Services;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
@@ -93,6 +97,33 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var genericResult = await _shopRepository.GetByEmail(email);
             var shopDto = _mapper.Map<ShopDTO>(genericResult);
             return shopDto;
+        }
+
+        public List<IFormFile> Base64ToImage(List<EquipmentFile> equipmentFiles)
+        {
+            List<IFormFile> formFiles = new List<IFormFile>();
+            foreach (var eqp in equipmentFiles)
+            {
+
+                byte[] bytes = Convert.FromBase64String(eqp.File);
+                MemoryStream stream = new MemoryStream(bytes);
+
+                IFormFile file = new FormFile(stream, 0, bytes.Length, eqp.Name, eqp.Name);
+                formFiles.Add(file);
+
+            }
+            return formFiles;
+        }
+
+        public IFormFile Base64ToIFormFile(string base64String)
+        {
+            // Convert Base64 String to byte[]
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            MemoryStream stream = new MemoryStream(imageBytes);
+
+            // Convert byte[] to Image
+            IFormFile file = new FormFile(stream, 0, imageBytes.Length, "", "");
+            return file;
         }
     }
 }

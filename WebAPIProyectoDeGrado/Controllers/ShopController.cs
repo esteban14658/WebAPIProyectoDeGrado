@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Services;
+using Microsoft.AspNetCore.Http;
+using System;
+using PG.Bussiness.DTOs.GetDTOs;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {
@@ -82,7 +85,41 @@ namespace WebAPIProyectoDeGrado.Controllers
             return Ok(shops);
         }
 
-        [HttpPut("UpdateImage/{id:int}")]
+
+        [HttpPut("UpdateImageJson/{id:int}")]
+        public async Task<ActionResult> UpdateImageJson(int id, [FromBody] ShopUpdateDTO shopUpdateDTO)
+        {
+            //var call = _shopService.Base64ToImage();
+            var call = _shopService.Base64ToIFormFile(shopUpdateDTO.Image);
+
+
+            var shopDB = await _context.Shops.FirstOrDefaultAsync(x => x.Id == id);
+            if (shopDB == null) { return NotFound(); }
+            shopDB = _mapper.Map<Shop>(shopUpdateDTO);
+            if (shopUpdateDTO.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await call.CopyToAsync(memoryStream);
+                    var contents = memoryStream.ToArray();
+                    var extension = Path.GetExtension(call.FileName);
+                    shopDB.Image = await _imageStorage.EditFile(contents, extension, container,
+                        shopDB.Image,
+                        "image/jpeg");
+                }
+            }
+            var query = from s in _context.Shops
+                        where s.Id == shopDB.Id
+                        select s;
+            foreach (Shop s in query)
+            {
+                s.Image = shopDB.Image;
+            }
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        /*[HttpPut("UpdateImage/{id:int}")]
         public async Task<ActionResult> UpdateImage(int id, [FromForm] ShopUpdateDTO shopUpdateDTO)
         {
             var shopDB = await _context.Shops.FirstOrDefaultAsync(x => x.Id == id);
@@ -109,7 +146,7 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
             await _context.SaveChangesAsync();
             return NoContent();
-        }
+        }*/
 
         [HttpPost("Insert")]
         public async Task<ActionResult> Insert([FromBody] CreateShopDTO createShopDTO)
