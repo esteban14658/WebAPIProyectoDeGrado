@@ -89,7 +89,6 @@ namespace WebAPIProyectoDeGrado.Controllers
         [HttpPut("UpdateImageJson/{id:int}")]
         public async Task<ActionResult> UpdateImageJson(int id, [FromBody] ShopUpdateDTO shopUpdateDTO)
         {
-            //var call = _shopService.Base64ToImage();
             var call = _shopService.Base64ToIFormFile(shopUpdateDTO.Image);
 
 

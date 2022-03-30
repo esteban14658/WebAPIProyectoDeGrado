@@ -1,4 +1,5 @@
-﻿using PG.Bussiness.DTOs;
+﻿using Microsoft.AspNetCore.Http;
+using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,5 +14,6 @@ namespace WebAPIProyectoDeGrado.Services
         Task<PaginateDTO<CollectionPointDTO>> GetByIdResident(int page, int amount, int idResident, string state);
         Task<PaginateDTO<CollectionPointDTO>> GetByDate(int page, int amount);
         Task<int> AssignToRoute(CollectionPointUpdateDTO dto);
+        IFormFile Base64ToIFormFile(string base64String);
     }
 }
