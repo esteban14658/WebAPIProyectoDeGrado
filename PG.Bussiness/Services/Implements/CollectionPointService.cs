@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
@@ -100,6 +101,17 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 Records = paged
             };
             return paginate;
+        }
+
+        public IFormFile Base64ToIFormFile(string base64String)
+        {
+            // Convert Base64 String to byte[]
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            MemoryStream stream = new MemoryStream(imageBytes);
+
+            // Convert byte[] to Image
+            IFormFile file = new FormFile(stream, 0, imageBytes.Length, "", "");
+            return file;
         }
     }
 }

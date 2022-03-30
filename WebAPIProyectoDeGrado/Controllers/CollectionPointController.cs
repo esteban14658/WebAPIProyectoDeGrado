@@ -34,9 +34,9 @@ namespace PG.Presentation.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpPost("{extension}")]
         [AllowAnonymous]
-        public async Task<ActionResult> Post([FromForm] CreateCollectionPointDTO createCollectionPointDTO)
+        public async Task<ActionResult> Post([FromBody] CreateCollectionPointDTO createCollectionPointDTO, string extension)
         {
             var resident = await _context.Residents.FindAsync(createCollectionPointDTO.Resident);
 
@@ -44,7 +44,7 @@ namespace PG.Presentation.Controllers
             {
                 return BadRequest();
             }
-            Console.WriteLine(createCollectionPointDTO.Image.ToString());
+            var call = _collectionPoint.Base64ToIFormFile(createCollectionPointDTO.Image);
 
             DateTime date = DateTime.Now;
             var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
@@ -53,11 +53,10 @@ namespace PG.Presentation.Controllers
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await createCollectionPointDTO.Image.CopyToAsync(memoryStream);
+                    await call.CopyToAsync(memoryStream);
                     var contents = memoryStream.ToArray();
-                    var extension = Path.GetExtension(createCollectionPointDTO.Image.FileName);
-                    collectionPoint.Image = await imageStorage.SaveFile(contents, extension, container,
-                        createCollectionPointDTO.Image.ContentType);
+                    collectionPoint.Image = await imageStorage.SaveFile(contents, "." + extension, container,
+                        "image/" + extension);
                 }
             }
             _context.Add(collectionPoint);
