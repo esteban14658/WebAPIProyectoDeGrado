@@ -86,8 +86,8 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
 
-        [HttpPut("UpdateImageJson/{id:int}")]
-        public async Task<ActionResult> UpdateImageJson(int id, [FromBody] ShopUpdateDTO shopUpdateDTO)
+        [HttpPut("UpdateImageJson/{id:int}/{extension}")]
+        public async Task<ActionResult> UpdateImageJson(int id, [FromBody] ShopUpdateDTO shopUpdateDTO, string extension)
         {
             var call = _shopService.Base64ToIFormFile(shopUpdateDTO.Image);
 
@@ -101,10 +101,9 @@ namespace WebAPIProyectoDeGrado.Controllers
                 {
                     await call.CopyToAsync(memoryStream);
                     var contents = memoryStream.ToArray();
-                    var extension = Path.GetExtension(call.FileName);
-                    shopDB.Image = await _imageStorage.EditFile(contents, ".jpg", container,
+                    shopDB.Image = await _imageStorage.EditFile(contents, "." + extension, container,
                         shopDB.Image,
-                        "image/jpeg");
+                        "image/" + extension);
                 }
             }
             var query = from s in _context.Shops
