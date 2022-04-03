@@ -53,6 +53,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("User already exist");
             }
+            dto.User.Role = "Reciclador";
             await _accountService.Register(dto.User,"isRecycler","2");
             var recycler = _mapper.Map<Recycler>(dto);
 
