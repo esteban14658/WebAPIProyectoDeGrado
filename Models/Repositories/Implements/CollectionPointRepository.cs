@@ -57,16 +57,24 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return result;
         }
 
-        public async override Task<CollectionPoint> Update(CollectionPoint entity)
+        public async Task<CollectionPoint> Update(CollectionPoint entity, string stateCompare)
         {
             var query = from c in _context.CollectionPoints
                         where c.Id == entity.Id
                         select c;
             foreach (CollectionPoint c in query)
             {
-                c.RouteId = entity.RouteId;
-                c.TypeOfMaterial = entity.TypeOfMaterial;
-                c.State = entity.State;
+                if (stateCompare.Equals(c.State))
+                {
+                    c.RouteId = entity.RouteId;
+                    c.TypeOfMaterial = entity.TypeOfMaterial;
+                    c.State = entity.State;
+                }
+                else
+                {
+                    throw new DbUpdateException("Point already assigned to recycler");
+                }
+                
             }
             await _context.SaveChangesAsync();
             return entity;

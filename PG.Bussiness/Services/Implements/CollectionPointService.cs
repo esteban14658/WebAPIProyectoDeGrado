@@ -62,7 +62,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return Paginate(genericResult, page, amount);
         }
 
-        public async Task<int> AssignToRoute(CollectionPointUpdateDTO dto)
+        public async Task<int> AssignToRoute(CollectionPointUpdateDTO dto, string stateCompare)
         {
             var isExists = _collectionPointRepository.Exists(dto.Id);
             if (isExists == false)
@@ -74,7 +74,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             result.RouteId = dto.RouteId;
             result.State = dto.State;
             var collectionPoint = _mapper.Map<CollectionPoint>(result);
-            await _collectionPointRepository.Update(collectionPoint);
+            await _collectionPointRepository.Update(collectionPoint, stateCompare);
             return dto.Id;
         }
 
