@@ -107,10 +107,10 @@ namespace PG.Presentation.Controllers
             return Ok(collectionPoint);
         }
 
-        [HttpPut("AssignToRoute")]
-        public async Task<ActionResult<int>> AssignToRoute([FromBody] CollectionPointUpdateDTO dto)
+        [HttpPut("AssignToRoute/{stateCompare}")]
+        public async Task<ActionResult<int>> AssignToRoute([FromBody] CollectionPointUpdateDTO dto, string stateCompare)
         {
-            await _collectionPoint.AssignToRoute(dto);
+            await _collectionPoint.AssignToRoute(dto, stateCompare);
             return Ok(dto.Id);
         }
 
