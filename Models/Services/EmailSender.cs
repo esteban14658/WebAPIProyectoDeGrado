@@ -37,34 +37,15 @@ namespace WebAPIProyectoDeGrado
 
         public async Task Execute(string apiKey, string subject, string message, string toEmail)
         {
-            /*var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("recifaca@gmail.com", "Password Recovery"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(toEmail));
-
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            msg.SetClickTracking(false, false);
-            var response = await client.SendEmailAsync(msg);
-            _logger.LogInformation(response.IsSuccessStatusCode
-                                   ? $"Email to {toEmail} queued successfully!"
-                                   : $"Failure Email to {toEmail}");
-            */
-            //apiKey = Environment.GetEnvironmentVariable("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");
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("recifaca@gmail.com", "Confirm email");
-            subject = "Sending with SendGrid is Fun";
+            var from = new EmailAddress("yugi.el.capo@gmail.com", "Recifaca");
             var to = new EmailAddress(toEmail, "Example User");
             var plainTextContent = "Bienvenido a Recifacapp, \n" +
-                "El lugar donde conectamos las personas que queremos un cambio \n" +
-                "A traves de este correo quedas suscrito a PORNHUB";
+                "El lugar donde conectamos las personas que queremos un cambio \n " +
+                "Tu codigo es: " + message;
             var htmlContent = "Bienvenido a Recifacapp, \n" +
-                "El lugar donde conectamos las personas que queremos un cambio";
+                "El lugar donde conectamos las personas que queremos un cambio \n " + 
+                "Tu codigo es: " + message;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
             _logger.LogInformation(response.IsSuccessStatusCode
