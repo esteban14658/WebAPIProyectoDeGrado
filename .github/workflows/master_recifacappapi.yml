@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'recifacappapi'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3C36686549EF4AC7B366680F765E2739 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A0769D4096724F3A9099D5C266A5A681 }}
           package: .
