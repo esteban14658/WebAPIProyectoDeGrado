@@ -7,6 +7,7 @@ using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Bussiness.Services;
 using System.Threading.Tasks;
+using WebAPIProyectoDeGrado.DTOs;
 
 namespace PG.Presentation.Controllers
 {
@@ -34,6 +35,29 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult> DoAdmin(EditAdminDTO editAdminDTO)
         {
             await _accountService.DoAdmin(editAdminDTO);
+            return NoContent();
+        }
+
+        [HttpPost("ConfirmEmail/{email}/{code}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string email, string code)
+        {
+            await _accountService.ConfirmEmail(email, code);
+            return NoContent();
+        }
+
+        [HttpPost("SendPasswordChangeCode/{email}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> SendPasswordChangeCode(string email)
+        {
+            await _accountService.SendPasswordChangeCode(email);
+            return NoContent();
+        }
+
+        [HttpPost("ChangePassword/{code}")]
+        public async Task<ActionResult> ChangePassword([FromBody] CreateUserDTO createUser, string code)
+        {
+            await _accountService.ChangePassword(createUser, code);
             return NoContent();
         }
     }

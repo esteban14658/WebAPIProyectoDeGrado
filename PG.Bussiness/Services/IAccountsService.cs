@@ -1,5 +1,6 @@
 ﻿using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
+using PG.Models.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace PG.Bussiness.Services
     {
         Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux);
         Task<AuthenticationResponse> Login(UserCredentials userCredentials);
+        Task<string> SendConfirmEmail();
+        Task<Code> ConfirmEmail(string email, string code);
+        Task<string> SendPasswordChangeCode(string email);
+        Task<int> ChangePassword(CreateUserDTO createUser, string code);
         Task DoAdmin(EditAdminDTO editAdminDTO);
         string HashPassword(CreateUserDTO createUser);
     }

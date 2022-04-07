@@ -48,6 +48,20 @@ namespace PG.Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "codes",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    code = table.Column<string>(type: "text", nullable: true),
+                    date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_codes", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "comment",
                 columns: table => new
                 {
@@ -465,6 +479,9 @@ namespace PG.Models.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "codes");
 
             migrationBuilder.DropTable(
                 name: "order");

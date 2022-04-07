@@ -16,6 +16,8 @@ using WebAPIProyectoDeGrado.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using WebAPIProyectoDeGrado;
 using System.Threading;
+using PG.Models.Entitys;
+using Microsoft.EntityFrameworkCore;
 
 namespace PG.Bussiness.Services.Implements
 {
@@ -50,9 +52,12 @@ namespace PG.Bussiness.Services.Implements
                 Email = createUser.Email
             };
             await userManager.CreateAsync(user, createUser.Password);
-            //await _emailSender.SendEmailAsync(user.Email, "Confirm your email","");
-            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            await userManager.ConfirmEmailAsync(user, token);
+
+            string code = await SendConfirmEmail();
+ //           var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            await _emailSender.SendEmailAsync(user.Email, "Confirm your email", code);
+            
+ //           await userManager.ConfirmEmailAsync(user, token);
             var userAux = await userManager.FindByEmailAsync(createUser.Email);
             await userManager.AddClaimAsync(userAux, new Claim(entry,aux));
             return null;
@@ -139,6 +144,78 @@ namespace PG.Bussiness.Services.Implements
             };
             string userPass = userManager.PasswordHasher.HashPassword(user, createUser.Password);
             return userPass;
+        }
+
+        public async Task<Code> ConfirmEmail(string email, string code)
+        {
+            var user = new IdentityUser
+            {
+                UserName = email,
+                Email = email
+            };
+            var query = await _context.Codes.Where(x => x.Date > DateTime.Now).ToListAsync();
+            var filter = query.FirstOrDefault(x => x.UserCode.Equals(code));
+            if (filter == null)
+            {
+                throw new KeyNotFoundException("The code is not registered or expired");
+            } else
+            {
+                var query2 = from r in _context.Users
+                            where r.Email == email
+                            select r;
+                foreach (var item in query2)
+                {
+                    item.EmailConfirmed = true;
+                }
+                await _context.SaveChangesAsync();
+            }
+            return filter;
+        }
+
+        public async Task<string> SendConfirmEmail()
+        {
+            Code code = new Code();
+            Guid guid = Guid.NewGuid();
+            code.UserCode = guid.ToString().Substring(startIndex: 0, length: 6);
+            code.Date = DateTime.Now.AddMinutes(value: 15);
+            _context.Codes.Add(code);
+            await _context.SaveChangesAsync();
+            return code.UserCode;
+        }
+
+        public async Task<string> SendPasswordChangeCode(string email)
+        {
+            Code code = new Code();
+            Guid guid = Guid.NewGuid();
+            code.UserCode = guid.ToString().Substring(startIndex: 0, length: 6);
+            code.Date = DateTime.Now.AddMinutes(value: 15);
+            _context.Codes.Add(code);
+            await _context.SaveChangesAsync();
+            await _emailSender.SendEmailAsync(email, "Tu codigo para resetear el password", code.UserCode);
+            return code.UserCode;
+        }
+
+        public async Task<int> ChangePassword(CreateUserDTO createUser, string code)
+        {
+            var query = await _context.Codes.Where(x => x.Date > DateTime.Now).ToListAsync();
+            var filter = query.FirstOrDefault(x => x.UserCode.Equals(code));
+            if (filter == null)
+            {
+                throw new KeyNotFoundException("The code is not registered or expired");
+            }
+            else
+            {
+                var passHash = HashPassword(createUser);
+                var query2 = from r in _context.Users
+                             where r.Email == createUser.Email
+                             select r;
+                foreach (var item in query2)
+                {
+                    item.PasswordHash = passHash;
+                }
+                await _context.SaveChangesAsync();
+            }
+            return query.Count();
         }
     }
 }

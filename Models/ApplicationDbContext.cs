@@ -16,6 +16,7 @@ namespace WebAPIProyectoDeGrado
             base.OnModelCreating(modelBuilder);
         }
 
+        public DbSet<Code> Codes { get; set; }
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Recycler> Recyclers { get; set; }
         public DbSet<Resident> Residents { get; set; }
