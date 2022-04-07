@@ -177,7 +177,7 @@ namespace PG.Bussiness.Services.Implements
             Code code = new Code();
             Guid guid = Guid.NewGuid();
             code.UserCode = guid.ToString().Substring(startIndex: 0, length: 6);
-            code.Date = DateTime.Now.AddMinutes(value: 15);
+            code.Date = DateTime.Now.AddHours(value: 2);
             _context.Codes.Add(code);
             await _context.SaveChangesAsync();
             return code.UserCode;
@@ -188,7 +188,7 @@ namespace PG.Bussiness.Services.Implements
             Code code = new Code();
             Guid guid = Guid.NewGuid();
             code.UserCode = guid.ToString().Substring(startIndex: 0, length: 6);
-            code.Date = DateTime.Now.AddMinutes(value: 15);
+            code.Date = DateTime.Now.AddHours(value: 2);
             _context.Codes.Add(code);
             await _context.SaveChangesAsync();
             await _emailSender.SendEmailAsync(email, "Tu codigo para resetear el password", code.UserCode);
