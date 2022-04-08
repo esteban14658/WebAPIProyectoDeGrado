@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PG.Models.Services;
 using SendGrid;
@@ -16,19 +17,21 @@ namespace WebAPIProyectoDeGrado
     public class EmailSender: IEmailSender
     {
         private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;
 
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor,
-                           ILogger<EmailSender> logger)
+                           ILogger<EmailSender> logger, IConfiguration configuration)
         {
             Options = optionsAccessor.Value;
             _logger = logger;
+            _configuration = configuration;
         }
 
         public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
 
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
-            if (string.IsNullOrEmpty(Options.SendGridKey))
+            if (string.IsNullOrEmpty(Options.SendGridKey) || string.IsNullOrEmpty(_configuration["SendGridKey"]))
             {
                 throw new Exception("Null SendGridKey");
             }
