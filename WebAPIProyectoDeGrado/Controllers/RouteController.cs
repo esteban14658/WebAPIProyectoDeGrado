@@ -57,7 +57,7 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             await _routeService.Delete(id);
-            return Ok(new { id });
+            return Ok();
         }
     }
 }

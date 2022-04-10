@@ -111,7 +111,7 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult<int>> AssignToRoute([FromBody] CollectionPointUpdateDTO dto, string stateCompare)
         {
             await _collectionPoint.AssignToRoute(dto, stateCompare);
-            return Ok(dto.Id);
+            return Ok();
         }
 
         [HttpDelete("{id:int}")]
