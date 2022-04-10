@@ -43,7 +43,7 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult<RouteDTO>> Post(CreateRouteDTO dto)
         {
             var getWithId = await _routeService.InsertCustom(dto);
-            return Created("", getWithId.Id);
+            return Created("", new { id = getWithId.Id });
         }
 
         [HttpPost("AddCommentToRoute/{idRoute:int}")]
