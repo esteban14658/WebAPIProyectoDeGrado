@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 

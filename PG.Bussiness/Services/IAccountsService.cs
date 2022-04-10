@@ -1,10 +1,6 @@
 ﻿using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Models.Entitys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 

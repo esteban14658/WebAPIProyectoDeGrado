@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using PG.Bussiness.Validations;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {

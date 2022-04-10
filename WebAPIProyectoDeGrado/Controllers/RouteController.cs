@@ -9,7 +9,7 @@ namespace PG.Presentation.Controllers
 {
     [ApiController]
     [Route("api/Routes")]
-    public class RouteController: ControllerBase
+    public class RouteController : ControllerBase
     {
         private readonly IRouteService _routeService;
 

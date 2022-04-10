@@ -23,7 +23,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 x.ShopId == idShop);
             if (address == null)
             {
-                
+
             }
             _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
@@ -31,9 +31,9 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public async Task DeleteUser(int idShop)
         {
-            var shop = await _shop.Include(x => 
+            var shop = await _shop.Include(x =>
             x.User).FirstOrDefaultAsync(x => x.Id == idShop);
-            var user = await _context.UsersApp.FirstOrDefaultAsync(x => 
+            var user = await _context.UsersApp.FirstOrDefaultAsync(x =>
                 x.Id == shop.User.Id);
             _context.UsersApp.Remove(user);
             await _context.SaveChangesAsync();
@@ -70,6 +70,6 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return result;
         }
 
-        
+
     }
 }

@@ -1,27 +1,26 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using PG.Bussiness.DTOs.GetDTOs;
+using PG.Bussiness.DTOs.UpdateDTOs;
+using PG.Bussiness.Exceptions;
+using PG.Models.Entitys;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using WebAPIProyectoDeGrado.Repositories;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Configuration;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using PG.Bussiness.Exceptions;
-using WebAPIProyectoDeGrado.DTOs;
-using PG.Bussiness.DTOs.UpdateDTOs;
 using WebAPIProyectoDeGrado;
-using System.Threading;
-using PG.Models.Entitys;
-using Microsoft.EntityFrameworkCore;
+using WebAPIProyectoDeGrado.DTOs;
+using WebAPIProyectoDeGrado.Repositories;
 
 namespace PG.Bussiness.Services.Implements
 {
-    public class AccountsService: IAccountsService
+    public class AccountsService : IAccountsService
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -54,12 +53,12 @@ namespace PG.Bussiness.Services.Implements
             await userManager.CreateAsync(user, createUser.Password);
 
             string code = await SendConfirmEmail();
- //           var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            //           var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
             await _emailSender.SendEmailAsync(user.Email, "Confirm your email", code);
-            
- //           await userManager.ConfirmEmailAsync(user, token);
+
+            //           await userManager.ConfirmEmailAsync(user, token);
             var userAux = await userManager.FindByEmailAsync(createUser.Email);
-            await userManager.AddClaimAsync(userAux, new Claim(entry,aux));
+            await userManager.AddClaimAsync(userAux, new Claim(entry, aux));
             return null;
         }
 
@@ -158,11 +157,12 @@ namespace PG.Bussiness.Services.Implements
             if (filter == null)
             {
                 throw new KeyNotFoundException("The code is not registered or expired");
-            } else
+            }
+            else
             {
                 var query2 = from r in _context.Users
-                            where r.Email == email
-                            select r;
+                             where r.Email == email
+                             select r;
                 foreach (var item in query2)
                 {
                     item.EmailConfirmed = true;

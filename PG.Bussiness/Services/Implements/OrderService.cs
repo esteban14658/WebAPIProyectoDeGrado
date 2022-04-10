@@ -4,10 +4,7 @@ using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.Services;
 using PG.Models.Entitys;
 using PG.Models.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Services.Implements

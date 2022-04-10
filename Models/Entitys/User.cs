@@ -16,7 +16,7 @@ namespace WebAPIProyectoDeGrado.Entitys
         [EmailAddress]
         public string Email { get; set; }
         [Column(name: "password")]
-        
+
         [Required(ErrorMessage = "Field {0} is required")]
         //[StringLength(maximumLength: 40, ErrorMessage = "field {0} must be less than {1} characters")]
         [PasswordPropertyText]

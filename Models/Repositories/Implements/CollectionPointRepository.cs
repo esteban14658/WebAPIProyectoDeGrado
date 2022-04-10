@@ -74,7 +74,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 {
                     throw new DbUpdateException("Point already assigned to recycler");
                 }
-                
+
             }
             await _context.SaveChangesAsync();
             return entity;
@@ -86,7 +86,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                         where (id == c.Resident)
                         && (c.State.Equals(state))
                         select c;
-            
+
             var result = query.Include(x => x.Address).ToListAsync();
             return result;
         }

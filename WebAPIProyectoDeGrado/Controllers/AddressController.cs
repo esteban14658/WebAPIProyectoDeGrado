@@ -29,7 +29,7 @@ namespace PG.Presentation.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> AddAddressToResident([FromBody] CreateAddressDTO createAddressDTO, int idResident)
         {
-            var address = await _addressService.AddAddressToResident(idResident,createAddressDTO);
+            var address = await _addressService.AddAddressToResident(idResident, createAddressDTO);
             return Created("", address);
         }
 

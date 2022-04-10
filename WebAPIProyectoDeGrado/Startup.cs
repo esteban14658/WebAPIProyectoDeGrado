@@ -91,7 +91,7 @@ namespace WebAPIProyectoDeGrado
             {
                 options.UseNpgsql(Configuration.GetConnectionString("defaultConnection"));
                 options.EnableSensitiveDataLogging();
-                
+
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -138,14 +138,14 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(IRouteRepository), typeof(RouteRepository));
             services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
 
- /*           services.AddCors(opciones =>
-            {
-                opciones.AddDefaultPolicy(builder =>
-                {
-                    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-                });
-            });
- */
+            /*           services.AddCors(opciones =>
+                       {
+                           opciones.AddDefaultPolicy(builder =>
+                           {
+                               builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                           });
+                       });
+            */
             /*           services.AddIdentity<IdentityUser, IdentityRole>(config =>
                        {
                            config.SignIn.RequireConfirmedEmail = true;
@@ -177,7 +177,7 @@ namespace WebAPIProyectoDeGrado
 
             app.UseRouting();
 
-//            app.UseCors();
+            //            app.UseCors();
 
             app.UseMiddleware<ErrorHandlerMiddleware>();
 

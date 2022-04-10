@@ -1,23 +1,17 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
-using PG.Bussiness.Exceptions;
-using System.Linq;
 using PG.Bussiness.Services;
 using PG.Presentation.Storage;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Entitys;
 using WebAPIProyectoDeGrado.Services;
-using Microsoft.AspNetCore.Http;
-using System;
-using PG.Bussiness.DTOs.GetDTOs;
 
 namespace WebAPIProyectoDeGrado.Controllers
 {

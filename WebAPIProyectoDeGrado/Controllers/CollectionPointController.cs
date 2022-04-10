@@ -5,7 +5,6 @@ using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Presentation.Storage;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado;
