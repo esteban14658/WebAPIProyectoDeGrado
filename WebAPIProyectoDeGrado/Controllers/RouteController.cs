@@ -52,5 +52,12 @@ namespace PG.Presentation.Controllers
             await _routeService.AddCommentToRoute(idRoute, dto);
             return Ok(idRoute);
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _routeService.Delete(id);
+            return Ok(new { id });
+        }
     }
 }
