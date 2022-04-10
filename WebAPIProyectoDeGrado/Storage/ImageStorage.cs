@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
+using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace PG.Presentation.Storage
 {
@@ -51,7 +48,7 @@ namespace PG.Presentation.Storage
             }
             string route = Path.Combine(folder, fileName);
             await File.WriteAllBytesAsync(route, contents);
-            
+
             var url = $"{httpContextAccessor.HttpContext.Request.Scheme}://{httpContextAccessor.HttpContext.Request.Host}";
             var urlToDB = Path.Combine(url, container, fileName).Replace("\\", "/");
 

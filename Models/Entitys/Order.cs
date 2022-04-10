@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PG.Models.Entitys
 {
@@ -15,7 +10,7 @@ namespace PG.Models.Entitys
         [Column(name: "id")]
         public int Id { get; set; }
         [Column(name: "type_of_material")]
-        public string TypeOfMaterial {  get; set; }
+        public string TypeOfMaterial { get; set; }
         [Column(name: "price")]
         public long Price { get; set; }
         [Column(name: "shop_id")]

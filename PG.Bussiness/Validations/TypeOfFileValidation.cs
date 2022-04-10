@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PG.Bussiness.Validations
 {
-    public class TypeOfFileValidation: ValidationAttribute
+    public class TypeOfFileValidation : ValidationAttribute
     {
         private readonly string[] _typeOfFile;
 

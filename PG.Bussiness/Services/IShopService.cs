@@ -3,7 +3,6 @@ using PG.Bussiness.DTOs.GetDTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WebAPIProyectoDeGrado.Services
 {

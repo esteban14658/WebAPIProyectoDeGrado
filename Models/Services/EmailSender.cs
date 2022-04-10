@@ -5,7 +5,6 @@ using PG.Models.Services;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado
@@ -14,7 +13,7 @@ namespace WebAPIProyectoDeGrado
     {
         Task SendEmailAsync(string email, string subject, string htmlMessage);
     }
-    public class EmailSender: IEmailSender
+    public class EmailSender : IEmailSender
     {
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
@@ -47,7 +46,7 @@ namespace WebAPIProyectoDeGrado
                 "El lugar donde conectamos las personas que queremos un cambio \n " +
                 "Tu codigo es: " + message;
             var htmlContent = "Bienvenido a Recifacapp, \n" +
-                "El lugar donde conectamos las personas que queremos un cambio \n " + 
+                "El lugar donde conectamos las personas que queremos un cambio \n " +
                 "Tu codigo es: " + message;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);

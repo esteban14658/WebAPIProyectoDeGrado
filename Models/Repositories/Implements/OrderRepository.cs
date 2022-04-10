@@ -1,12 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PG.Models.Entitys;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado;
-using WebAPIProyectoDeGrado.Repositories;
 using WebAPIProyectoDeGrado.Repositories.Implements;
 
 namespace PG.Models.Repositories.Implements

@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Bussiness.Services;

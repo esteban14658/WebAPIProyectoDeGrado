@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using PG.Bussiness.DTOs.CreateDTOs;
 using PG.Bussiness.DTOs.GetDTOs;
-using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Bussiness.Exceptions;
 using PG.Models.Entitys;
 using PG.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Repositories;
 using WebAPIProyectoDeGrado.Services;
 using WebAPIProyectoDeGrado.Services.Implements;

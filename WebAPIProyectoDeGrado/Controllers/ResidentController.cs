@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PG.Bussiness.DTOs;
-using System.Net;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 using WebAPIProyectoDeGrado.Services;
@@ -11,7 +9,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 {
     [ApiController]
     [Route("api/residents")]
- //   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsResident")]
+    //   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsResident")]
     public class ResidentController : ControllerBase
     {
         private readonly IResidentService residentService;

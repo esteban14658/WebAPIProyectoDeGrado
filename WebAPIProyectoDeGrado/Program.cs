@@ -1,4 +1,3 @@
-using Azure.Extensions.AspNetCore.Configuration.Secrets;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
