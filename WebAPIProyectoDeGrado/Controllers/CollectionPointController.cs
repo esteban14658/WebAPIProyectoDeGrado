@@ -99,6 +99,13 @@ namespace PG.Presentation.Controllers
             return Ok(collectionPoint);
         }
 
+        [HttpGet("GetByStateAndType/{page:int}/{amount:int}/{state}/{type}")]
+        public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> GetByStateAndType(int page, int amount, string state, string type)
+        {
+            var collectionPoint = await _collectionPoint.GetByStateAndType(page, amount, state, type);
+            return Ok(collectionPoint);
+        }
+
         [HttpGet("GetByIdResident/{page:int}/{amount:int}/{idResident:int}/{state}")]
         public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> GetByIdResident(int page, int amount, int idResident, string state)
         {

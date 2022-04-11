@@ -113,5 +113,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             IFormFile file = new FormFile(stream, 0, imageBytes.Length, "", "");
             return file;
         }
+
+        public async Task<PaginateDTO<CollectionPointDTO>> GetByStateAndType(int page, int amount, string state, string type)
+        {
+            var genericResult = await _collectionPointRepository.GetByStateAndType(state, type);
+            return Paginate(genericResult, page, amount);
+        }
     }
 }

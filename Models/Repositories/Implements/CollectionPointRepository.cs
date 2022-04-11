@@ -90,5 +90,14 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             var result = query.Include(x => x.Address).ToListAsync();
             return result;
         }
+
+        public async Task<List<CollectionPoint>> GetByStateAndType(string state, string type)
+        {
+            var result = await _collectionPoints.Where(x => x.TypeOfMaterial.Equals(type))
+                .Where(x => x.State.Equals(state))
+                .OrderByDescending(x => x.CreateDate)
+                .Include(x => x.Address).ToListAsync();
+            return result;
+        }
     }
 }
