@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31507.150
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PG.Presentation", "WebAPIProyectoDeGrado\PG.Presentation.csproj", "{546F51A2-5312-479B-9012-786ECF6618D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PG.Models", "Models\PG.Models.csproj", "{F530DD8A-F2BF-4732-91EC-9261A4BEF33A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PG.Models", "Models\PG.Models.csproj", "{F530DD8A-F2BF-4732-91EC-9261A4BEF33A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PG.Bussiness", "PG.Bussiness\PG.Bussiness.csproj", "{4A9BD931-B939-4329-B5CE-4FED3E125E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PG.Bussiness", "PG.Bussiness\PG.Bussiness.csproj", "{4A9BD931-B939-4329-B5CE-4FED3E125E47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

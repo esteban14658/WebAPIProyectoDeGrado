@@ -12,6 +12,7 @@ namespace WebAPIProyectoDeGrado.Services
         Task<PaginateDTO<CollectionPointDTO>> GetByTypeOfMaterial(int page, int amount, string typeOfMaterial);
         Task<PaginateDTO<CollectionPointDTO>> GetByIdResident(int page, int amount, int idResident, string state);
         Task<PaginateDTO<CollectionPointDTO>> GetByDate(int page, int amount);
+        Task<PaginateDTO<CollectionPointDTO>> GetByStateAndType(int page, int amount, string state, string type);
         Task<int> AssignToRoute(CollectionPointUpdateDTO dto, string stateCompare);
         IFormFile Base64ToIFormFile(string base64String);
     }
