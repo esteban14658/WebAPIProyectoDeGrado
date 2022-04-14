@@ -45,7 +45,7 @@ namespace PG.Presentation.Controllers
             }
             var call = _collectionPoint.Base64ToIFormFile(createCollectionPointDTO.Image);
 
-            DateTime date = DateTime.Now;
+            var date = DateTime.Now.ToUniversalTime().AddHours(-5);
             var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
             collectionPoint.CreateDate = date;
             if (createCollectionPointDTO.Image != null)

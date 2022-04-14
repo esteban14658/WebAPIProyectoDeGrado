@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using PG.Bussiness.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,9 @@ namespace PG.Presentation.Middlewares
                     case KeyNotFoundException e:
                         // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
+                    case DbUpdateException e:
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
                     default:
                         // unhandled error
