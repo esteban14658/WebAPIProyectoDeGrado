@@ -72,7 +72,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 }
                 else
                 {
-                    throw new DbUpdateException("Point already assigned to recycler");
+                    throw new DbUpdateException("You are trying to send a status different from the one found in the database");
                 }
 
             }
