@@ -36,7 +36,7 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult<int>> Finalize(int id)
         {
             await _routeService.Finalize(id);
-            return Accepted(id);
+            return Accepted(new { id });
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult> AddCommentToRoute([FromBody] CreateCommentDTO dto, int idRoute)
         {
             await _routeService.AddCommentToRoute(idRoute, dto);
-            return Ok(idRoute);
+            return Ok(new { id = idRoute});
         }
 
         [HttpDelete("{id:int}")]
