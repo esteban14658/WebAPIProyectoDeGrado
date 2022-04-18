@@ -152,7 +152,7 @@ namespace PG.Bussiness.Services.Implements
                 UserName = email,
                 Email = email
             };
-            var query = await _context.Codes.Where(x => x.Date > DateTime.Now).ToListAsync();
+            var query = await _context.Codes.ToListAsync();
             var filter = query.FirstOrDefault(x => x.UserCode.Equals(code));
             if (filter == null)
             {
@@ -197,7 +197,7 @@ namespace PG.Bussiness.Services.Implements
 
         public async Task<int> ChangePassword(CreateUserDTO createUser, string code)
         {
-            var query = await _context.Codes.Where(x => x.Date > DateTime.Now).ToListAsync();
+            var query = await _context.Codes.ToListAsync();
             var filter = query.FirstOrDefault(x => x.UserCode.Equals(code));
             if (filter == null)
             {
