@@ -119,5 +119,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var genericResult = await _collectionPointRepository.GetByStateAndType(state, type);
             return Paginate(genericResult, page, amount);
         }
+
+        public async Task<PaginateDTO<CollectionPointDTO>> GetByIdRoute(int page, int amount, int idRoute, string state)
+        {
+            var genericResult = await _collectionPointRepository.GetByIdRoute(idRoute, state);
+            return Paginate(genericResult, page, amount);
+        }
     }
 }

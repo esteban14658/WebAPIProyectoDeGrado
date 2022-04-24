@@ -70,6 +70,18 @@ namespace PG.Bussiness.Services.Implements
             return routeDto;
         }
 
+        public async Task<List<RouteDTO>> GetByIdRecycler(int idRecycler)
+        {
+            var result = await _routeRepository.GetByIdRecycler(idRecycler);
+            var list = new List<RouteDTO>();
+            foreach (var route in result)
+            {
+                var mapping = _mapper.Map<RouteDTO>(route);
+                list.Add(mapping);
+            }
+            return list;
+        }
+
         public async Task<RouteDTO> InsertCustom(CreateRouteDTO dto)
         {
             var existsRecycler = _recyclerRepository.Exists(dto.Recycler);
@@ -77,8 +89,14 @@ namespace PG.Bussiness.Services.Implements
             {
                 throw new KeyNotFoundException("Not found");
             }
+            var activeRoute = _routeRepository.ExistsActiveRoute(dto.Recycler);
+            if (activeRoute == true)
+            {
+                throw new AppException("The recycler has an active route");
+            }
             var send = _mapper.Map<Route>(dto);
             send.StartDate = DateTime.Now.ToUniversalTime().AddHours(-5);
+            send.EndDate = null;
             var body = await _routeRepository.Insert(send);
             var getWithId = _mapper.Map<RouteDTO>(body);
             return getWithId;

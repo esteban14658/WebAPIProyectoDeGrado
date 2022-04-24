@@ -75,5 +75,20 @@ namespace PG.Models.Repositories.Implements
                 .FirstOrDefaultAsync(x => x.Id == id);
             return result;
         }
+
+        public bool ExistsActiveRoute(int idRecycler)
+        {
+            return _routes.Any(x => x.Recycler == idRecycler && x.EndDate == null);
+        }
+
+        public async Task<List<Route>> GetByIdRecycler(int idRecycler)
+        {
+            var result = await _routes
+                .Include(x => x.CollectionPoints)
+                .Include(x => x.Comment)
+                .Where(x => x.Recycler == idRecycler)
+                .ToListAsync();
+            return result;
+        }
     }
 }

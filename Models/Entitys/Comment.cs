@@ -12,5 +12,8 @@ namespace PG.Models.Entitys
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 50, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Description { get; set; }
+        [Column(name: "user_id")]
+        [ForeignKey("User")]
+        public int? UserId { get; set; }
     }
 }

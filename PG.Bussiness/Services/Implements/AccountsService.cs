@@ -163,6 +163,10 @@ namespace PG.Bussiness.Services.Implements
                 var query2 = from r in _context.Users
                              where r.Email == email
                              select r;
+                if (query2.Count() == 0)
+                {
+                    throw new KeyNotFoundException("The email is not registered");
+                }
                 foreach (var item in query2)
                 {
                     item.EmailConfirmed = true;
@@ -177,7 +181,7 @@ namespace PG.Bussiness.Services.Implements
             Code code = new Code();
             Guid guid = Guid.NewGuid();
             code.UserCode = guid.ToString().Substring(startIndex: 0, length: 6);
-            code.Date = DateTime.Now.AddHours(value: 2);
+            code.Date = DateTime.Now.ToUniversalTime().AddHours(-3);
             _context.Codes.Add(code);
             await _context.SaveChangesAsync();
             return code.UserCode;
@@ -188,7 +192,7 @@ namespace PG.Bussiness.Services.Implements
             Code code = new Code();
             Guid guid = Guid.NewGuid();
             code.UserCode = guid.ToString().Substring(startIndex: 0, length: 6);
-            code.Date = DateTime.Now.AddHours(value: 2);
+            code.Date = DateTime.Now.ToUniversalTime().AddHours(-3);
             _context.Codes.Add(code);
             await _context.SaveChangesAsync();
             await _emailSender.SendEmailAsync(email, "Tu codigo para resetear el password", code.UserCode);
@@ -209,6 +213,10 @@ namespace PG.Bussiness.Services.Implements
                 var query2 = from r in _context.Users
                              where r.Email == createUser.Email
                              select r;
+                if (query2.Count() == 0)
+                {
+                    throw new KeyNotFoundException("The email is not registered");
+                }
                 foreach (var item in query2)
                 {
                     item.PasswordHash = passHash;

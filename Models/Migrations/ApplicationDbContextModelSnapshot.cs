@@ -248,6 +248,10 @@ namespace PG.Models.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("description");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id");
 
                     b.ToTable("comment");
