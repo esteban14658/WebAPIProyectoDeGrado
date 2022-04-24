@@ -99,5 +99,16 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
                 .Include(x => x.Address).ToListAsync();
             return result;
         }
+
+        public Task<List<CollectionPoint>> GetByIdRoute(int idRoute, string state)
+        {
+            var query = from c in _context.CollectionPoints
+                        where (idRoute == c.RouteId)
+                        && (c.State.Equals(state))
+                        select c;
+
+            var result = query.Include(x => x.Address).ToListAsync();
+            return result;
+        }
     }
 }

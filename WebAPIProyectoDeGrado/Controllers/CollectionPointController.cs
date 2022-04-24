@@ -113,6 +113,13 @@ namespace PG.Presentation.Controllers
             return Ok(collectionPoint);
         }
 
+        [HttpGet("GetByIdRoute/{page:int}/{amount:int}/{idRoute:int}/{state}")]
+        public async Task<ActionResult<PaginateDTO<CollectionPointDTO>>> GetByIdRoute(int page, int amount, int idRoute, string state)
+        {
+            var collectionPoint = await _collectionPoint.GetByIdRoute(page, amount, idRoute, state);
+            return Ok(collectionPoint);
+        }
+
         [HttpPut("AssignToRoute/{stateCompare}")]
         public async Task<ActionResult<int>> AssignToRoute([FromBody] CollectionPointUpdateDTO dto, string stateCompare)
         {

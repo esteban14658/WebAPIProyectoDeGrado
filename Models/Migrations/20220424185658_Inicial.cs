@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using System;
 
 namespace PG.Models.Migrations
 {
@@ -67,7 +67,8 @@ namespace PG.Models.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    description = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    description = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    user_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {

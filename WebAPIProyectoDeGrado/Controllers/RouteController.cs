@@ -32,6 +32,13 @@ namespace PG.Presentation.Controllers
             return Ok(route);
         }
 
+        [HttpGet("GetByIdRecycler/{idRecycler:int}")]
+        public async Task<ActionResult<RouteDTO>> GetByIdRecycler(int idRecycler)
+        {
+            var routes = await _routeService.GetByIdRecycler(idRecycler);
+            return Ok(routes);
+        }
+
         [HttpPut("{id:int}")]
         public async Task<ActionResult<int>> Finalize(int id)
         {
