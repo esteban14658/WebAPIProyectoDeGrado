@@ -83,5 +83,16 @@ namespace WebAPIProyectoDeGrado.Controllers
             return NoContent();
         }
 
+        [HttpGet("VerifyIsPresent/{email}")]
+        public async Task<ActionResult> VerifyIsPresent(string email)
+        {
+            var isPresent = await context.UsersApp.FirstOrDefaultAsync(x => x.Email.Equals(email));
+            if (isPresent == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
     }
 }

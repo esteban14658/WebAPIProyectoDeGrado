@@ -44,7 +44,7 @@ namespace PG.Presentation.Controllers
                 return BadRequest();
             }
             var call = _collectionPoint.Base64ToIFormFile(createCollectionPointDTO.Image);
-
+            createCollectionPointDTO.CommentState = false;
             var date = DateTime.Now.ToUniversalTime().AddHours(-5);
             var collectionPoint = mapper.Map<CollectionPoint>(createCollectionPointDTO);
             collectionPoint.CreateDate = date;

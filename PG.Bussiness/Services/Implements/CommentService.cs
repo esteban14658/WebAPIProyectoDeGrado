@@ -3,6 +3,7 @@ using PG.Bussiness.DTOs.CreateDTOs;
 using PG.Bussiness.DTOs.GetDTOs;
 using PG.Models.Entitys;
 using PG.Models.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.Repositories;
@@ -56,6 +57,7 @@ namespace PG.Bussiness.Services.Implements
             {
                 throw new KeyNotFoundException("Not found user");
             }
+            dto.Date = DateTime.Now.ToUniversalTime().AddHours(-5);
             return base.Insert(dto);
         }
 
