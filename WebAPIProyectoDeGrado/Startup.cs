@@ -89,7 +89,14 @@ namespace WebAPIProyectoDeGrado
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("defaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("defaultConnection"),
+                    npgsqlOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 10,
+                            maxRetryDelay: TimeSpan.FromSeconds(5),
+                            errorCodesToAdd: null);
+                    });
                 options.EnableSensitiveDataLogging();
 
             });
