@@ -27,6 +27,9 @@ namespace WebAPIProyectoDeGrado.Entitys
         [Column(name: "state")]
         public string State { get; set; }
         [Required]
+        [Column(name: "column_state")]
+        public bool CommentState { get; set; }
+        [Required]
         [Column(name: "adress_id")]
         public Address Address { get; set; }
         [Required]
