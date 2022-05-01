@@ -39,7 +39,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var exist = _residentRepository.ExistUserById(id);
             if (!exist)
             {
-                throw new KeyNotFoundException("recycler not found");
+                throw new KeyNotFoundException("Resident not found");
             }
             var genericResult = await _residentRepository.GetUserById(id);
             var residentDTO = _mapper.Map<ResidentDTO>(genericResult);
@@ -51,7 +51,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var exists = _residentRepository.Exists(id);
             if (!exists)
             {
-                throw new KeyNotFoundException("User not found");
+                throw new KeyNotFoundException("Resident not found");
             }
             var genericResult = await _residentRepository.GetById(id);
             ResidentDTO residentDTO = _mapper.Map<ResidentDTO>(genericResult);
