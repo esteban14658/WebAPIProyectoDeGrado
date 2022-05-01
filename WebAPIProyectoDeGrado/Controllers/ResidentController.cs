@@ -27,6 +27,13 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("GetById/{id:int}")]
+        public async Task<ActionResult<ResidentDTO>> GetById(int id)
+        {
+            var resident = await residentService.GetById(id);
+            return Ok(resident);
+        }
+
+        [HttpGet("GetByUserId/{id:int}")]
         public async Task<ActionResult<ResidentDTO>> GetUserById(int id)
         {
             var resident = await residentService.GetUserById(id);
