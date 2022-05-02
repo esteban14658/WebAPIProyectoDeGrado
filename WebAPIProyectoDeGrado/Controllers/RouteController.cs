@@ -57,7 +57,7 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult> AddCommentToRoute([FromBody] CreateCommentDTO dto, int idRoute)
         {
             await _routeService.AddCommentToRoute(idRoute, dto);
-            return Ok(new { id = idRoute});
+            return Ok(new { id = idRoute });
         }
 
         [HttpDelete("{id:int}")]

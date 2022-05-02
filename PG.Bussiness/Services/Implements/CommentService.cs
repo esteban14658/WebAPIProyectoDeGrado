@@ -61,6 +61,6 @@ namespace PG.Bussiness.Services.Implements
             return base.Insert(dto);
         }
 
-        
+
     }
 }

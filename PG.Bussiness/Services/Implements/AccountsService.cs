@@ -153,7 +153,8 @@ namespace PG.Bussiness.Services.Implements
                 Email = email
             };
             var query = await _context.Codes.ToListAsync();
-            var filter = query.FirstOrDefault(x => x.UserCode.Equals(code));
+            var filter = query.FirstOrDefault(x => x.UserCode.Equals(code) &&
+                x.Date > DateTime.Now.ToUniversalTime().AddHours(-5));
             if (filter == null)
             {
                 throw new KeyNotFoundException("The code is not registered or expired");
@@ -202,7 +203,8 @@ namespace PG.Bussiness.Services.Implements
         public async Task<int> ChangePassword(CreateUserDTO createUser, string code)
         {
             var query = await _context.Codes.ToListAsync();
-            var filter = query.FirstOrDefault(x => x.UserCode.Equals(code));
+            var filter = query.FirstOrDefault(x => x.UserCode.Equals(code) &&
+                x.Date > DateTime.Now.ToUniversalTime().AddHours(-5));
             if (filter == null)
             {
                 throw new KeyNotFoundException("The code is not registered or expired");
