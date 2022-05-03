@@ -20,6 +20,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Text.Json.Serialization;
+using WebAPIProyectoDeGrado.Controllers;
 using WebAPIProyectoDeGrado.Filters;
 using WebAPIProyectoDeGrado.Repositories;
 using WebAPIProyectoDeGrado.Repositories.Implements;
@@ -145,21 +146,6 @@ namespace WebAPIProyectoDeGrado
             services.AddScoped(typeof(IRouteRepository), typeof(RouteRepository));
             services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
 
-            /*           services.AddCors(opciones =>
-                       {
-                           opciones.AddDefaultPolicy(builder =>
-                           {
-                               builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-                           });
-                       });
-            */
-            /*           services.AddIdentity<IdentityUser, IdentityRole>(config =>
-                       {
-                           config.SignIn.RequireConfirmedEmail = true;
-                       })
-                           .AddEntityFrameworkStores<ApplicationDbContext>()
-                           .AddDefaultTokenProviders();
-            */
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

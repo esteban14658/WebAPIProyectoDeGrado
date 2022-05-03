@@ -30,5 +30,18 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await _orderRepository.AddOrderToShop(idShop, orders);
             return orderList;
         }
+
+        public async override Task<OrderDTO> Update(OrderDTO dto, int id)
+        {
+            var exists = _orderRepository.Exists(id);
+            if (!exists)
+            {
+                throw new KeyNotFoundException("Doesn´t exists");
+            }
+            var mapped = _mapper.Map<Order>(dto);
+            mapped.Id = id;
+            await _orderRepository.Update(mapped);
+            return dto;
+        }
     }
 }

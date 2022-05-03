@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PG.Models.Entitys;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado;
 using WebAPIProyectoDeGrado.Repositories.Implements;
@@ -33,5 +34,23 @@ namespace PG.Models.Repositories.Implements
             return orderList;
         }
 
+        public bool Exists(int id)
+        {
+            return _order.Any(x => x.Id.Equals(id));
+        }
+
+        public override async Task<Order> Update(Order entity)
+        {
+            var query = from o in _context.Orders
+                        where o.Id == entity.Id
+                        select o;
+            foreach (var item in query)
+            {
+                item.TypeOfMaterial = entity.TypeOfMaterial;
+                item.Price = entity.Price;
+            }
+            await _context.SaveChangesAsync();
+            return entity;
+        }
     }
 }
