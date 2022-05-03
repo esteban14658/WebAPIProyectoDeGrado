@@ -9,7 +9,7 @@ namespace PG.Presentation.Controllers
 {
     [ApiController]
     [Route("api/Comments")]
-    public class CommentController: ControllerBase
+    public class CommentController : ControllerBase
     {
         private readonly ICommentService _commentService;
 

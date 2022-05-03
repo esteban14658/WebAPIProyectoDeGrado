@@ -13,7 +13,7 @@ namespace PG.Models.Repositories.Implements
         private readonly DbSet<Comment> _comment;
         private readonly ApplicationDbContext _context;
 
-        public CommentRepository(ApplicationDbContext context): base(context)
+        public CommentRepository(ApplicationDbContext context) : base(context)
         {
             _comment = context.Set<Comment>();
             _context = context;

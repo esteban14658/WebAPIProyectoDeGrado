@@ -23,5 +23,19 @@ namespace PG.Presentation.Controllers
             var orders = await _orderService.AddOrderToShop(idShop, orderList);
             return Created("", orders);
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<OrderDTO>> Put([FromBody] OrderDTO order, int id)
+        {
+            var orders = await _orderService.Update(order, id);
+            return Ok(orders);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _orderService.Delete(id);
+            return NoContent();
+        }
     }
 }

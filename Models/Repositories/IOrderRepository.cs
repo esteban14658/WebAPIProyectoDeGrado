@@ -7,6 +7,7 @@ namespace PG.Models.Repositories
 {
     public interface IOrderRepository : IGenericRepository<Order>
     {
+        bool Exists(int id);
         Task<List<Order>> AddOrderToShop(int idShop, List<Order> orderList);
     }
 }
