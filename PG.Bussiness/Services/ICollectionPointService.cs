@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado.DTOs;
 
@@ -16,5 +17,6 @@ namespace WebAPIProyectoDeGrado.Services
         Task<int> AssignToRoute(CollectionPointUpdateDto dto, string stateCompare);
         IFormFile Base64ToIFormFile(string base64String);
         Task<PaginateDto<CollectionPointDto>> GetByIdRoute(int page, int amount, int idRoute, string state);
+        Task<List<CollectionPointDto>> GetByDate(string date);
     }
 }

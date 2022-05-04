@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -109,6 +110,41 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
             var result = query.Include(x => x.Address).ToListAsync();
             return result;
+        }
+
+        public async Task<List<CollectionPoint>> GetByDate(string date)
+        {
+            var filterList = new List<CollectionPoint>();
+            if (date.Equals("HOY"))
+            {
+                var result = await _collectionPoints.Where(x => x.CreateDate == DateTime.Now)
+                    .ToListAsync();
+                foreach (var route in result)
+                {
+                    filterList.Add(route);
+                }
+            }
+            else if (date.Equals("SEMANA"))
+            {
+                var result = await _collectionPoints.Where(x => x.CreateDate <= DateTime.Now &&
+                x.CreateDate >= DateTime.Now.AddDays(-7))
+                    .ToListAsync();
+                foreach (var route in result)
+                {
+                    filterList.Add(route);
+                }
+            }
+            else
+            {
+                var result = await _collectionPoints.Where(x => x.CreateDate.Day <= DateTime.Now.Day &&
+                x.CreateDate.Day >= DateTime.Now.AddDays(-30).Day)
+                    .ToListAsync();
+                foreach (var route in result)
+                {
+                    filterList.Add(route);
+                }
+            }
+            return filterList;
         }
     }
 }

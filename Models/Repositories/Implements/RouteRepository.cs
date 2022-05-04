@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PG.Models.Entitys;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -89,6 +90,39 @@ namespace PG.Models.Repositories.Implements
                 .Where(x => x.Recycler == idRecycler)
                 .ToListAsync();
             return result;
+        }
+
+        public async Task<List<Route>> GetByDate(string date)
+        {
+            var filterList = new List<Route>();
+            if (date.Equals("HOY"))
+            {
+                var result = await _routes.Where(x => x.StartDate == DateTime.Now)
+                    .ToListAsync();
+                foreach (var route in result)
+                {
+                    filterList.Add(route);
+                }
+            } else if(date.Equals("SEMANA"))
+            {
+                var result = await _routes.Where(x => x.StartDate <= DateTime.Now && 
+                x.StartDate >= DateTime.Now.AddDays(-7))
+                    .ToListAsync();
+                foreach (var route in result)
+                {
+                    filterList.Add(route);
+                }
+            } else
+            {
+                var result = await _routes.Where(x => x.StartDate.Day <= DateTime.Now.Day &&
+                x.StartDate.Day >= DateTime.Now.AddDays(-30).Day)
+                    .ToListAsync();
+                foreach (var route in result)
+                {
+                    filterList.Add(route);
+                }
+            }
+            return filterList;
         }
     }
 }

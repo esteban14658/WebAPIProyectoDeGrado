@@ -125,5 +125,17 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             var genericResult = await _collectionPointRepository.GetByIdRoute(idRoute, state);
             return Paginate(genericResult, page, amount);
         }
+
+        public async Task<List<CollectionPointDto>> GetByDate(string date)
+        {
+            var list = new List<CollectionPointDto>();
+            var query = await _collectionPointRepository.GetByDate(date);
+            foreach (var item in query)
+            {
+                var mapped = _mapper.Map<CollectionPointDto>(item);
+                list.Add(mapped);
+            }
+            return list;
+        }
     }
 }
