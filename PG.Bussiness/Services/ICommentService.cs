@@ -6,9 +6,9 @@ using WebAPIProyectoDeGrado.Services;
 
 namespace PG.Bussiness.Services
 {
-    public interface ICommentService : IGenericService<CommentDTO, CreateCommentDTO>
+    public interface ICommentService : IGenericService<CommentDto, CreateCommentDto>
     {
         Task DeleteAll(int id);
-        Task<List<CommentDTO>> Get(int idUser);
+        Task<List<CommentDto>> Get(int idUser);
     }
 }

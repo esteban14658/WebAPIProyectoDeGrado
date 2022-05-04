@@ -2,7 +2,7 @@
 
 namespace PG.Bussiness.DTOs.UpdateDTOs
 {
-    public class EditAdminDTO
+    public class EditAdminDto
     {
         [Required]
         [EmailAddress]

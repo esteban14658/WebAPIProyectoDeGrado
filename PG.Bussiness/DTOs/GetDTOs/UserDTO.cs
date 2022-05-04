@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class UserDTO
+    public class UserDto
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Field {0} is required")]

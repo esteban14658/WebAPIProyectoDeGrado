@@ -1,6 +1,6 @@
 ﻿namespace PG.Bussiness.DTOs.GetDTOs
 {
-    public class OrderDTO
+    public class OrderDto
     {
         public int Id { get; set; }
         public string TypeOfMaterial { get; set; }

@@ -2,7 +2,7 @@
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class AddressDTO
+    public class AddressDto
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Field {0} is required")]

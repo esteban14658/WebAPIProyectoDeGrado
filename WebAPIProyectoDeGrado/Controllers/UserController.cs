@@ -27,16 +27,16 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<UserDTO>>> Get()
+        public async Task<ActionResult<List<UserDto>>> Get()
         {
             //var us = await userService.GetAll();
 
             var users = await context.UsersApp.Where(x => x.Role != "Admin").ToListAsync();
-            return mapper.Map<List<UserDTO>>(users);
+            return mapper.Map<List<UserDto>>(users);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<UserDTO>> Get(int id)
+        public async Task<ActionResult<UserDto>> Get(int id)
         {
             var exists = await context.UsersApp.AnyAsync(x =>
                 x.Id == id);
@@ -47,11 +47,11 @@ namespace WebAPIProyectoDeGrado.Controllers
             }
 
             var user = await context.UsersApp.FirstOrDefaultAsync(x => x.Id == id);
-            return mapper.Map<UserDTO>(user);
+            return mapper.Map<UserDto>(user);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(CreateUserDTO createUserDTO, int id)
+        public async Task<ActionResult> Put(CreateUserDto createUserDTO, int id)
         {
             var exist = await context.UsersApp.AnyAsync(x => x.Id == id);
 

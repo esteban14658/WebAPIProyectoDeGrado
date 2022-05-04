@@ -48,10 +48,9 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         public override async Task Delete(int id)
         {
             var entity = await GetById(id);
-
             if (entity == null)
             {
-                throw new Exception("The entity is null");
+                throw new KeyNotFoundException("The entity is null");
             }
             _resident.Remove(entity);
             await _context.SaveChangesAsync();

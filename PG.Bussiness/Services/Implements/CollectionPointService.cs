@@ -13,7 +13,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class CollectionPointService : GenericService<CollectionPointDTO, CreateCollectionPointDTO, CollectionPoint>, ICollectionPointService
+    public class CollectionPointService : GenericService<CollectionPointDto, CreateCollectionPointDto, CollectionPoint>, ICollectionPointService
     {
         private readonly ICollectionPointRepository _collectionPointRepository;
         private readonly IMapper _mapper;
@@ -25,20 +25,20 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _mapper = mapper;
         }
 
-        public async Task<PaginateDTO<CollectionPointDTO>> GetByState(int page, int amount, string state)
+        public async Task<PaginateDto<CollectionPointDto>> GetByState(int page, int amount, string state)
         {
             var genericResult = await _collectionPointRepository.GetByState(state);
             return Paginate(genericResult, page, amount);
         }
 
-        public async override Task<CreateCollectionPointDTO> Insert(CreateCollectionPointDTO dto)
+        public async override Task<CreateCollectionPointDto> Insert(CreateCollectionPointDto dto)
         {
             var collectionPoint = _mapper.Map<CollectionPoint>(dto);
             await _collectionPointRepository.Insert(collectionPoint);
             return dto;
         }
 
-        public override async Task<CollectionPointDTO> GetById(int id)
+        public override async Task<CollectionPointDto> GetById(int id)
         {
             var isExists = _collectionPointRepository.Exists(id);
             if (isExists == false)
@@ -46,23 +46,23 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("The collection point didn´t found");
             }
             var genericResult = await _collectionPointRepository.GetById(id);
-            var collectionPointDto = _mapper.Map<CollectionPointDTO>(genericResult);
+            var collectionPointDto = _mapper.Map<CollectionPointDto>(genericResult);
             return collectionPointDto;
         }
 
-        public async Task<PaginateDTO<CollectionPointDTO>> GetByTypeOfMaterial(int page, int amount, string typeOfMaterial)
+        public async Task<PaginateDto<CollectionPointDto>> GetByTypeOfMaterial(int page, int amount, string typeOfMaterial)
         {
             var genericResult = await _collectionPointRepository.GetByTypeOfMaterial(typeOfMaterial);
             return Paginate(genericResult, page, amount);
         }
 
-        public async Task<PaginateDTO<CollectionPointDTO>> GetByDate(int page, int amount)
+        public async Task<PaginateDto<CollectionPointDto>> GetByDate(int page, int amount)
         {
             var genericResult = await _collectionPointRepository.GetByDate();
             return Paginate(genericResult, page, amount);
         }
 
-        public async Task<int> AssignToRoute(CollectionPointUpdateDTO dto, string stateCompare)
+        public async Task<int> AssignToRoute(CollectionPointUpdateDto dto, string stateCompare)
         {
             var isExists = _collectionPointRepository.Exists(dto.Id);
             if (isExists == false)
@@ -78,22 +78,22 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto.Id;
         }
 
-        public async Task<PaginateDTO<CollectionPointDTO>> GetByIdResident(int page, int amount, int idResident, string state)
+        public async Task<PaginateDto<CollectionPointDto>> GetByIdResident(int page, int amount, int idResident, string state)
         {
             var genericResult = await _collectionPointRepository.GetByIdResident(idResident, state);
             return Paginate(genericResult, page, amount);
         }
 
-        private PaginateDTO<CollectionPointDTO> Paginate(List<CollectionPoint> list, int page, int amount)
+        private PaginateDto<CollectionPointDto> Paginate(List<CollectionPoint> list, int page, int amount)
         {
-            List<CollectionPointDTO> genericList = new();
+            List<CollectionPointDto> genericList = new();
             foreach (var item in list)
             {
-                var result = _mapper.Map<CollectionPointDTO>(item);
+                var result = _mapper.Map<CollectionPointDto>(item);
                 genericList.Add(result);
             }
-            var paged = PagedList<CollectionPointDTO>.Create(genericList, page, amount);
-            PaginateDTO<CollectionPointDTO> paginate = new()
+            var paged = PagedList<CollectionPointDto>.Create(genericList, page, amount);
+            PaginateDto<CollectionPointDto> paginate = new()
             {
                 Page = page,
                 Size = paged.Count,
@@ -114,13 +114,13 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return file;
         }
 
-        public async Task<PaginateDTO<CollectionPointDTO>> GetByStateAndType(int page, int amount, string state, string type)
+        public async Task<PaginateDto<CollectionPointDto>> GetByStateAndType(int page, int amount, string state, string type)
         {
             var genericResult = await _collectionPointRepository.GetByStateAndType(state, type);
             return Paginate(genericResult, page, amount);
         }
 
-        public async Task<PaginateDTO<CollectionPointDTO>> GetByIdRoute(int page, int amount, int idRoute, string state)
+        public async Task<PaginateDto<CollectionPointDto>> GetByIdRoute(int page, int amount, int idRoute, string state)
         {
             var genericResult = await _collectionPointRepository.GetByIdRoute(idRoute, state);
             return Paginate(genericResult, page, amount);

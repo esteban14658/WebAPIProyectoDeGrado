@@ -11,7 +11,7 @@ using WebAPIProyectoDeGrado.Services.Implements;
 
 namespace PG.Bussiness.Services.Implements
 {
-    public class CommentService : GenericService<CommentDTO, CreateCommentDTO, Comment>, ICommentService
+    public class CommentService : GenericService<CommentDto, CreateCommentDto, Comment>, ICommentService
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
@@ -38,19 +38,19 @@ namespace PG.Bussiness.Services.Implements
             }
         }
 
-        public async Task<List<CommentDTO>> Get(int idUser)
+        public async Task<List<CommentDto>> Get(int idUser)
         {
             var genericList = await _commentRepository.GetAllByIdUser(idUser);
-            var listMapped = new List<CommentDTO>();
+            var listMapped = new List<CommentDto>();
             foreach (var item in genericList)
             {
-                var mapping = _mapper.Map<CommentDTO>(item);
+                var mapping = _mapper.Map<CommentDto>(item);
                 listMapped.Add(mapping);
             }
             return listMapped;
         }
 
-        public override Task<CreateCommentDTO> Insert(CreateCommentDTO dto)
+        public override Task<CreateCommentDto> Insert(CreateCommentDto dto)
         {
             var existsUser = _userRepository.isExists(dto.UserId);
             if (existsUser.Result == false)

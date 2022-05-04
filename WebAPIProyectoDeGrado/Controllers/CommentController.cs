@@ -19,7 +19,7 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateCommentDTO createCommentDTO)
+        public async Task<ActionResult> Post([FromBody] CreateCommentDto createCommentDTO)
         {
             var result = await _commentService.Insert(createCommentDTO);
             return Created("", result);
@@ -33,7 +33,7 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpGet("{idUser:int}")]
-        public async Task<ActionResult<List<CommentDTO>>> Get(int idUser)
+        public async Task<ActionResult<List<CommentDto>>> Get(int idUser)
         {
             var result = await _commentService.Get(idUser);
             return Ok(result);

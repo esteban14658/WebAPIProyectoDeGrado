@@ -1,6 +1,6 @@
 ﻿namespace PG.Bussiness.DTOs.UpdateDTOs
 {
-    public class CollectionPointUpdateDTO
+    public class CollectionPointUpdateDto
     {
         public int Id { get; set; }
         public string TypeOfMaterial { get; set; }

@@ -6,11 +6,11 @@ using WebAPIProyectoDeGrado.Services;
 
 namespace PG.Bussiness.Services
 {
-    public interface IRouteService : IGenericService<RouteDTO, CreateRouteDTO>
+    public interface IRouteService : IGenericService<RouteDto, CreateRouteDto>
     {
         Task<int> Finalize(int id);
-        Task<RouteDTO> InsertCustom(CreateRouteDTO dto);
-        Task AddCommentToRoute(int idRoute, CreateCommentDTO dto);
-        Task<List<RouteDTO>> GetByIdRecycler(int idRecycler);
+        Task<RouteDto> InsertCustom(CreateRouteDto dto);
+        Task AddCommentToRoute(int idRoute, CreateCommentDto dto);
+        Task<List<RouteDto>> GetByIdRecycler(int idRecycler);
     }
 }

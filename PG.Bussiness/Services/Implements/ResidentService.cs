@@ -9,7 +9,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ResidentService : GenericService<ResidentDTO, CreateResidentDTO, Resident>, IResidentService
+    public class ResidentService : GenericService<ResidentDto, CreateResidentDto, Resident>, IResidentService
     {
         private readonly IResidentRepository _residentRepository;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _accountService = accountService;
         }
 
-        public async Task<ResidentDTO> GetUserByEmail(string email)
+        public async Task<ResidentDto> GetUserByEmail(string email)
         {
             var exist = _residentRepository.ExistUserByEmail(email);
             if (!exist)
@@ -30,11 +30,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("Resident not found");
             }
             var genericResult = await _residentRepository.GetUserByEmail(email);
-            var residentDTO = _mapper.Map<ResidentDTO>(genericResult);
+            var residentDTO = _mapper.Map<ResidentDto>(genericResult);
             return residentDTO;
         }
 
-        public async Task<ResidentDTO> GetUserById(int id)
+        public async Task<ResidentDto> GetUserById(int id)
         {
             var exist = _residentRepository.ExistUserById(id);
             if (!exist)
@@ -42,11 +42,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("Resident not found");
             }
             var genericResult = await _residentRepository.GetUserById(id);
-            var residentDTO = _mapper.Map<ResidentDTO>(genericResult);
+            var residentDTO = _mapper.Map<ResidentDto>(genericResult);
             return residentDTO;
         }
 
-        public override async Task<ResidentDTO> GetById(int id)
+        public override async Task<ResidentDto> GetById(int id)
         {
             var exists = _residentRepository.Exists(id);
             if (!exists)
@@ -54,11 +54,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("Resident not found");
             }
             var genericResult = await _residentRepository.GetById(id);
-            ResidentDTO residentDTO = _mapper.Map<ResidentDTO>(genericResult);
+            ResidentDto residentDTO = _mapper.Map<ResidentDto>(genericResult);
             return residentDTO;
         }
 
-        public override async Task<CreateResidentDTO> Insert(CreateResidentDTO dto)
+        public override async Task<CreateResidentDto> Insert(CreateResidentDto dto)
         {
             var user = _residentRepository.ExistUserByEmail(dto.User.Email);
             if (user)
@@ -77,7 +77,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public override async Task<ResidentDTO> Update(ResidentDTO dto, int id)
+        public override async Task<ResidentDto> Update(ResidentDto dto, int id)
         {
             var exist = _residentRepository.Exists(id);
 

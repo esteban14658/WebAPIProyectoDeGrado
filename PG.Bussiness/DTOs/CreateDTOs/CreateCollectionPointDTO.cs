@@ -2,7 +2,7 @@
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class CreateCollectionPointDTO
+    public class CreateCollectionPointDto
     {
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
@@ -16,7 +16,7 @@ namespace WebAPIProyectoDeGrado.DTOs
         [Required]
         public bool CommentState { get; set; }
         [Required]
-        public CreateAddressDTO Address { get; set; }
+        public CreateAddressDto Address { get; set; }
         [Required]
         public int Resident { get; set; }
     }

@@ -9,7 +9,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class RecyclerService : GenericService<RecyclerDTO, CreateRecyclerDTO, Recycler>, IRecyclerService
+    public class RecyclerService : GenericService<RecyclerDto, CreateRecyclerDto, Recycler>, IRecyclerService
     {
         private readonly IRecyclerRepository _recyclerRepository;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _accountService = accountService;
         }
 
-        public async Task<RecyclerDTO> GetUserByEmail(string email)
+        public async Task<RecyclerDto> GetUserByEmail(string email)
         {
             var exist = _recyclerRepository.ExistUserByEmail(email);
             if (!exist)
@@ -30,11 +30,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("recycler not found");
             }
             var genericResult = await _recyclerRepository.GetUserByEmail(email);
-            var recyclerDTO = _mapper.Map<RecyclerDTO>(genericResult);
+            var recyclerDTO = _mapper.Map<RecyclerDto>(genericResult);
             return recyclerDTO;
         }
 
-        public override async Task<RecyclerDTO> GetById(int id)
+        public override async Task<RecyclerDto> GetById(int id)
         {
             var exists = _recyclerRepository.Exists(id);
             if (!exists)
@@ -42,11 +42,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("User not found");
             }
             var genericResult = await _recyclerRepository.GetById(id);
-            RecyclerDTO recyclerDTO = _mapper.Map<RecyclerDTO>(genericResult);
+            RecyclerDto recyclerDTO = _mapper.Map<RecyclerDto>(genericResult);
             return recyclerDTO;
         }
 
-        public override async Task<CreateRecyclerDTO> Insert(CreateRecyclerDTO dto)
+        public override async Task<CreateRecyclerDto> Insert(CreateRecyclerDto dto)
         {
             var user = _recyclerRepository.ExistUserByEmail(dto.User.Email);
             if (user)
@@ -61,7 +61,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public override async Task<RecyclerDTO> Update(RecyclerDTO dto, int id)
+        public override async Task<RecyclerDto> Update(RecyclerDto dto, int id)
         {
             var exist = _recyclerRepository.Exists(id);
             if (!exist)
@@ -75,7 +75,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public async Task<RecyclerDTO> GetUserById(int id)
+        public async Task<RecyclerDto> GetUserById(int id)
         {
             var exist = _recyclerRepository.ExistUserById(id);
             if (!exist)
@@ -83,7 +83,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("recycler not found");
             }
             var genericResult = await _recyclerRepository.GetUserById(id);
-            var recyclerDTO = _mapper.Map<RecyclerDTO>(genericResult);
+            var recyclerDTO = _mapper.Map<RecyclerDto>(genericResult);
             return recyclerDTO;
         }
     }

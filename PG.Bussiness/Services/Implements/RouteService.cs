@@ -13,7 +13,7 @@ using WebAPIProyectoDeGrado.Services.Implements;
 
 namespace PG.Bussiness.Services.Implements
 {
-    public class RouteService : GenericService<RouteDTO, CreateRouteDTO, Route>, IRouteService
+    public class RouteService : GenericService<RouteDto, CreateRouteDto, Route>, IRouteService
     {
         private readonly IRouteRepository _routeRepository;
         private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace PG.Bussiness.Services.Implements
             _recyclerRepository = recyclerRepository;
         }
 
-        public async Task AddCommentToRoute(int idRoute, CreateCommentDTO dto)
+        public async Task AddCommentToRoute(int idRoute, CreateCommentDto dto)
         {
             var comment = _mapper.Map<Comment>(dto);
             var result = await _routeRepository.AddCommentToRoute(idRoute, comment);
@@ -47,7 +47,7 @@ namespace PG.Bussiness.Services.Implements
                 throw new KeyNotFoundException("Not found");
             }
             DateTime date = DateTime.Now.ToUniversalTime().AddHours(-5);
-            RouteDTO dto = new RouteDTO
+            RouteDto dto = new RouteDto
             {
                 Id = id,
                 CollectionPoints = null,
@@ -58,7 +58,7 @@ namespace PG.Bussiness.Services.Implements
             return id;
         }
 
-        public override async Task<RouteDTO> GetById(int id)
+        public override async Task<RouteDto> GetById(int id)
         {
             var exists = _routeRepository.Exists(id);
             if (!exists)
@@ -66,23 +66,23 @@ namespace PG.Bussiness.Services.Implements
                 throw new KeyNotFoundException("Route not found");
             }
             var genericResult = await _routeRepository.GetById(id);
-            var routeDto = _mapper.Map<RouteDTO>(genericResult);
+            var routeDto = _mapper.Map<RouteDto>(genericResult);
             return routeDto;
         }
 
-        public async Task<List<RouteDTO>> GetByIdRecycler(int idRecycler)
+        public async Task<List<RouteDto>> GetByIdRecycler(int idRecycler)
         {
             var result = await _routeRepository.GetByIdRecycler(idRecycler);
-            var list = new List<RouteDTO>();
+            var list = new List<RouteDto>();
             foreach (var route in result)
             {
-                var mapping = _mapper.Map<RouteDTO>(route);
+                var mapping = _mapper.Map<RouteDto>(route);
                 list.Add(mapping);
             }
             return list;
         }
 
-        public async Task<RouteDTO> InsertCustom(CreateRouteDTO dto)
+        public async Task<RouteDto> InsertCustom(CreateRouteDto dto)
         {
             var existsRecycler = _recyclerRepository.Exists(dto.Recycler);
             if (existsRecycler == false)
@@ -98,7 +98,7 @@ namespace PG.Bussiness.Services.Implements
             send.StartDate = DateTime.Now.ToUniversalTime().AddHours(-5);
             send.EndDate = null;
             var body = await _routeRepository.Insert(send);
-            var getWithId = _mapper.Map<RouteDTO>(body);
+            var getWithId = _mapper.Map<RouteDto>(body);
             return getWithId;
         }
     }

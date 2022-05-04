@@ -19,7 +19,7 @@ namespace PG.Presentation.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Post([FromBody] CreateAddressDTO createAddressDTO)
+        public async Task<ActionResult> Post([FromBody] CreateAddressDto createAddressDTO)
         {
             var address = await _addressService.Insert(createAddressDTO);
             return Created("", address);
@@ -27,7 +27,7 @@ namespace PG.Presentation.Controllers
 
         [HttpPost("AddAddressToResident/{idResident:int}")]
         [AllowAnonymous]
-        public async Task<ActionResult> AddAddressToResident([FromBody] CreateAddressDTO createAddressDTO, int idResident)
+        public async Task<ActionResult> AddAddressToResident([FromBody] CreateAddressDto createAddressDTO, int idResident)
         {
             var address = await _addressService.AddAddressToResident(idResident, createAddressDTO);
             return Created("", address);
@@ -35,14 +35,14 @@ namespace PG.Presentation.Controllers
 
         [HttpPost("AddAddressToShop/{idShop:int}")]
         [AllowAnonymous]
-        public async Task<ActionResult> AddAddressToShop([FromBody] CreateAddressDTO createAddressDTO, int idShop)
+        public async Task<ActionResult> AddAddressToShop([FromBody] CreateAddressDto createAddressDTO, int idShop)
         {
             var address = await _addressService.AddAddressToShop(idShop, createAddressDTO);
             return Created("", address);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(AddressDTO addressDTO, int id)
+        public async Task<ActionResult> Put(AddressDto addressDTO, int id)
         {
             await _addressService.Update(addressDTO, id);
             return NoContent();

@@ -29,7 +29,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await genericRepository.Delete(id);
         }
 
-        public async Task<PaginateDTO<TDto>> GetAll(int page, int amount)
+        public async Task<PaginateDto<TDto>> GetAll(int page, int amount)
         {
             var genericResult = await genericRepository.GetAll();
             List<TDto> genericList = new();
@@ -39,7 +39,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 genericList.Add(result);
             }
             var paged = PagedList<TDto>.Create(genericList, page, amount);
-            PaginateDTO<TDto> paginate = new()
+            PaginateDto<TDto> paginate = new()
             {
                 Page = page,
                 Size = paged.Count,

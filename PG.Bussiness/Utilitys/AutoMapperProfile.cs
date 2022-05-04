@@ -14,41 +14,41 @@ namespace WebAPIProyectoDeGrado.Utilitys
         {
             // DTOs para recibir informacion
 
-            CreateMap<User, UserDTO>().ReverseMap();
-            CreateMap<Recycler, RecyclerDTO>().ReverseMap();
-            CreateMap<Address, AddressDTO>().ReverseMap();
-            CreateMap<Resident, ResidentDTO>().ReverseMap();
-            CreateMap<CollectionPoint, CollectionPointDTO>().ReverseMap();
-            CreateMap<Shop, ShopDTO>().ReverseMap();
-            CreateMap<Comment, CommentDTO>().ReverseMap();
-            CreateMap<Route, RouteDTO>().ReverseMap();
-            CreateMap<Order, OrderDTO>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Recycler, RecyclerDto>().ReverseMap();
+            CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<Resident, ResidentDto>().ReverseMap();
+            CreateMap<CollectionPoint, CollectionPointDto>().ReverseMap();
+            CreateMap<Shop, ShopDto>().ReverseMap();
+            CreateMap<Comment, CommentDto>().ReverseMap();
+            CreateMap<Route, RouteDto>().ReverseMap();
+            CreateMap<Order, OrderDto>().ReverseMap();
 
 
             // **** *** **************************************************
 
             // DTOs para enviar informacion
 
-            CreateMap<CreateRecyclerDTO, Recycler>().ReverseMap();
-            CreateMap<CreateUserDTO, User>().ReverseMap();
-            CreateMap<CreateAddressDTO, Address>().ReverseMap();
-            CreateMap<CreateCollectionPointDTO, CollectionPoint>().ReverseMap();
-            CreateMap<CreateResidentDTO, Resident>().ReverseMap();
-            CreateMap<CreateShopDTO, Shop>().ReverseMap();
-            CreateMap<CreateRouteDTO, Route>().ReverseMap();
-            CreateMap<CreateCommentDTO, Comment>().ReverseMap();
-            CreateMap<CreateOrderDTO, Order>().ReverseMap();
+            CreateMap<CreateRecyclerDto, Recycler>().ReverseMap();
+            CreateMap<CreateUserDto, User>().ReverseMap();
+            CreateMap<CreateAddressDto, Address>().ReverseMap();
+            CreateMap<CreateCollectionPointDto, CollectionPoint>().ReverseMap();
+            CreateMap<CreateResidentDto, Resident>().ReverseMap();
+            CreateMap<CreateShopDto, Shop>().ReverseMap();
+            CreateMap<CreateRouteDto, Route>().ReverseMap();
+            CreateMap<CreateCommentDto, Comment>().ReverseMap();
+            CreateMap<CreateOrderDto, Order>().ReverseMap();
 
 
-            CreateMap<CreateRecyclerDTO, RecyclerDTO>().ReverseMap();
-            CreateMap<CreateUserDTO, UserDTO>().ReverseMap();
-            CreateMap<CreateAddressDTO, AddressDTO>().ReverseMap();
-            CreateMap<CreateCollectionPointDTO, CollectionPointDTO>().ReverseMap();
-            CreateMap<CreateResidentDTO, ResidentDTO>().ReverseMap();
-            CreateMap<CreateShopDTO, ShopDTO>().ReverseMap();
+            CreateMap<CreateRecyclerDto, RecyclerDto>().ReverseMap();
+            CreateMap<CreateUserDto, UserDto>().ReverseMap();
+            CreateMap<CreateAddressDto, AddressDto>().ReverseMap();
+            CreateMap<CreateCollectionPointDto, CollectionPointDto>().ReverseMap();
+            CreateMap<CreateResidentDto, ResidentDto>().ReverseMap();
+            CreateMap<CreateShopDto, ShopDto>().ReverseMap();
 
-            CreateMap<CollectionPoint, CollectionPointUpdateDTO>().ReverseMap();
-            CreateMap<Shop, ShopUpdateDTO>().ReverseMap();
+            CreateMap<CollectionPoint, CollectionPointUpdateDto>().ReverseMap();
+            CreateMap<Shop, ShopUpdateDto>().ReverseMap();
         }
     }
 }

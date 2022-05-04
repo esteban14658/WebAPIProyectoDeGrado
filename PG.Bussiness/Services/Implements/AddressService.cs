@@ -8,7 +8,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class AddressService : GenericService<AddressDTO, CreateAddressDTO, Address>, IAddressService
+    public class AddressService : GenericService<AddressDto, CreateAddressDto, Address>, IAddressService
     {
         private readonly IAddressRepository _addressRepository;
         private readonly IMapper _mapper;
@@ -19,14 +19,14 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _mapper = mapper;
         }
 
-        public async Task<CreateAddressDTO> AddAddressToResident(int idResident, CreateAddressDTO dto)
+        public async Task<CreateAddressDto> AddAddressToResident(int idResident, CreateAddressDto dto)
         {
             var address = _mapper.Map<Address>(dto);
             await _addressRepository.AddAddressToResident(idResident, address);
             return dto;
         }
 
-        public async override Task<CreateAddressDTO> Insert(CreateAddressDTO dto)
+        public async override Task<CreateAddressDto> Insert(CreateAddressDto dto)
         {
             var address = _mapper.Map<Address>(dto);
             await _addressRepository.Insert(address);
@@ -38,7 +38,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await _addressRepository.Delete(id);
         }
 
-        public async Task<CreateAddressDTO> AddAddressToShop(int idShop, CreateAddressDTO dto)
+        public async Task<CreateAddressDto> AddAddressToShop(int idShop, CreateAddressDto dto)
         {
             var address = _mapper.Map<Address>(dto);
             var result = await _addressRepository.AddAddressToShop(idShop, address);
@@ -49,7 +49,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public override async Task<AddressDTO> Update(AddressDTO dto, int id)
+        public override async Task<AddressDto> Update(AddressDto dto, int id)
         {
             var exist = _addressRepository.Exists(id);
             if (!exist)
