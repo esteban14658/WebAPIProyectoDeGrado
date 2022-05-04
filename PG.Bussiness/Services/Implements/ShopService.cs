@@ -13,7 +13,7 @@ using WebAPIProyectoDeGrado.Repositories;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class ShopService : GenericService<ShopDTO, CreateShopDTO, Shop>, IShopService
+    public class ShopService : GenericService<ShopDto, CreateShopDto, Shop>, IShopService
     {
         private readonly IShopRepository _shopRepository;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _accountService = accountsService;
         }
 
-        public override async Task<CreateShopDTO> Insert(CreateShopDTO dto)
+        public override async Task<CreateShopDto> Insert(CreateShopDto dto)
         {
             var user = _shopRepository.ExistUserByEmail(dto.User.Email);
             if (user)
@@ -40,7 +40,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return dto;
         }
 
-        public override async Task<ShopDTO> GetById(int id)
+        public override async Task<ShopDto> GetById(int id)
         {
             var exist = _shopRepository.Exist(id);
             if (!exist)
@@ -48,11 +48,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("User not found");
             }
             var genericResult = await _shopRepository.GetById(id);
-            var shopDto = _mapper.Map<ShopDTO>(genericResult);
+            var shopDto = _mapper.Map<ShopDto>(genericResult);
             return shopDto;
         }
 
-        public override async Task<ShopDTO> Update(ShopDTO dto, int id)
+        public override async Task<ShopDto> Update(ShopDto dto, int id)
         {
             var exist = _shopRepository.Exist(id);
 
@@ -75,19 +75,19 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             await _shopRepository.Delete(id);
         }
 
-        public async Task<List<ShopDTO>> GetAllList()
+        public async Task<List<ShopDto>> GetAllList()
         {
             var list = await _shopRepository.GetAll();
-            List<ShopDTO> result = new();
+            List<ShopDto> result = new();
             foreach (var item in list)
             {
-                var mapping = _mapper.Map<ShopDTO>(item);
+                var mapping = _mapper.Map<ShopDto>(item);
                 result.Add(mapping);
             }
             return result;
         }
 
-        public async Task<ShopDTO> GetByEmail(string email)
+        public async Task<ShopDto> GetByEmail(string email)
         {
             var exist = _shopRepository.ExistUserByEmail(email);
             if (!exist)
@@ -95,7 +95,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
                 throw new KeyNotFoundException("User not found");
             }
             var genericResult = await _shopRepository.GetByEmail(email);
-            var shopDto = _mapper.Map<ShopDTO>(genericResult);
+            var shopDto = _mapper.Map<ShopDto>(genericResult);
             return shopDto;
         }
 

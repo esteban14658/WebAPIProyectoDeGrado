@@ -2,7 +2,7 @@
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IUserService : IGenericService<UserDTO, CreateUserDTO>
+    public interface IUserService : IGenericService<UserDto, CreateUserDto>
     {
     }
 }

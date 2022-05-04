@@ -9,14 +9,14 @@ namespace PG.PresentationTests
 {
     public class ResidentData
     {
-        public CreateResidentDTO BuildCreateResidentDTO()
+        public CreateResidentDto BuildCreateResidentDTO()
         {
-            CreateResidentDTO createResidentDTO = new();
-            CreateUserDTO createUserDTO = new();
+            CreateResidentDto createResidentDTO = new();
+            CreateUserDto createUserDTO = new();
             createResidentDTO.Name = "Juan";
             createResidentDTO.LastName = "Diaz";
             createResidentDTO.Phone = "3213213211";
-            createResidentDTO.AddressList = new List<CreateAddressDTO>();
+            createResidentDTO.AddressList = new List<CreateAddressDto>();
             createUserDTO.Email = "esteb_12@hotmail.com";
             createUserDTO.Password = "Aa_12345";
             createUserDTO.State = true;
@@ -25,15 +25,15 @@ namespace PG.PresentationTests
             return createResidentDTO;
         }
 
-        public ResidentDTO BuildResidentDTO(int index)
+        public ResidentDto BuildResidentDTO(int index)
         {
-            ResidentDTO residentDTO = new();
-            UserDTO userDTO = new();
+            ResidentDto residentDTO = new();
+            UserDto userDTO = new();
             residentDTO.Id = index;
             residentDTO.Name = "Juan";
             residentDTO.LastName = "Diaz";
             residentDTO.Phone = "3213213211";
-            residentDTO.AddressList = new List<AddressDTO>();
+            residentDTO.AddressList = new List<AddressDto>();
             userDTO.Id = index;
             userDTO.Email = "esteb_12" + index + "@hotmail.com";
             userDTO.State = true;
@@ -42,9 +42,9 @@ namespace PG.PresentationTests
             return residentDTO;
         }
 
-        public List<ResidentDTO> BuildListResidentDTO()
+        public List<ResidentDto> BuildListResidentDTO()
         {
-            List<ResidentDTO> list = new();
+            List<ResidentDto> list = new();
             for (int i = 0; i < 4; i++)
             {
                 list.Add(BuildResidentDTO(i));

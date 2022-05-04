@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class CreateResidentDTO
+    public class CreateResidentDto
     {
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
@@ -14,7 +14,7 @@ namespace WebAPIProyectoDeGrado.DTOs
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
         public string Phone { get; set; }
-        public List<CreateAddressDTO> AddressList { get; set; }
-        public CreateUserDTO User { get; set; }
+        public List<CreateAddressDto> AddressList { get; set; }
+        public CreateUserDto User { get; set; }
     }
 }

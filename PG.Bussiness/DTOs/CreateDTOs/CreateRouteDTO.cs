@@ -1,8 +1,8 @@
 ﻿namespace PG.Bussiness.DTOs.CreateDTOs
 {
-    public class CreateRouteDTO
+    public class CreateRouteDto
     {
-        public CreateCommentDTO Comment { get; set; }
+        public CreateCommentDto Comment { get; set; }
         public int Recycler { get; set; }
     }
 }

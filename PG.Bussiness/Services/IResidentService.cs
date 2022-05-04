@@ -3,10 +3,10 @@ using WebAPIProyectoDeGrado.DTOs;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IResidentService : IGenericService<ResidentDTO, CreateResidentDTO>
+    public interface IResidentService : IGenericService<ResidentDto, CreateResidentDto>
     {
-        Task<ResidentDTO> GetUserById(int id);
-        Task<ResidentDTO> GetUserByEmail(string email);
+        Task<ResidentDto> GetUserById(int id);
+        Task<ResidentDto> GetUserByEmail(string email);
         Task DeleteAll(int id);
     }
 }

@@ -6,15 +6,15 @@ using WebAPIProyectoDeGrado.DTOs;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface ICollectionPointService : IGenericService<CollectionPointDTO, CreateCollectionPointDTO>
+    public interface ICollectionPointService : IGenericService<CollectionPointDto, CreateCollectionPointDto>
     {
-        Task<PaginateDTO<CollectionPointDTO>> GetByState(int page, int amount, string state);
-        Task<PaginateDTO<CollectionPointDTO>> GetByTypeOfMaterial(int page, int amount, string typeOfMaterial);
-        Task<PaginateDTO<CollectionPointDTO>> GetByIdResident(int page, int amount, int idResident, string state);
-        Task<PaginateDTO<CollectionPointDTO>> GetByDate(int page, int amount);
-        Task<PaginateDTO<CollectionPointDTO>> GetByStateAndType(int page, int amount, string state, string type);
-        Task<int> AssignToRoute(CollectionPointUpdateDTO dto, string stateCompare);
+        Task<PaginateDto<CollectionPointDto>> GetByState(int page, int amount, string state);
+        Task<PaginateDto<CollectionPointDto>> GetByTypeOfMaterial(int page, int amount, string typeOfMaterial);
+        Task<PaginateDto<CollectionPointDto>> GetByIdResident(int page, int amount, int idResident, string state);
+        Task<PaginateDto<CollectionPointDto>> GetByDate(int page, int amount);
+        Task<PaginateDto<CollectionPointDto>> GetByStateAndType(int page, int amount, string state, string type);
+        Task<int> AssignToRoute(CollectionPointUpdateDto dto, string stateCompare);
         IFormFile Base64ToIFormFile(string base64String);
-        Task<PaginateDTO<CollectionPointDTO>> GetByIdRoute(int page, int amount, int idRoute, string state);
+        Task<PaginateDto<CollectionPointDto>> GetByIdRoute(int page, int amount, int idRoute, string state);
     }
 }

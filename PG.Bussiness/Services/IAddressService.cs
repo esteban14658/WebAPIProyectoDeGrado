@@ -3,9 +3,9 @@ using WebAPIProyectoDeGrado.DTOs;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IAddressService : IGenericService<AddressDTO, CreateAddressDTO>
+    public interface IAddressService : IGenericService<AddressDto, CreateAddressDto>
     {
-        Task<CreateAddressDTO> AddAddressToResident(int idResident, CreateAddressDTO dto);
-        Task<CreateAddressDTO> AddAddressToShop(int idShop, CreateAddressDTO dto);
+        Task<CreateAddressDto> AddAddressToResident(int idResident, CreateAddressDto dto);
+        Task<CreateAddressDto> AddAddressToShop(int idShop, CreateAddressDto dto);
     }
 }

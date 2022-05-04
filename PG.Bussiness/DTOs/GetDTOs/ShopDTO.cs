@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class ShopDTO
+    public class ShopDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,8 +11,8 @@ namespace WebAPIProyectoDeGrado.DTOs
         public string DocumentType { get; set; }
         public string Document { get; set; }
         public string Image { get; set; }
-        public List<OrderDTO> OrderList { get; set; }
-        public AddressDTO Address { get; set; }
-        public UserDTO User { get; set; }
+        public List<OrderDto> OrderList { get; set; }
+        public AddressDto Address { get; set; }
+        public UserDto User { get; set; }
     }
 }

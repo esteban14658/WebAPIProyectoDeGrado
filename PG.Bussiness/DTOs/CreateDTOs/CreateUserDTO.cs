@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class CreateUserDTO
+    public class CreateUserDto
     {
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 50, ErrorMessage = "field {0} must be less than {1} characters")]

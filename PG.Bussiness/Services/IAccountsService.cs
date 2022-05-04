@@ -8,13 +8,13 @@ namespace PG.Bussiness.Services
 {
     public interface IAccountsService
     {
-        Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux);
+        Task<AuthenticationResponse> Register(CreateUserDto createUser, string entry, string aux);
         Task<AuthenticationResponse> Login(UserCredentials userCredentials);
         Task<string> SendConfirmEmail();
         Task<Code> ConfirmEmail(string email, string code);
         Task<string> SendPasswordChangeCode(string email);
-        Task<int> ChangePassword(CreateUserDTO createUser, string code);
-        Task DoAdmin(EditAdminDTO editAdminDTO);
-        string HashPassword(CreateUserDTO createUser);
+        Task<int> ChangePassword(CreateUserDto createUser, string code);
+        Task DoAdmin(EditAdminDto editAdminDTO);
+        string HashPassword(CreateUserDto createUser);
     }
 }

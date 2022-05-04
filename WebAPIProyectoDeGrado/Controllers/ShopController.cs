@@ -38,28 +38,28 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("{page:int}/{amount:int}")]
-        public async Task<ActionResult<PaginateDTO<ShopDTO>>> Get(int page, int amount)
+        public async Task<ActionResult<PaginateDto<ShopDto>>> Get(int page, int amount)
         {
             var shops = await _shopService.GetAll(page, amount);
             return Ok(shops);
         }
 
         [HttpGet("GetById/{id:int}")]
-        public async Task<ActionResult<ShopDTO>> GetById(int id)
+        public async Task<ActionResult<ShopDto>> GetById(int id)
         {
             var shop = await _shopService.GetById(id);
             return Ok(shop);
         }
 
         [HttpGet("GetByEmail/{email}")]
-        public async Task<ActionResult<ShopDTO>> GetByEmail(string email)
+        public async Task<ActionResult<ShopDto>> GetByEmail(string email)
         {
             var shop = await _shopService.GetByEmail(email);
             return Ok(shop);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(ShopDTO dto, int id)
+        public async Task<ActionResult> Put(ShopDto dto, int id)
         {
             await _shopService.Update(dto, id);
             return NoContent();
@@ -73,7 +73,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("GetAllList")]
-        public async Task<ActionResult<List<ShopDTO>>> GetAllList()
+        public async Task<ActionResult<List<ShopDto>>> GetAllList()
         {
             var shops = await _shopService.GetAllList();
             return Ok(shops);
@@ -81,7 +81,7 @@ namespace WebAPIProyectoDeGrado.Controllers
 
 
         [HttpPut("UpdateImageJson/{id:int}/{extension}")]
-        public async Task<ActionResult> UpdateImageJson(int id, [FromBody] ShopUpdateDTO shopUpdateDTO, string extension)
+        public async Task<ActionResult> UpdateImageJson(int id, [FromBody] ShopUpdateDto shopUpdateDTO, string extension)
         {
             var call = _shopService.Base64ToIFormFile(shopUpdateDTO.Image);
 
@@ -141,7 +141,7 @@ namespace WebAPIProyectoDeGrado.Controllers
         }*/
 
         [HttpPost("Insert")]
-        public async Task<ActionResult> Insert([FromBody] CreateShopDTO createShopDTO)
+        public async Task<ActionResult> Insert([FromBody] CreateShopDto createShopDTO)
         {
             var shop = await _shopService.Insert(createShopDTO);
             return Created("", shop);

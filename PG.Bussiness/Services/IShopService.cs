@@ -6,11 +6,11 @@ using WebAPIProyectoDeGrado.DTOs;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IShopService : IGenericService<ShopDTO, CreateShopDTO>
+    public interface IShopService : IGenericService<ShopDto, CreateShopDto>
     {
         Task DeleteAll(int id);
-        Task<List<ShopDTO>> GetAllList();
-        Task<ShopDTO> GetByEmail(string email);
+        Task<List<ShopDto>> GetAllList();
+        Task<ShopDto> GetByEmail(string email);
         List<IFormFile> Base64ToImage(List<EquipmentFile> equipmentFiles);
         IFormFile Base64ToIFormFile(string base64String);
     }

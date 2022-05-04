@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado.Services.Implements
 {
-    public class OrderService : GenericService<OrderDTO, CreateOrderDTO, Order>, IOrderService
+    public class OrderService : GenericService<OrderDto, CreateOrderDto, Order>, IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
-        public async Task<List<OrderDTO>> AddOrderToShop(int idShop, List<OrderDTO> orderList)
+        public async Task<List<OrderDto>> AddOrderToShop(int idShop, List<OrderDto> orderList)
         {
             List<Order> orders = new();
             foreach (var item in orderList)
@@ -31,7 +31,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             return orderList;
         }
 
-        public async override Task<OrderDTO> Update(OrderDTO dto, int id)
+        public async override Task<OrderDto> Update(OrderDto dto, int id)
         {
             var exists = _orderRepository.Exists(id);
             if (!exists)

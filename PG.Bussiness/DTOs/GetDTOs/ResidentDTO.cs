@@ -2,13 +2,13 @@
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class ResidentDTO
+    public class ResidentDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
-        public List<AddressDTO> AddressList { get; set; }
-        public UserDTO User { get; set; }
+        public List<AddressDto> AddressList { get; set; }
+        public UserDto User { get; set; }
     }
 }

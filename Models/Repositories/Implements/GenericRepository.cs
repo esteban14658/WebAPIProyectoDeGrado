@@ -20,7 +20,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
             if (entity == null)
             {
-                throw new Exception("The entity is null");
+                throw new KeyNotFoundException("The entity is null");
             }
             _entities.Remove(entity);
             await context.SaveChangesAsync();
@@ -29,7 +29,6 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public virtual async Task<List<TEntity>> GetAll()
         {
-            List<TEntity> entities = new List<TEntity>();
             var result = await _entities.ToListAsync();
             return result;
         }

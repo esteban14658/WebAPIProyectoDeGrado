@@ -3,9 +3,9 @@ using WebAPIProyectoDeGrado.DTOs;
 
 namespace WebAPIProyectoDeGrado.Services
 {
-    public interface IRecyclerService : IGenericService<RecyclerDTO, CreateRecyclerDTO>
+    public interface IRecyclerService : IGenericService<RecyclerDto, CreateRecyclerDto>
     {
-        Task<RecyclerDTO> GetUserByEmail(string email);
-        Task<RecyclerDTO> GetUserById(int id);
+        Task<RecyclerDto> GetUserByEmail(string email);
+        Task<RecyclerDto> GetUserById(int id);
     }
 }

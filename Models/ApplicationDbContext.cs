@@ -11,9 +11,9 @@ namespace WebAPIProyectoDeGrado
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
         }
 
         public DbSet<Code> Codes { get; set; }

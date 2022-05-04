@@ -18,14 +18,14 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPost("{idShop:int}")]
-        public async Task<ActionResult<List<OrderDTO>>> Post([FromBody] List<OrderDTO> orderList, int idShop)
+        public async Task<ActionResult<List<OrderDto>>> Post([FromBody] List<OrderDto> orderList, int idShop)
         {
             var orders = await _orderService.AddOrderToShop(idShop, orderList);
             return Created("", orders);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<OrderDTO>> Put([FromBody] OrderDTO order, int id)
+        public async Task<ActionResult<OrderDto>> Put([FromBody] OrderDto order, int id)
         {
             var orders = await _orderService.Update(order, id);
             return Ok(orders);

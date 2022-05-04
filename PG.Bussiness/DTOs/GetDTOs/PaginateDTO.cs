@@ -2,7 +2,7 @@
 
 namespace PG.Bussiness.DTOs
 {
-    public class PaginateDTO<T> where T : class
+    public class PaginateDto<T> where T : class
     {
         public int Page { get; set; }
         public int Size { get; set; }

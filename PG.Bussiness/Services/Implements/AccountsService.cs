@@ -43,7 +43,7 @@ namespace PG.Bussiness.Services.Implements
             _context = context;
         }
 
-        public async Task<AuthenticationResponse> Register(CreateUserDTO createUser, string entry, string aux)
+        public async Task<AuthenticationResponse> Register(CreateUserDto createUser, string entry, string aux)
         {
             var user = new IdentityUser
             {
@@ -71,7 +71,7 @@ namespace PG.Bussiness.Services.Implements
 
             if (result.Succeeded)
             {
-                var send = _mapper.Map<CreateUserDTO>(consult);
+                var send = _mapper.Map<CreateUserDto>(consult);
                 return await BuildToken(send);
             }
             else
@@ -80,7 +80,7 @@ namespace PG.Bussiness.Services.Implements
             }
         }
 
-        private async Task<AuthenticationResponse> BuildToken(CreateUserDTO createUser)
+        private async Task<AuthenticationResponse> BuildToken(CreateUserDto createUser)
         {
             var claims = new List<Claim>()
             {
@@ -107,7 +107,7 @@ namespace PG.Bussiness.Services.Implements
             };
         }
 
-        public async Task DoAdmin(EditAdminDTO editAdminDTO)
+        public async Task DoAdmin(EditAdminDto editAdminDTO)
         {
             var user = await userManager.FindByEmailAsync(editAdminDTO.Email);
             await DeleteAllRoles(user);
@@ -134,7 +134,7 @@ namespace PG.Bussiness.Services.Implements
             await userManager.RemoveClaimAsync(user, new Claim("isShop", "4"));
         }
 
-        public string HashPassword(CreateUserDTO createUser)
+        public string HashPassword(CreateUserDto createUser)
         {
             var user = new IdentityUser
             {
@@ -200,7 +200,7 @@ namespace PG.Bussiness.Services.Implements
             return code.UserCode;
         }
 
-        public async Task<int> ChangePassword(CreateUserDTO createUser, string code)
+        public async Task<int> ChangePassword(CreateUserDto createUser, string code)
         {
             var query = await _context.Codes.ToListAsync();
             var filter = query.FirstOrDefault(x => x.UserCode.Equals(code) &&

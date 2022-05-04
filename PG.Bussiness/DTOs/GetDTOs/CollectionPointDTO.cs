@@ -2,7 +2,7 @@
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class CollectionPointDTO
+    public class CollectionPointDto
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
@@ -11,7 +11,7 @@ namespace WebAPIProyectoDeGrado.DTOs
         public string Description { get; set; }
         public string State { get; set; }
         public bool CommentState { get; set; }
-        public AddressDTO Address { get; set; }
+        public AddressDto Address { get; set; }
         public int Resident { get; set; }
         public int RouteId { get; set; }
     }

@@ -6,8 +6,8 @@ using WebAPIProyectoDeGrado.Services;
 
 namespace PG.Bussiness.Services
 {
-    public interface IOrderService : IGenericService<OrderDTO, CreateOrderDTO>
+    public interface IOrderService : IGenericService<OrderDto, CreateOrderDto>
     {
-        Task<List<OrderDTO>> AddOrderToShop(int idShop, List<OrderDTO> orderList);
+        Task<List<OrderDto>> AddOrderToShop(int idShop, List<OrderDto> orderList);
     }
 }

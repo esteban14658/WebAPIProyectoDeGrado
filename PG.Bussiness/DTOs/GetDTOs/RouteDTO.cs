@@ -4,13 +4,13 @@ using WebAPIProyectoDeGrado.DTOs;
 
 namespace PG.Bussiness.DTOs.GetDTOs
 {
-    public class RouteDTO
+    public class RouteDto
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<CollectionPointDTO> CollectionPoints { get; set; }
-        public CommentDTO Comment { get; set; }
+        public List<CollectionPointDto> CollectionPoints { get; set; }
+        public CommentDto Comment { get; set; }
         public int Recycler { get; set; }
     }
 }

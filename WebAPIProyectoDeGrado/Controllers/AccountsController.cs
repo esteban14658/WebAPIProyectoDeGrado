@@ -29,7 +29,7 @@ namespace PG.Presentation.Controllers
 
         [HttpPost("DoAdmin")]
         [AllowAnonymous]
-        public async Task<ActionResult> DoAdmin(EditAdminDTO editAdminDTO)
+        public async Task<ActionResult> DoAdmin(EditAdminDto editAdminDTO)
         {
             await _accountService.DoAdmin(editAdminDTO);
             return NoContent();
@@ -52,7 +52,7 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPost("ChangePassword/{code}")]
-        public async Task<ActionResult> ChangePassword([FromBody] CreateUserDTO createUser, string code)
+        public async Task<ActionResult> ChangePassword([FromBody] CreateUserDto createUser, string code)
         {
             await _accountService.ChangePassword(createUser, code);
             return NoContent();

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIProyectoDeGrado.DTOs
 {
-    public class CreateShopDTO
+    public class CreateShopDto
     {
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(maximumLength: 25, ErrorMessage = "field {0} must be less than {1} characters")]
@@ -22,8 +22,8 @@ namespace WebAPIProyectoDeGrado.DTOs
         //        [FileSizeWeightValidation(maxWeightOnMB: 4)]
         //        [TypeOfFileValidation(typeOfFyleGroup: TypeOfFyleGroup.Image)]
         //        public IFormFile Image { get; set; }
-        public List<CreateOrderDTO> OrderList { get; set; }
-        public CreateUserDTO User { get; set; }
-        public CreateAddressDTO Address { get; set; }
+        public List<CreateOrderDto> OrderList { get; set; }
+        public CreateUserDto User { get; set; }
+        public CreateAddressDto Address { get; set; }
     }
 }

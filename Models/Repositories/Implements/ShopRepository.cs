@@ -21,10 +21,6 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         {
             var address = await _context.Addresses.FirstOrDefaultAsync(x =>
                 x.ShopId == idShop);
-            if (address == null)
-            {
-
-            }
             _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
         }

@@ -20,28 +20,28 @@ namespace WebAPIProyectoDeGrado.Controllers
         }
 
         [HttpGet("{page:int}/{amount:int}")]
-        public async Task<ActionResult<PaginateDTO<ResidentDTO>>> Get(int page, int amount)
+        public async Task<ActionResult<PaginateDto<ResidentDto>>> Get(int page, int amount)
         {
             var residents = await residentService.GetAll(page, amount);
             return Ok(residents);
         }
 
         [HttpGet("GetById/{id:int}")]
-        public async Task<ActionResult<ResidentDTO>> GetById(int id)
+        public async Task<ActionResult<ResidentDto>> GetById(int id)
         {
             var resident = await residentService.GetById(id);
             return Ok(resident);
         }
 
         [HttpGet("GetByUserId/{id:int}")]
-        public async Task<ActionResult<ResidentDTO>> GetUserById(int id)
+        public async Task<ActionResult<ResidentDto>> GetUserById(int id)
         {
             var resident = await residentService.GetUserById(id);
             return Ok(resident);
         }
 
         [HttpGet("GetByEmail/{email}")]
-        public async Task<ActionResult<ResidentDTO>> GetUserByEmail(string email)
+        public async Task<ActionResult<ResidentDto>> GetUserByEmail(string email)
         {
             var resident = await residentService.GetUserByEmail(email);
             return Ok(resident);
@@ -49,14 +49,14 @@ namespace WebAPIProyectoDeGrado.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Post([FromBody] CreateResidentDTO createResidentDTO)
+        public async Task<ActionResult> Post([FromBody] CreateResidentDto createResidentDTO)
         {
             var resident = await residentService.Insert(createResidentDTO);
             return Created("", resident);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(ResidentDTO residentDTO, int id)
+        public async Task<ActionResult> Put(ResidentDto residentDTO, int id)
         {
             await residentService.Update(residentDTO, id);
             return NoContent();

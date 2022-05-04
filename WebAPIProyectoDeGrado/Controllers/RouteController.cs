@@ -19,21 +19,21 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpGet("{page:int}/{amount:int}")]
-        public async Task<ActionResult<PaginateDTO<RouteDTO>>> Get(int page, int amount)
+        public async Task<ActionResult<PaginateDto<RouteDto>>> Get(int page, int amount)
         {
             var route = await _routeService.GetAll(page, amount);
             return Ok(route);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<RouteDTO>> Get(int id)
+        public async Task<ActionResult<RouteDto>> Get(int id)
         {
             var route = await _routeService.GetById(id);
             return Ok(route);
         }
 
         [HttpGet("GetByIdRecycler/{idRecycler:int}")]
-        public async Task<ActionResult<RouteDTO>> GetByIdRecycler(int idRecycler)
+        public async Task<ActionResult<RouteDto>> GetByIdRecycler(int idRecycler)
         {
             var routes = await _routeService.GetByIdRecycler(idRecycler);
             return Ok(routes);
@@ -47,14 +47,14 @@ namespace PG.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<RouteDTO>> Post(CreateRouteDTO dto)
+        public async Task<ActionResult<RouteDto>> Post(CreateRouteDto dto)
         {
             var getWithId = await _routeService.InsertCustom(dto);
             return Created("", new { id = getWithId.Id });
         }
 
         [HttpPost("AddCommentToRoute/{idRoute:int}")]
-        public async Task<ActionResult> AddCommentToRoute([FromBody] CreateCommentDTO dto, int idRoute)
+        public async Task<ActionResult> AddCommentToRoute([FromBody] CreateCommentDto dto, int idRoute)
         {
             await _routeService.AddCommentToRoute(idRoute, dto);
             return Ok(new { id = idRoute });

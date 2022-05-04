@@ -5,6 +5,7 @@ using PG.Models.Services;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebAPIProyectoDeGrado
@@ -28,13 +29,13 @@ namespace WebAPIProyectoDeGrado
 
         public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
 
-        public async Task SendEmailAsync(string toEmail, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             if (string.IsNullOrEmpty(Options.SendGridKey) || string.IsNullOrEmpty(_configuration["SendGridKey"]))
             {
-                throw new Exception("Null SendGridKey");
+                throw new KeyNotFoundException("Null SendGridKey");
             }
-            await Execute(Options.SendGridKey, subject, message, toEmail);
+            await Execute(Options.SendGridKey, subject, htmlMessage, email);
         }
 
         public async Task Execute(string apiKey, string subject, string message, string toEmail)
