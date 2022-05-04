@@ -12,5 +12,6 @@ namespace PG.Bussiness.Services
         Task<RouteDto> InsertCustom(CreateRouteDto dto);
         Task AddCommentToRoute(int idRoute, CreateCommentDto dto);
         Task<List<RouteDto>> GetByIdRecycler(int idRecycler);
+        Task<List<RouteDto>> GetByDate(string date);
     }
 }

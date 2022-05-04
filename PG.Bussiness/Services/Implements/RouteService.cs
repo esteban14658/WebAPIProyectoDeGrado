@@ -58,6 +58,18 @@ namespace PG.Bussiness.Services.Implements
             return id;
         }
 
+        public async Task<List<RouteDto>> GetByDate(string date)
+        {
+            var list = new List<RouteDto>();
+            var query = await _routeRepository.GetByDate(date);
+            foreach (var item in query)
+            {
+                var mapped = _mapper.Map<RouteDto>(item);
+                list.Add(mapped);
+            }
+            return list;
+        }
+
         public override async Task<RouteDto> GetById(int id)
         {
             var exists = _routeRepository.Exists(id);

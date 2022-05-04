@@ -3,6 +3,7 @@ using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.CreateDTOs;
 using PG.Bussiness.DTOs.GetDTOs;
 using PG.Bussiness.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PG.Presentation.Controllers
@@ -29,6 +30,13 @@ namespace PG.Presentation.Controllers
         public async Task<ActionResult<RouteDto>> Get(int id)
         {
             var route = await _routeService.GetById(id);
+            return Ok(route);
+        }
+
+        [HttpGet("{date}")]
+        public async Task<ActionResult<List<RouteDto>>> GetByDate(string date)
+        {
+            var route = await _routeService.GetByDate(date);
             return Ok(route);
         }
 

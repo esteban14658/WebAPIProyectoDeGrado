@@ -5,6 +5,7 @@ using PG.Bussiness.DTOs;
 using PG.Bussiness.DTOs.UpdateDTOs;
 using PG.Presentation.Storage;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using WebAPIProyectoDeGrado;
@@ -97,6 +98,13 @@ namespace PG.Presentation.Controllers
         {
             var collectionPoint = await _collectionPoint.GetByDate(page, amount);
             return Ok(collectionPoint);
+        }
+
+        [HttpGet("{date}")]
+        public async Task<ActionResult<List<CollectionPointDto>>> GetByDate(string date)
+        {
+            var points = await _collectionPoint.GetByDate(date);
+            return Ok(points);
         }
 
         [HttpGet("GetByStateAndType/{page:int}/{amount:int}/{state}/{type}")]

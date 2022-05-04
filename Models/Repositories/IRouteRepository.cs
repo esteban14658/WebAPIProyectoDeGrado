@@ -11,5 +11,6 @@ namespace PG.Models.Repositories
         Task<Comment> AddCommentToRoute(int idRoute, Comment comment);
         bool ExistsActiveRoute(int idRecycler);
         Task<List<Route>> GetByIdRecycler(int idRecycler);
+        Task<List<Route>> GetByDate(string date);
     }
 }
