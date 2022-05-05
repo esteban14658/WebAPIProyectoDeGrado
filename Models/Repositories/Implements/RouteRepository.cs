@@ -120,8 +120,8 @@ namespace PG.Models.Repositories.Implements
             {
                 var result = await _routes
                     .Include(X => X.CollectionPoints)
-                    .Where(x => x.StartDate.Day <= DateTime.Now.Day &&
-                x.StartDate.Day >= DateTime.Now.AddDays(-30).Day)
+                    .Where(x => x.StartDate <= DateTime.Now &&
+                    x.StartDate >= DateTime.Now.AddDays(-30))
                     .ToListAsync();
                 foreach (var route in result)
                 {
