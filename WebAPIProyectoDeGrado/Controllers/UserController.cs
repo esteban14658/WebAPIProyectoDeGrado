@@ -96,7 +96,7 @@ namespace WebAPIProyectoDeGrado.Controllers
             var isPresent = await context.UsersApp.FirstOrDefaultAsync(x => x.Email.Equals(email));
             if (isPresent == null)
             {
-                return NoContent();
+                return NotFound();
             }
             if (!isPresent.State)
             {
