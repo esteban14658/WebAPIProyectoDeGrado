@@ -97,7 +97,9 @@ namespace PG.Models.Repositories.Implements
             var filterList = new List<Route>();
             if (date.Equals("HOY"))
             {
-                var result = await _routes.Where(x => x.StartDate == DateTime.Now)
+                var result = await _routes
+                    .Include(x => x.CollectionPoints)
+                    .Where(x => x.StartDate == DateTime.Now)
                     .ToListAsync();
                 foreach (var route in result)
                 {
@@ -105,7 +107,9 @@ namespace PG.Models.Repositories.Implements
                 }
             } else if(date.Equals("SEMANA"))
             {
-                var result = await _routes.Where(x => x.StartDate <= DateTime.Now && 
+                var result = await _routes
+                    .Include(X => X.CollectionPoints)
+                    .Where(x => x.StartDate <= DateTime.Now && 
                 x.StartDate >= DateTime.Now.AddDays(-7))
                     .ToListAsync();
                 foreach (var route in result)
@@ -114,7 +118,9 @@ namespace PG.Models.Repositories.Implements
                 }
             } else
             {
-                var result = await _routes.Where(x => x.StartDate.Day <= DateTime.Now.Day &&
+                var result = await _routes
+                    .Include(X => X.CollectionPoints)
+                    .Where(x => x.StartDate.Day <= DateTime.Now.Day &&
                 x.StartDate.Day >= DateTime.Now.AddDays(-30).Day)
                     .ToListAsync();
                 foreach (var route in result)
