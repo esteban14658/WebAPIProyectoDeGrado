@@ -24,14 +24,14 @@ namespace PG.Bussiness.Services.Implements
             _userRepository = userRepository;
         }
 
-        public async Task DeleteAll(int idUser)
+        public async Task DeleteAll(int id)
         {
-            var existsUser = _userRepository.isExists(idUser);
-            if (existsUser.Result == false)
+            var existsUser = _userRepository.isExists(id);
+            if (!existsUser.Result)
             {
                 throw new KeyNotFoundException("Not found user");
             }
-            var list = await _commentRepository.GetAllByIdUser(idUser);
+            var list = await _commentRepository.GetAllByIdUser(id);
             foreach (var item in list)
             {
                 await _commentRepository.Delete(item.Id);
@@ -53,7 +53,7 @@ namespace PG.Bussiness.Services.Implements
         public override Task<CreateCommentDto> Insert(CreateCommentDto dto)
         {
             var existsUser = _userRepository.isExists(dto.UserId);
-            if (existsUser.Result == false)
+            if (!existsUser.Result)
             {
                 throw new KeyNotFoundException("Not found user");
             }

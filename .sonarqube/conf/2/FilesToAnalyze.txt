@@ -8,7 +8,6 @@ C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Controll
 C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Controllers\RouteController.cs
 C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Controllers\ShopController.cs
 C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Controllers\UserController.cs
-C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Filters\CustomOperationFilter.cs
 C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Filters\ExceptionFilter.cs
 C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Middlewares\ErrorHandlerMiddleware.cs
 C:\Users\esteb\source\repos\WebAPIProyectoDeGrado\WebAPIProyectoDeGrado\Program.cs

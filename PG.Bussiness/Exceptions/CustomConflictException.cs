@@ -3,6 +3,7 @@ using System.Globalization;
 
 namespace PG.Bussiness.Exceptions
 {
+    [Serializable]
     public class CustomConflictException : Exception
     {
         public CustomConflictException() : base()

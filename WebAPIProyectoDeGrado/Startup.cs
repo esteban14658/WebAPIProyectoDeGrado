@@ -13,7 +13,6 @@ using PG.Bussiness.Services.Implements;
 using PG.Models.Repositories;
 using PG.Models.Repositories.Implements;
 using PG.Models.Services;
-using PG.Presentation.Filters;
 using PG.Presentation.Middlewares;
 using PG.Presentation.Storage;
 using System;
@@ -53,7 +52,6 @@ namespace WebAPIProyectoDeGrado
 
             services.AddSwaggerGen(c =>
             {
-                c.OperationFilter<CustomOperationFilter>();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PG", Version = "v1" });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

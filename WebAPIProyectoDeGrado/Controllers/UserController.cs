@@ -16,21 +16,17 @@ namespace WebAPIProyectoDeGrado.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
-        private readonly IUserService userService;
 
 
-        public UserController(ApplicationDbContext context, IMapper mapper, IUserService userService)
+        public UserController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
-            this.userService = userService;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> Get()
-        {
-            //var us = await userService.GetAll();
-
+        { 
             var users = await context.UsersApp.Where(x => x.Role != "Admin").ToListAsync();
             return mapper.Map<List<UserDto>>(users);
         }
