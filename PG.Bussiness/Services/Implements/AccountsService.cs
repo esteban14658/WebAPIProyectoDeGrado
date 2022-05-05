@@ -53,10 +53,7 @@ namespace PG.Bussiness.Services.Implements
             await userManager.CreateAsync(user, createUser.Password);
 
             string code = await SendConfirmEmail();
-            //           var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
             await _emailSender.SendEmailAsync(user.Email, "Confirm your email", code);
-
-            //           await userManager.ConfirmEmailAsync(user, token);
             var userAux = await userManager.FindByEmailAsync(createUser.Email);
             await userManager.AddClaimAsync(userAux, new Claim(entry, aux));
             return null;
@@ -147,11 +144,6 @@ namespace PG.Bussiness.Services.Implements
 
         public async Task<Code> ConfirmEmail(string email, string code)
         {
-            var user = new IdentityUser
-            {
-                UserName = email,
-                Email = email
-            };
             var query = await _context.Codes.ToListAsync();
             var filter = query.FirstOrDefault(x => x.UserCode.Equals(code) &&
                 x.Date > DateTime.Now.ToUniversalTime().AddHours(-5));
@@ -164,7 +156,7 @@ namespace PG.Bussiness.Services.Implements
                 var query2 = from r in _context.Users
                              where r.Email == email
                              select r;
-                if (query2.Count() == 0)
+                if (query2.Any())
                 {
                     throw new KeyNotFoundException("The email is not registered");
                 }
@@ -215,7 +207,7 @@ namespace PG.Bussiness.Services.Implements
                 var query2 = from r in _context.Users
                              where r.Email == createUser.Email
                              select r;
-                if (query2.Count() == 0)
+                if (query2.Any())
                 {
                     throw new KeyNotFoundException("The email is not registered");
                 }
@@ -225,7 +217,7 @@ namespace PG.Bussiness.Services.Implements
                 }
                 await _context.SaveChangesAsync();
             }
-            return query.Count();
+            return query.Count;
         }
     }
 }

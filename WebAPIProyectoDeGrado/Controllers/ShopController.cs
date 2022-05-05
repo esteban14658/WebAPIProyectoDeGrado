@@ -25,16 +25,14 @@ namespace WebAPIProyectoDeGrado.Controllers
         private readonly IMapper _mapper;
         private readonly string container = "shops";
         private readonly ApplicationDbContext _context;
-        private readonly IAccountsService _accountService;
 
         public ShopController(IShopService shopService, IImageStorage imageStorage,
-            IMapper mapper, ApplicationDbContext context, IAccountsService accountsService)
+            IMapper mapper, ApplicationDbContext context)
         {
             _shopService = shopService;
             _imageStorage = imageStorage;
             _mapper = mapper;
             _context = context;
-            _accountService = accountsService;
         }
 
         [HttpGet("{page:int}/{amount:int}")]
@@ -110,35 +108,6 @@ namespace WebAPIProyectoDeGrado.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
-
-        /*[HttpPut("UpdateImage/{id:int}")]
-        public async Task<ActionResult> UpdateImage(int id, [FromForm] ShopUpdateDTO shopUpdateDTO)
-        {
-            var shopDB = await _context.Shops.FirstOrDefaultAsync(x => x.Id == id);
-            if (shopDB == null) { return NotFound(); }
-            shopDB = _mapper.Map<Shop>(shopUpdateDTO);
-            if (shopUpdateDTO.Image != null)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await shopUpdateDTO.Image.CopyToAsync(memoryStream);
-                    var contents = memoryStream.ToArray();
-                    var extension = Path.GetExtension(shopUpdateDTO.Image.FileName);
-                    shopDB.Image = await _imageStorage.EditFile(contents, extension, container,
-                        shopDB.Image,
-                        shopUpdateDTO.Image.ContentType);
-                }
-            }
-            var query = from s in _context.Shops
-                        where s.Id == shopDB.Id
-                        select s;
-            foreach (Shop s in query)
-            {
-                s.Image = shopDB.Image;
-            }
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }*/
 
         [HttpPost("Insert")]
         public async Task<ActionResult> Insert([FromBody] CreateShopDto createShopDTO)

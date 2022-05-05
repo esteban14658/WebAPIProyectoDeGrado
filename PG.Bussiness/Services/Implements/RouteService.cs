@@ -17,15 +17,13 @@ namespace PG.Bussiness.Services.Implements
     {
         private readonly IRouteRepository _routeRepository;
         private readonly IMapper _mapper;
-        private readonly ICollectionPointService _collectionPointService;
         private readonly IRecyclerRepository _recyclerRepository;
 
-        public RouteService(IRouteRepository routeRepository, IMapper mapper, ICollectionPointService collectionPointService,
+        public RouteService(IRouteRepository routeRepository, IMapper mapper, 
                 IRecyclerRepository recyclerRepository) : base(routeRepository, mapper)
         {
             _routeRepository = routeRepository;
             _mapper = mapper;
-            _collectionPointService = collectionPointService;
             _recyclerRepository = recyclerRepository;
         }
 
@@ -97,12 +95,12 @@ namespace PG.Bussiness.Services.Implements
         public async Task<RouteDto> InsertCustom(CreateRouteDto dto)
         {
             var existsRecycler = _recyclerRepository.Exists(dto.Recycler);
-            if (existsRecycler == false)
+            if (existsRecycler)
             {
                 throw new KeyNotFoundException("Not found");
             }
             var activeRoute = _routeRepository.ExistsActiveRoute(dto.Recycler);
-            if (activeRoute == true)
+            if (activeRoute)
             {
                 throw new AppException("The recycler has an active route");
             }

@@ -19,9 +19,6 @@ namespace WebAPIProyectoDeGrado.DTOs
         [StringLength(maximumLength: 10, ErrorMessage = "field {0} must be less than {1} characters")]
 
         public string Phone { get; set; }
-        //        [FileSizeWeightValidation(maxWeightOnMB: 4)]
-        //        [TypeOfFileValidation(typeOfFyleGroup: TypeOfFyleGroup.Image)]
-        //        public IFormFile Image { get; set; }
         public List<CreateOrderDto> OrderList { get; set; }
         public CreateUserDto User { get; set; }
         public CreateAddressDto Address { get; set; }
