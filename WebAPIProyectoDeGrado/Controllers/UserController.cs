@@ -105,5 +105,24 @@ namespace WebAPIProyectoDeGrado.Controllers
             return Ok();
         }
 
+        [HttpPut("Activate/{email}")]
+        public async Task<ActionResult> Activate(string email)
+        {
+            var isPresent = await context.UsersApp.AnyAsync(x => x.Email.Equals(email));
+            if (!isPresent)
+            {
+                return NotFound();
+            }
+            var query = from u in context.UsersApp
+                        where u.Email == email
+                        select u;
+            foreach (var item in query)
+            {
+                item.State = true;
+            }
+            await context.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }
