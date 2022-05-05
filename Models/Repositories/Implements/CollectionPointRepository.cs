@@ -117,7 +117,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             var filterList = new List<CollectionPoint>();
             if (date.Equals("HOY"))
             {
-                var result = await _collectionPoints.Where(x => x.CreateDate == DateTime.Now)
+                var result = await _collectionPoints.Where(x => x.CreateDate.Day == DateTime.Now.Day)
                     .ToListAsync();
                 foreach (var route in result)
                 {
@@ -136,8 +136,8 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             }
             else
             {
-                var result = await _collectionPoints.Where(x => x.CreateDate.Day <= DateTime.Now.Day &&
-                x.CreateDate.Day >= DateTime.Now.AddDays(-30).Day)
+                var result = await _collectionPoints.Where(x => x.CreateDate <= DateTime.Now &&
+                x.CreateDate >= DateTime.Now.AddDays(-30))
                     .ToListAsync();
                 foreach (var route in result)
                 {
