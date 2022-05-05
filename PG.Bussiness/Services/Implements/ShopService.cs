@@ -33,7 +33,13 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("User already exist");
             }
+            var documentIsPresent = _shopRepository.ExistsByDocument(dto.Document);
+            if (documentIsPresent)
+            {
+                throw new CustomConflictException("Shop already exist");
+            }
             dto.User.Role = "isShop";
+            dto.User.State = false;
             await _accountService.Register(dto.User, "isShop", "4");
             var shop = _mapper.Map<Shop>(dto);
             await _shopRepository.Insert(shop);

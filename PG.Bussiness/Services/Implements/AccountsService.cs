@@ -156,7 +156,7 @@ namespace PG.Bussiness.Services.Implements
                 var query2 = from r in _context.Users
                              where r.Email == email
                              select r;
-                if (query2.Any())
+                if (!query2.Any())
                 {
                     throw new KeyNotFoundException("The email is not registered");
                 }
@@ -207,7 +207,7 @@ namespace PG.Bussiness.Services.Implements
                 var query2 = from r in _context.Users
                              where r.Email == createUser.Email
                              select r;
-                if (query2.Any())
+                if (!query2.Any())
                 {
                     throw new KeyNotFoundException("The email is not registered");
                 }

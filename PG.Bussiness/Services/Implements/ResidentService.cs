@@ -65,6 +65,7 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             {
                 throw new CustomConflictException("User already exist");
             }
+            dto.User.State = true;
             dto.User.Role = "isResident";
             await _accountService.Register(dto.User, "isResident", "1");
             var resident = _mapper.Map<Resident>(dto);

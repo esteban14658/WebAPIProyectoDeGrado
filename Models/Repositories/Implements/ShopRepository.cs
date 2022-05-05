@@ -40,6 +40,11 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             return _shop.Any(x => x.Id == id);
         }
 
+        public bool ExistsByDocument(string document)
+        {
+            return _shop.Any(x => x.Document.Equals(document));
+        }
+
         public bool ExistUserByEmail(string email)
         {
             return _shop.Any(x => x.User.Email.Equals(email));
