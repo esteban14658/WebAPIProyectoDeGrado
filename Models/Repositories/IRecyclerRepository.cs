@@ -10,5 +10,6 @@ namespace WebAPIProyectoDeGrado.Repositories
         bool Exists(int id);
         bool ExistUserByEmail(string email);
         bool ExistUserById(int id);
+        bool ExistByDocument(string document);
     }
 }

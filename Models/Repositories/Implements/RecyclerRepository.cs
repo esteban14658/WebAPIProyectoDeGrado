@@ -60,5 +60,10 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
         {
             return _recycler.Any(x => x.User.Id == id);
         }
+
+        public bool ExistByDocument(string document)
+        {
+            return _recycler.Any(x => x.Document.Equals(document));
+        }
     }
 }

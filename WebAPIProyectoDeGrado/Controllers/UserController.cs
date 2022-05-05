@@ -90,5 +90,20 @@ namespace WebAPIProyectoDeGrado.Controllers
             return Ok();
         }
 
+        [HttpGet("VerifyState/{email}")]
+        public async Task<ActionResult> VerifyState(string email)
+        {
+            var isPresent = await context.UsersApp.FirstOrDefaultAsync(x => x.Email.Equals(email));
+            if (isPresent == null)
+            {
+                return NoContent();
+            }
+            if (!isPresent.State)
+            {
+                return Unauthorized();
+            }
+            return Ok();
+        }
+
     }
 }

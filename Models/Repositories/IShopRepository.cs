@@ -10,5 +10,6 @@ namespace WebAPIProyectoDeGrado.Repositories
         Task DeleteAddress(int idShop);
         Task DeleteUser(int idShop);
         Task<Shop> GetByEmail(string email);
+        bool ExistsByDocument(string document);
     }
 }
