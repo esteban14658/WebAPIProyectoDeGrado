@@ -99,7 +99,7 @@ namespace PG.Models.Repositories.Implements
             {
                 var result = await _routes
                     .Include(x => x.CollectionPoints)
-                    .Where(x => x.StartDate == DateTime.Now)
+                    .Where(x => x.StartDate.Day == DateTime.Now.Day)
                     .ToListAsync();
                 foreach (var route in result)
                 {
