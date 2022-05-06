@@ -95,7 +95,7 @@ namespace PG.Bussiness.Services.Implements
         public async Task<RouteDto> InsertCustom(CreateRouteDto dto)
         {
             var existsRecycler = _recyclerRepository.Exists(dto.Recycler);
-            if (existsRecycler)
+            if (!existsRecycler)
             {
                 throw new KeyNotFoundException("Not found");
             }
