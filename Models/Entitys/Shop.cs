@@ -1,4 +1,5 @@
-﻿using PG.Models.Entitys;
+﻿using Microsoft.EntityFrameworkCore;
+using PG.Models.Entitys;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WebAPIProyectoDeGrado.Entitys
 {
     [Table(name: "shop")]
+    [Index(nameof(Document), IsUnique = true)]
     public class Shop
     {
         [Column(name: "id")]

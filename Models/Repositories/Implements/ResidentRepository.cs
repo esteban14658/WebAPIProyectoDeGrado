@@ -24,7 +24,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public bool ExistUserByEmail(string email)
         {
-            return _resident.Any(x => x.User.Email.Equals(email));
+            return _context.UsersApp.Any(x => x.Email.Equals(email));
         }
 
         public bool ExistUserById(int id)
