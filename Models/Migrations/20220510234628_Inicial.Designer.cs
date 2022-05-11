@@ -10,7 +10,7 @@ using WebAPIProyectoDeGrado;
 namespace PG.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220429223847_Inicial")]
+    [Migration("20220510234628_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -573,6 +573,9 @@ namespace PG.Models.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Document")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 

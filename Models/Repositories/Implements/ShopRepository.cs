@@ -42,12 +42,16 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public bool ExistsByDocument(string document)
         {
-            return _shop.Any(x => x.Document.Equals(document));
+            if (_context.Recyclers.Any(x => x.Document.Equals(document)) || _shop.Any(x => x.Document.Equals(document)))
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool ExistUserByEmail(string email)
         {
-            return _shop.Any(x => x.User.Email.Equals(email));
+            return _context.UsersApp.Any(x => x.Email.Equals(email));
         }
 
         public override async Task<List<Shop>> GetAll()

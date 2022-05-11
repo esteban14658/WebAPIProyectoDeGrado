@@ -572,6 +572,9 @@ namespace PG.Models.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Document")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("shop");

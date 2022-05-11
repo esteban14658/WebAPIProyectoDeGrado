@@ -24,7 +24,7 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public bool ExistUserByEmail(string email)
         {
-            return _recycler.Any(x => x.User.Email.Equals(email));
+            return _context.UsersApp.Any(x => x.Email.Equals(email));
         }
 
         public override async Task<List<Recycler>> GetAll()
@@ -63,7 +63,11 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public bool ExistByDocument(string document)
         {
-            return _recycler.Any(x => x.Document.Equals(document));
+            if (_recycler.Any(x => x.Document.Equals(document)) || _context.Shops.Any(x => x.Document.Equals(document)))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

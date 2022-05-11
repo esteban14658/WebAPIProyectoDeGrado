@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using System;
 
 namespace PG.Models.Migrations
 {
@@ -456,6 +456,12 @@ namespace PG.Models.Migrations
                 name: "IX_route_CommentId",
                 table: "route",
                 column: "CommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_shop_document",
+                table: "shop",
+                column: "document",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_shop_UserId",
