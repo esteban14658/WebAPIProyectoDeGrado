@@ -18,5 +18,6 @@ namespace WebAPIProyectoDeGrado.Services
         IFormFile Base64ToIFormFile(string base64String);
         Task<PaginateDto<CollectionPointDto>> GetByIdRoute(int page, int amount, int idRoute, string state);
         Task<List<CollectionPointDto>> GetByDate(string date);
+        Task Disassociate();
     }
 }

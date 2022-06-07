@@ -141,5 +141,11 @@ namespace PG.Presentation.Controllers
             await _collectionPoint.Delete(id);
             return NoContent();
         }
+
+        [HttpPut("Disassociate")]
+        public async Task Disassociate()
+        {
+            await _collectionPoint.Disassociate();
+        }
     }
 }

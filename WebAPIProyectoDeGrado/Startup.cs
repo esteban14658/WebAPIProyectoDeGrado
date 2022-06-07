@@ -15,11 +15,11 @@ using PG.Models.Repositories.Implements;
 using PG.Models.Services;
 using PG.Presentation.Middlewares;
 using PG.Presentation.Storage;
+using PG.Presentation.Tasks;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Text.Json.Serialization;
-using WebAPIProyectoDeGrado.Controllers;
 using WebAPIProyectoDeGrado.Filters;
 using WebAPIProyectoDeGrado.Repositories;
 using WebAPIProyectoDeGrado.Repositories.Implements;
@@ -119,9 +119,7 @@ namespace WebAPIProyectoDeGrado
                 opciones.AddPolicy("IsAdmin", politica => politica.RequireClaim("isAdmin"));
                 opciones.AddPolicy("IsShop", politica => politica.RequireClaim("isShop"));
             });
-            //services.AddScoped(typeof(AutoMapperProfile));
-
-            //services.AddScoped(typeof(IGenericService<>), typeof(GenericService<,>));
+            
             services.AddScoped(typeof(IRecyclerService), typeof(RecyclerService));
             services.AddScoped(typeof(IAddressService), typeof(AddressService));
             services.AddScoped(typeof(ICollectionPointService), typeof(CollectionPointService));
@@ -147,6 +145,8 @@ namespace WebAPIProyectoDeGrado
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddHostedService<TimedHostedService>();
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
