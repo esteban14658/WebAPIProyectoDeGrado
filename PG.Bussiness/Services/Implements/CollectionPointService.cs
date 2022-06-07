@@ -137,5 +137,11 @@ namespace WebAPIProyectoDeGrado.Services.Implements
             }
             return list;
         }
+
+        public async Task Disassociate()
+        {
+            Console.WriteLine("Entro a la función");
+            await _collectionPointRepository.Disassociate();
+        }
     }
 }

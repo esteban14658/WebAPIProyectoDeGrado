@@ -146,5 +146,21 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             }
             return filterList;
         }
+
+        public async Task Disassociate()
+        {
+            DateTime today = DateTime.Now.ToUniversalTime().AddHours(-5);
+            DateTime aux = new DateTime(today.Year, today.Month, today.Day, 0, 0, 0);
+            var listAll =  from c in _context.CollectionPoints
+                            where (c.CreateDate < aux) &&
+                            (c.State.Equals("Activo"))
+                            select c;
+            foreach (var item in listAll)
+            {
+                item.State = "Espera";
+                item.RouteId = null;
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 }

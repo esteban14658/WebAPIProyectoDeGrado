@@ -15,5 +15,7 @@ namespace WebAPIProyectoDeGrado.Repositories
         bool Exists(int id);
         Task<List<CollectionPoint>> GetByIdRoute(int idRoute, string state);
         Task<List<CollectionPoint>> GetByDate(string date);
+
+        Task Disassociate();
     }
 }
