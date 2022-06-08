@@ -114,10 +114,11 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
 
         public async Task<List<CollectionPoint>> GetByDate(string date)
         {
+            var today = DateTime.Now.ToUniversalTime().AddHours(-5);
             var filterList = new List<CollectionPoint>();
             if (date.Equals("HOY"))
             {
-                var result = await _collectionPoints.Where(x => x.CreateDate.Day == DateTime.Now.Day)
+                var result = await _collectionPoints.Where(x => x.CreateDate.Day == today.Day)
                     .ToListAsync();
                 foreach (var route in result)
                 {
@@ -126,8 +127,8 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             }
             else if (date.Equals("SEMANA"))
             {
-                var result = await _collectionPoints.Where(x => x.CreateDate <= DateTime.Now &&
-                x.CreateDate >= DateTime.Now.AddDays(-7))
+                var result = await _collectionPoints.Where(x => x.CreateDate <= today &&
+                x.CreateDate >= today.AddDays(-7))
                     .ToListAsync();
                 foreach (var route in result)
                 {
@@ -136,8 +137,8 @@ namespace WebAPIProyectoDeGrado.Repositories.Implements
             }
             else
             {
-                var result = await _collectionPoints.Where(x => x.CreateDate <= DateTime.Now &&
-                x.CreateDate >= DateTime.Now.AddDays(-30))
+                var result = await _collectionPoints.Where(x => x.CreateDate <= today &&
+                x.CreateDate >= today.AddDays(-30))
                     .ToListAsync();
                 foreach (var route in result)
                 {
