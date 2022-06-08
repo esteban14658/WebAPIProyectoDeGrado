@@ -94,12 +94,13 @@ namespace PG.Models.Repositories.Implements
 
         public async Task<List<Route>> GetByDate(string date)
         {
+            var today = DateTime.Now.ToUniversalTime().AddHours(-5);
             var filterList = new List<Route>();
             if (date.Equals("HOY"))
             {
                 var result = await _routes
                     .Include(x => x.CollectionPoints)
-                    .Where(x => x.StartDate.Day == DateTime.Now.Day)
+                    .Where(x => x.StartDate.Day == today.Day)
                     .ToListAsync();
                 foreach (var route in result)
                 {
@@ -109,8 +110,8 @@ namespace PG.Models.Repositories.Implements
             {
                 var result = await _routes
                     .Include(X => X.CollectionPoints)
-                    .Where(x => x.StartDate <= DateTime.Now && 
-                x.StartDate >= DateTime.Now.AddDays(-7))
+                    .Where(x => x.StartDate <= today && 
+                x.StartDate >= today.AddDays(-7))
                     .ToListAsync();
                 foreach (var route in result)
                 {
@@ -120,8 +121,8 @@ namespace PG.Models.Repositories.Implements
             {
                 var result = await _routes
                     .Include(X => X.CollectionPoints)
-                    .Where(x => x.StartDate <= DateTime.Now &&
-                    x.StartDate >= DateTime.Now.AddDays(-30))
+                    .Where(x => x.StartDate <= today &&
+                    x.StartDate >= today.AddDays(-30))
                     .ToListAsync();
                 foreach (var route in result)
                 {
